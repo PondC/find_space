@@ -1,0 +1,7 @@
+{
+  "name": "FindSpace",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
