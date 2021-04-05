@@ -5,46 +5,43 @@
     <div class="login_div">
       <img class="mainIcon" :src="require('@/assets/icon/FindSpaceIcon.png')" />
       <div class="greenBar"></div>
-      <div class="login_card">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione commodi voluptatem repudiandae sunt totam corrupti, doloribus architecto itaque repellendus quis corporis deserunt. A veniam beatae cum nisi doloremque nostrum repellendus.
-      <ion-button @click="() => router.push('/tabs')" > helloo world </ion-button>
+      <div class="login_card" v-if="showPanel">
+        Welcome Back
+        <div>
+          <form @submit.prevent="onSubmit">
+            <ion-label> UserName </ion-label>
+            <ion-input
+              :value="userName"
+              @input="userName = $event.target.value"
+              placeholder="Username"
+              name="userName"
+            ></ion-input>
+            <ion-label> Password </ion-label>
+            <ion-input
+              :value="passWord"
+              @input="passWord = $event.target.value"
+              placeholder="Password"
+              name="passWord"
+            ></ion-input>
+            <!-- <ion-button @click="() => router.push('/tabs')"> -->
+            <ion-button type="submit">
+              helloo world
+            </ion-button>
+            <ion-button @click="reload()">
+              refresh
+            </ion-button>
+          </form>
+          <ion-button @click="() => logLocal()">
+            log local
+          </ion-button>
+          <ion-button @click="() => clearLocal()">
+            clear all
+          </ion-button>
+        </div>
       </div>
     </div>
   </ion-page>
 </template>
-
-<script lang="ts">
-import // IonCard,
-// IonPage,
-// IonHeader,
-// IonToolbar,
-// IonTitle,
-// IonContent,
-// IonImg,
-"@ionic/vue";
-import { useRouter } from "vue-router";
-
-export default {
-  name: "Login",
-  // components: { IonCard },
-  setup() {
-    const router = useRouter();
-    return {
-      router,
-    };
-  },
-  methods: {},
-  // created() {
-  //   const geolocation = navigator.geolocation;
-  //   geolocation.getCurrentPosition((res) => {
-  //     console.log(res.coords.latitude);
-  //     console.log(res.coords.longitude);
-  //     // go main page
-  //     // this.$router.push('/tabs');
-  //   });
-  // }
-};
-</script>
 
 <style lang="css" scoped>
 .back_picture {
@@ -67,7 +64,7 @@ export default {
 }
 .login_card {
   /* position: absolute; */
-  color: green;
+  color: rgb(0, 139, 0);
   background-color: white;
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
@@ -95,3 +92,88 @@ export default {
   align-items: center;
 }
 </style>
+
+<script lang="ts">
+import // IonCard,
+// IonImg,
+"@ionic/vue";
+import { useRouter } from "vue-router";
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "Login",
+  // components: { IonCard },
+  beforeMount() {
+    console.log("hello before mount!");
+    const userName = window.localStorage.getItem("username");
+    const passWord = window.localStorage.getItem("password");
+    if (userName && passWord) {
+      console.log("have information");
+      console.log(userName);
+      console.log(passWord);
+      this.showPanel = false;
+      if (window.localStorage.getItem("LoginPageReloaded") === "no") {
+        window.localStorage.setItem("LoginPageReloaded", "yes");
+        window.location.reload();
+      }
+      this.$router.push("/tabs");
+    } else {
+      console.log("no data!");
+    }
+  },
+  data() {
+    return {
+      userName: "",
+      passWord: "",
+      showPanel: true,
+    };
+  },
+  setup() {
+    const router = useRouter();
+    return {
+      router,
+    };
+  },
+  methods: {
+    onSubmit() {
+      console.log("username = " + this.userName);
+      console.log("password = " + this.passWord);
+      // Delete the thing above and do the authentication here
+
+
+
+
+
+      // 
+      window.localStorage.setItem("username", this.userName);
+      window.localStorage.setItem("password", this.passWord);
+      this.showPanel = false;
+      this.$router.push("/tabs");
+    },
+    created() {
+      console.log("please wait");
+      console.log(window.localStorage.getItem("username"));
+      const geolocation = navigator.geolocation;
+      geolocation.getCurrentPosition((res) => {
+        console.log("hereis your location");
+        console.log(res.coords.latitude);
+        console.log(res.coords.longitude);
+        // go main page
+        // this.$router.push('/tabs');
+      });
+    },
+    clearLocal() {
+      window.localStorage.removeItem("username");
+      window.localStorage.removeItem("password");
+      console.log(" cleared");
+    },
+    logLocal() {
+      console.log("username = " + window.localStorage.getItem("username"));
+      console.log("password = " + window.localStorage.getItem("password"));
+    },
+    reload() {
+      window.location.reload();
+    },
+  },
+});
+</script>

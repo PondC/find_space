@@ -8,7 +8,8 @@
         </ion-tab-button>
           
         <ion-tab-button tab="tab2" href="/tabs/tab2">
-          <ion-icon :icon="ellipse" />
+          <!-- <ion-icon :icon="ellipse" />  -->
+          <img class="mainIcon" :src="require('@/assets/icon/FindSpaceIcon.png')" />
           <!-- <ion-label>Tab 2</ion-label> -->
         </ion-tab-button>
         
@@ -22,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage } from '@ionic/vue';
+import { IonTabBar, IonTabButton, IonTabs, IonIcon, IonPage } from '@ionic/vue';
 import { ellipse, square, triangle } from 'ionicons/icons';
 
 export default {
@@ -43,5 +44,14 @@ export default {
 <style lang="css" scoped>
 .mainBar {
   --background: #D16110;
+  --color: #10b4d1;
+  --color-selected: green;
+  max-height: 40px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+.mainIcon {
+  max-height: 36px;
+  max-width: 36px;
 }
 </style>
