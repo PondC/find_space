@@ -11,19 +11,54 @@
           <ion-title size="large">Tab 1</ion-title>
         </ion-toolbar>
       </ion-header>
-    
-      <ExploreContainer name="Tab 1 page" />
+      <ion-button @click="reload()">
+        reload
+      </ion-button>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonButton,
+} from "@ionic/vue";
+import { defineComponent } from "vue";
+import axios from "axios";
 
-export default  {
+export default defineComponent({
   // name: 'Tab1',
-  name: 'Nearby',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
-}
+  name: "Nearby",
+  components: {
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonPage,
+    IonButton,
+  },
+  beforeMount() {
+    console.log("hello from tab 1");
+    console.log("Backend says.......  " + this.helloBackend());
+  },
+  methods: {
+    helloBackend() {
+      return axios
+        .get("http://localhost:3000/users/login")
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    reload() {
+      window.location.reload();
+    },
+  },
+});
 </script>

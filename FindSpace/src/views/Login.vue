@@ -94,15 +94,18 @@
 </style>
 
 <script lang="ts">
-import // IonCard,
-// IonImg,
-"@ionic/vue";
+import { IonInput, IonLabel, IonButton, IonPage } from "@ionic/vue";
 import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Login",
-  // components: { IonCard },
+  components: {
+    IonPage,
+    IonInput,
+    IonLabel,
+    IonButton,
+  },
   beforeMount() {
     console.log("hello before mount!");
     const userName = window.localStorage.getItem("username");
@@ -140,11 +143,7 @@ export default defineComponent({
       console.log("password = " + this.passWord);
       // Delete the thing above and do the authentication here
 
-
-
-
-
-      // 
+      //
       window.localStorage.setItem("username", this.userName);
       window.localStorage.setItem("password", this.passWord);
       this.showPanel = false;

@@ -36,17 +36,28 @@
 </template>
 
 <script lang="ts">
-import // IonPage, IonHeader, IonToolbar, IonTitle, IonContent
-"@ionic/vue";
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  // IonContent,
+  IonButton,
+} from "@ionic/vue";
 // import ExploreContainer from '@/components/ExploreContainer.vue';
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import { Geolocation } from "@ionic-native/geolocation/ngx";
+// import { Geolocation } from "@ionic-native/geolocation/ngx";
 
 export default defineComponent({
   name: "Tab3",
   components: {
-    // IonHeader, IonToolbar, IonTitle, IonContent, IonPage
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    // IonContent,
+    IonPage,
+    IonButton,
   },
   beforeMount() {
     // mounted() {
