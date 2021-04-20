@@ -43,18 +43,22 @@ export default defineComponent({
   },
   beforeMount() {
     console.log("hello from tab 1");
-    console.log("Backend says.......  " + this.helloBackend());
+    this.helloBackend();
   },
   methods: {
     helloBackend() {
-      return axios
-        .get("http://localhost:3000/users/login")
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // axios.defaults.withCredentials = true;
+      return (
+        axios
+          // .get("http://localhost:5678/cumap")
+          .get("http://localhost:5678/realtime/recommWS")
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      );
     },
     reload() {
       window.location.reload();

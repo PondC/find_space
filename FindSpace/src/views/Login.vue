@@ -6,30 +6,40 @@
       <img class="mainIcon" :src="require('@/assets/icon/FindSpaceIcon.png')" />
       <div class="greenBar"></div>
       <div class="login_card" v-if="showPanel">
-        Welcome Back
-        <div>
+        <div class="sub_login_card">
+          <div>
+            Welcome Back
+          </div>
           <form @submit.prevent="onSubmit">
-            <ion-label> UserName </ion-label>
-            <ion-input
-              :value="userName"
-              @input="userName = $event.target.value"
-              placeholder="Username"
-              name="userName"
-            ></ion-input>
-            <ion-label> Password </ion-label>
-            <ion-input
-              :value="passWord"
-              @input="passWord = $event.target.value"
-              placeholder="Password"
-              name="passWord"
-            ></ion-input>
+            <div class="textFieldBorder">
+              <ion-input
+                :value="userName"
+                @input="userName = $event.target.value"
+                placeholder="Username"
+                name="userName"
+              ></ion-input>
+            </div>
+
+            <!-- <ion-item class="textFieldBorder"> -->
+            <div class="textFieldBorder">
+              <ion-input
+                :value="passWord"
+                @input="passWord = $event.target.value"
+                placeholder="Password"
+                name="passWord"
+              ></ion-input>
+            </div>
+            <!-- </ion-item> -->
             <!-- <ion-button @click="() => router.push('/tabs')"> -->
+            <a @click="reload()">
+              Forget password
+            </a>
             <ion-button type="submit">
-              helloo world
+              Continue
             </ion-button>
-            <ion-button @click="reload()">
-              refresh
-            </ion-button>
+            <a @click="reload()">
+              sign up
+            </a>
           </form>
           <ion-button @click="() => logLocal()">
             log local
@@ -43,58 +53,14 @@
   </ion-page>
 </template>
 
-<style lang="css" scoped>
-.back_picture {
-  /* background-image: url("https://i.imgur.com/BNlw2lj.jpg"); */
-  min-height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
-}
-.login_div {
-  position: absolute;
-  background-color: rgba(0, 0, 255, 0.349);
-  min-width: 100%;
-  height: 60%;
-  margin-top: 20%;
-  margin-bottom: 20%;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-.login_card {
-  /* position: absolute; */
-  color: rgb(0, 139, 0);
-  background-color: white;
-  border-bottom-left-radius: 24px;
-  border-bottom-right-radius: 24px;
-  height: 100%;
-}
-.greenBar {
-  /* position: absolute; */
-  background-color: #4a4d3e;
-  height: 18px;
-  margin-top: 6%;
-  min-width: 100%;
-}
-.mainIcon {
-  /* position: absolute;
-  margin-left: 43%;
-  margin-right: 43%;
-  max-height: 20%;
-  max-width: 14%; */
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  max-width: 16%;
-  align-items: center;
-}
-</style>
-
 <script lang="ts">
-import { IonInput, IonLabel, IonButton, IonPage } from "@ionic/vue";
+import {
+  IonInput,
+  // IonLabel,
+  IonButton,
+  IonPage,
+  // IonItem,
+} from "@ionic/vue";
 import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
 
@@ -103,8 +69,9 @@ export default defineComponent({
   components: {
     IonPage,
     IonInput,
-    IonLabel,
+    // IonLabel,
     IonButton,
+    // IonItem,
   },
   beforeMount() {
     console.log("hello before mount!");
@@ -176,3 +143,67 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="css" scoped>
+.back_picture {
+  /* background-image: url("https://i.imgur.com/BNlw2lj.jpg"); */
+  min-height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}
+.login_div {
+  position: absolute;
+  min-width: 100%;
+  height: 60%;
+  margin-top: 40%;
+  margin-bottom: 20%;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.login_card {
+  color: #4a4d3e;
+  background-color: white;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  height: 90%;
+  padding-top: 8%;
+}
+.sub_login_card {
+  width: 80%;
+  margin-left: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  /* background-color: #9da778; */
+  align-items: center;
+}
+/* .sub_login_card_title {
+  margin-left: 50%;
+  margin-right: 50%;
+} */
+.greenBar {
+  /* position: absolute; */
+  background-color: #4a4d3e;
+  height: 18px;
+  margin-top: 6%;
+  min-width: 100%;
+}
+.mainIcon {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  max-width: 16%;
+  align-items: center;
+}
+.textFieldBorder {
+  border-bottom: #4a4d3e;
+  color: #4a4d3e;
+  border-width: thin;
+  border-style: solid;
+  border-radius: 3px;
+  margin-top: 10%;
+}
+</style>
