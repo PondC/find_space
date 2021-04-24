@@ -2,7 +2,7 @@
     <ion-page>
         <ion-header>
             <ion-toolbar>
-                <ion-title>Tab 2</ion-title>
+                <ion-title>Tab </ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content :fullscreen="true">
@@ -13,6 +13,9 @@
             </ion-header>
             <ion-button @click="reload()">
                 reload
+            </ion-button>
+            <ion-button href ="/modify1">
+                to modify
             </ion-button>
         </ion-content>
     </ion-page>
