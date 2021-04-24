@@ -117,14 +117,14 @@
                         <ion-label>PowerOutlets</ion-label>
                         <ion-input :value="powerOut"
                                    @input="powerOut = $event.target.value"
-                                   placeholder="00:00 - 00:00"
+                                   placeholder="XX"
                                    name="powerOut"></ion-input>
                     </ion-item>
                     <ion-item lines="none">
                         <ion-label>Wifi</ion-label>
                         <ion-input :value="wifi"
                                    @input="wifi = $event.target.value"
-                                   placeholder="Available"
+                                   placeholder="Available / Unavailable"
                                    name="wifi"></ion-input>
                     </ion-item>
                     <ion-item lines="none">
