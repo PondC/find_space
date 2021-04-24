@@ -150,7 +150,7 @@
                 <ion-button @click="() => onSubmit()">SAVE</ion-button>
             </ion-fab>
             <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-                <ion-button @click="() => onSubmit()">DELETE</ion-button>
+                <ion-button @click="presentAlertConfirm()">DELETE</ion-button>
             </ion-fab>
 
         </ion-content>
@@ -160,117 +160,131 @@
 
 
 <script lang="ts">
-            import {
-                IonPage,
-                //IonList,
-                IonHeader,
+    import {
+        IonPage,
+        //IonList,
+        IonHeader,
+        
+        alertController,
+        //IonToolbar,
+        IonContent,
+        // IonButton,
+        //IonItemGroup,
+        //IonBackButton,
 
-                //IonToolbar,
-                IonContent,
-                // IonButton,
-                //IonItemGroup,
-                //IonBackButton,
+    } from "@ionic/vue";
+    //import { useRouter } from "vue-router";
+    import { defineComponent } from "vue";
+    export default defineComponent({
+        name: "Tab2",
+        components: {
+            IonHeader,
 
-            } from "@ionic/vue";
-            //import { useRouter } from "vue-router";
-            import { defineComponent } from "vue";
-            export default defineComponent ({
-                name: "Tab2",
-                components: {
-                    IonHeader,
-                    //IonList,
-                   //IonToolbar,
-                    IonContent,
-                    IonPage,
-                    //IonItemGroup,
-                    //IonButton,
-                    //IonBackButton,
+            
+            //IonList,
+            //IonToolbar,
+            IonContent,
+            IonPage,
+            //IonItemGroup,
+            //IonButton,
+            //IonBackButton,
 
-             },
+        },
 
-                data() {
-                    return {
-                        pic1: "",
-                        pic2: "",
-                        pic3: "",
-                        totSeats: "",
-                        description: "",
-                        monday: "",
-                        tuesday: "",
-                        wednesday: "",
-                        thursday: "",
-                        friday: "",
-                        saturday: "",
-                        sunday: "",
-                        powerOut: "",
-                        wifi: "",
-                        location: "",
-                        locationLink: "",
-                    };
-                },
-                methods: {
+        data() {
+            return {
+                pic1: "",
+                pic2: "",
+                pic3: "",
+                totSeats: "",
+                description: "",
+                monday: "",
+                tuesday: "",
+                wednesday: "",
+                thursday: "",
+                friday: "",
+                saturday: "",
+                sunday: "",
+                powerOut: "",
+                wifi: "",
+                location: "",
+                locationLink: "",
+            };
+        },
+        methods: {
 
-                    reload() {
-                        window.location.reload();
+            reload() {
+                window.location.reload();
+            },
+            onSubmit() {
+                console.log("pic1 = " + this.pic1);
+                console.log("pic2 = " + this.pic2);
+                console.log("pic3 = " + this.pic3);
+                console.log("TotalSeats = " + this.totSeats);
+                console.log("Description = " + this.description);
+                console.log("Monday = " + this.monday);
+                console.log("Tuesday = " + this.tuesday);
+                console.log("Wednesday = " + this.wednesday);
+                console.log("Thursday = " + this.thursday);
+                console.log("Friday = " + this.friday);
+                console.log("Saturday = " + this.saturday);
+                console.log("Sunday = " + this.sunday);
+                console.log("PowerOutlets = " + this.powerOut);
+                console.log("Wifi = " + this.wifi);
+                console.log("Location = " + this.location);
+                console.log("Location Link = " + this.locationLink);
+
+                // Delete the thing above and do the authentication here
+
+                //
+                window.localStorage.setItem("pic1", this.pic1);
+                window.localStorage.setItem("pic2", this.pic2);
+                window.localStorage.setItem("pic3", this.pic3);
+                window.localStorage.setItem("Total Seats", this.totSeats);
+                window.localStorage.setItem("Description", this.description);
+                window.localStorage.setItem("Monday: ", this.monday);
+                window.localStorage.setItem("Tuesday: ", this.tuesday);
+                window.localStorage.setItem("Wednesday: ", this.wednesday);
+                window.localStorage.setItem("Thursday: ", this.thursday);
+                window.localStorage.setItem("Friday: ", this.friday);
+                window.localStorage.setItem("Saturday: ", this.saturday);
+                window.localStorage.setItem("Sunday: ", this.sunday);
+                window.localStorage.setItem("PowerOutlets: ", this.powerOut);
+                window.localStorage.setItem("Wifi:", this.wifi);
+                window.localStorage.setItem("location: ", this.location);
+                window.localStorage.setItem("location Link: ", this.locationLink);
+
+            },
+            async presentAlertConfirm() {
+              const alert = await alertController
+                .create({
+                  cssClass: 'my-custom-class',
+                  header: 'Confirm!',
+                  message: 'Are you sure you want to delete this location?',
+                  buttons: [
+                    {
+                      text: 'YES',
+                      role: 'cancel',
+                      cssClass: 'secondary',
+                      handler: blah => {
+                        console.log('Confirm Cancel:', blah)
+                      },
                     },
-                    onSubmit() {
-                      console.log("pic1 = " + this.pic1);
-                      console.log("pic2 = " + this.pic2);
-                        console.log("pic3 = " + this.pic3);
-                        console.log("TotalSeats = " + this.totSeats);
-                        console.log("Description = " + this.description);
-                        console.log("Monday = " + this.monday);
-                        console.log("Tuesday = " + this.tuesday);
-                        console.log("Wednesday = " + this.wednesday);
-                        console.log("Thursday = " + this.thursday);
-                        console.log("Friday = " + this.friday);
-                        console.log("Saturday = " + this.saturday);
-                        console.log("Sunday = " + this.sunday);
-                        console.log("PowerOutlets = " + this.powerOut);
-                        console.log("Wifi = " + this.wifi);
-                        console.log("Location = " + this.location);
-                        console.log("Location Link = " + this.locationLink);
-
-                      // Delete the thing above and do the authentication here
-
-                      //
-                      window.localStorage.setItem("pic1", this.pic1);
-                        window.localStorage.setItem("pic2", this.pic2);
-                        window.localStorage.setItem("pic3", this.pic3);
-                        window.localStorage.setItem("Total Seats", this.totSeats);
-                        window.localStorage.setItem("Description", this.description);
-                        window.localStorage.setItem("Monday: ", this.monday);
-                        window.localStorage.setItem("Tuesday: ", this.tuesday);
-                        window.localStorage.setItem("Wednesday: ", this.wednesday);
-                        window.localStorage.setItem("Thursday: ", this.thursday);
-                        window.localStorage.setItem("Friday: ", this.friday);
-                        window.localStorage.setItem("Saturday: ", this.saturday);
-                        window.localStorage.setItem("Sunday: ", this.sunday);
-                        window.localStorage.setItem("PowerOutlets: ", this.powerOut);
-                        window.localStorage.setItem("Wifi:", this.wifi);
-                        window.localStorage.setItem("location: ", this.location);
-                        window.localStorage.setItem("location Link: ", this.locationLink);
-
+                    {
+                      text: 'NO',
+                      handler: () => {
+                        console.log('Confirm Okay')
+                      },
                     },
-                    created() {
-                      console.log("please wait");
-                      console.log(window.localStorage.getItem("pic1"));
-                        // go main page
-                        // this.$router.push('/tabs');
-                      }
-                    },
-                    clearLocal() {
-                      window.localStorage.removeItem("pic1");
-                      window.localStorage.removeItem("pic2");
-                      console.log(" cleared");
-                    },
-                    logLocal() {
-                      console.log("pic1 = " + window.localStorage.getItem("pic1"));
-                      console.log("pic2 = " + window.localStorage.getItem("pic2"));
-                    }
-            }
-                )
+                  ],
+                });
+              return alert.present();
+            },
+        }
+    })
 </script>
+
+
 
 <style lang="css" scoped>
 

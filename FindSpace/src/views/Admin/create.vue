@@ -13,10 +13,10 @@
                                 </ion-button>
 
                                 <div class="mainIcon">
-                                    <ion-input :value="workspaceName"
-                                               @input="workspaceName = $event.target.value"
+                                    <ion-input :value="wsname"
+                                               @input="wsname = $event.target.value"
                                                placeholder="NAME"
-                                               name="workspaceName"></ion-input>
+                                               name="wsname"></ion-input>
                                 </div>
 
                             </ion-item>
@@ -49,17 +49,17 @@
                     <!-- wait for crowdedness icons    -->
                     <ion-item lines="none">
                         <ion-label>Total Seats</ion-label>
-                        <ion-input :value="totSeats"
-                                   @input="totSeats = $event.target.value"
-                                   placeholder="TotalSeats"
-                                   name="totSeats"></ion-input>
+                        <ion-input :value="totalseat"
+                                   @input="totalseat = $event.target.value"
+                                   placeholder="totalseat"
+                                   name="totalseat"></ion-input>
                     </ion-item>
                     <ion-item lines="none">
                         <ion-label>Description</ion-label>
-                        <ion-input :value="description"
-                                   @input="description = $event.target.value"
+                        <ion-input :value="wsdes"
+                                   @input="wsdes = $event.target.value"
                                    placeholder="Description"
-                                   name="description"></ion-input>
+                                   name="wsdes"></ion-input>
                     </ion-item>
                     <ion-label>
                         Operating Hours
@@ -113,12 +113,13 @@
                                        name="sunday"></ion-input>
                         </ion-item>
                     </ion-label>
+
                     <ion-item lines="none">
                         <ion-label>PowerOutlets</ion-label>
-                        <ion-input :value="powerOut"
-                                   @input="powerOut = $event.target.value"
+                        <ion-input :value="poweroutlet"
+                                   @input="poweroutlet = $event.target.value"
                                    placeholder="XX"
-                                   name="powerOut"></ion-input>
+                                   name="poweroutlet"></ion-input>
                     </ion-item>
                     <ion-item lines="none">
                         <ion-label>Wifi</ion-label>
@@ -145,11 +146,12 @@
                     </ion-item>
                   
                     <ion-item></ion-item>
-</ion-header>
-                <ion-fab vertical="bottom" horizontal="center" slot="fixed" >
-                    <ion-button @click="() => onSubmit()" >CREATE</ion-button>
+            </ion-header>
+            <form action="/workspace" method="post">
+                <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+                    <ion-button @click="() => onSubmit() ">CREATE</ion-button>
                 </ion-fab>
-            
+            </form>
         </ion-content>
     </ion-page>
 </template>
@@ -161,7 +163,7 @@
                 IonPage,
                 //IonList,
                 IonHeader,
-             
+                IonAlert,
                 //IonToolbar,
                 IonContent,
                 // IonButton,
@@ -171,102 +173,105 @@
             } from "@ionic/vue";
             //import { useRouter } from "vue-router";
             import { defineComponent } from "vue";
-            export default defineComponent ({
-                name: "Tab2",
-                components: {
-                    IonHeader,
-                    //IonList,
-                   //IonToolbar,
-                    IonContent,
-                    IonPage,
-                    //IonItemGroup,
-                    //IonButton,
-                    //IonBackButton,
-                    
-             },
-                
-                data() {
-                    return {
-                        pic1: "",
-                        pic2: "",
-                        pic3: "",
-                        totSeats: "",
-                        description: "",
-                        monday: "",
-                        tuesday: "",
-                        wednesday: "",
-                        thursday: "",
-                        friday: "",
-                        saturday: "",
-                        sunday: "",
-                        powerOut: "",
-                        wifi: "",
-                        location: "",
-                        locationLink: "",
-                    };
-                },
-                methods: {
-                    
-                    reload() {
-                        window.location.reload();
-                    },
-                    onSubmit() {
-                      console.log("pic1 = " + this.pic1);
-                      console.log("pic2 = " + this.pic2);
-                        console.log("pic3 = " + this.pic3);
-                        console.log("TotalSeats = " + this.totSeats);
-                        console.log("Description = " + this.description);
-                        console.log("Monday = " + this.monday);
-                        console.log("Tuesday = " + this.tuesday);
-                        console.log("Wednesday = " + this.wednesday);
-                        console.log("Thursday = " + this.thursday);
-                        console.log("Friday = " + this.friday);
-                        console.log("Saturday = " + this.saturday);
-                        console.log("Sunday = " + this.sunday);
-                        console.log("PowerOutlets = " + this.powerOut);
-                        console.log("Wifi = " + this.wifi);
-                        console.log("Location = " + this.location);
-                        console.log("Location Link = " + this.locationLink);
+    export default defineComponent({
+        name: "Tab2",
+        components: {
+            IonHeader,
+            IonAlert,
+            //IonList,
+            //IonToolbar,
+            IonContent,
+            IonPage,
+            //IonItemGroup,
+            //IonButton,
+            //IonBackButton,
 
-                      // Delete the thing above and do the authentication here
+        },
 
-                      //
-                      window.localStorage.setItem("pic1", this.pic1);
-                        window.localStorage.setItem("pic2", this.pic2);
-                        window.localStorage.setItem("pic3", this.pic3);
-                        window.localStorage.setItem("Total Seats", this.totSeats);
-                        window.localStorage.setItem("Description", this.description);
-                        window.localStorage.setItem("Monday: ", this.monday);
-                        window.localStorage.setItem("Tuesday: ", this.tuesday);
-                        window.localStorage.setItem("Wednesday: ", this.wednesday);
-                        window.localStorage.setItem("Thursday: ", this.thursday);
-                        window.localStorage.setItem("Friday: ", this.friday);
-                        window.localStorage.setItem("Saturday: ", this.saturday);
-                        window.localStorage.setItem("Sunday: ", this.sunday);
-                        window.localStorage.setItem("PowerOutlets: ", this.powerOut);
-                        window.localStorage.setItem("Wifi:", this.wifi);
-                        window.localStorage.setItem("location: ", this.location);
-                        window.localStorage.setItem("location Link: ", this.locationLink);
+        data() {
+            return {
+                wsname: "",
+                pic1: "",
+                pic2: "",
+                pic3: "",
+                totalseat: "",
+                wsdes: "",
+                monday: "",
+                tuesday: "",
+                wednesday: "",
+                thursday: "",
+                friday: "",
+                saturday: "",
+                sunday: "",
+                poweroutlet: "",
+                wifi: "",
+                location: "",
+                locationLink: "",
+            };
+        },
+        methods: {
 
-                    },
-                    created() {
-                      console.log("please wait");
-                      console.log(window.localStorage.getItem("pic1"));
-                        // go main page
-                        // this.$router.push('/tabs');
-                      }
-                    },
-                    clearLocal() {
-                      window.localStorage.removeItem("pic1");
-                      window.localStorage.removeItem("pic2");
-                      console.log(" cleared");
-                    },
-                    logLocal() {
-                      console.log("pic1 = " + window.localStorage.getItem("pic1"));
-                      console.log("pic2 = " + window.localStorage.getItem("pic2"));
-                    }
+            reload() {
+                window.location.reload();
+            },
+            onSubmit() {
+                console.log("wsname = " + this.wsname);
+                console.log("pic1 = " + this.pic1);
+                console.log("pic2 = " + this.pic2);
+                console.log("pic3 = " + this.pic3);
+                console.log("TotalSeats = " + this.totalseat);
+                console.log("Description = " + this.wsdes);
+                console.log("Monday = " + this.monday);
+                console.log("Tuesday = " + this.tuesday);
+                console.log("Wednesday = " + this.wednesday);
+                console.log("Thursday = " + this.thursday);
+                console.log("Friday = " + this.friday);
+                console.log("Saturday = " + this.saturday);
+                console.log("Sunday = " + this.sunday);
+                console.log("PowerOutlets = " + this.poweroutlet);
+                console.log("Wifi = " + this.wifi);
+                console.log("Location = " + this.location);
+                console.log("Location Link = " + this.locationLink);
+
+                // Delete the thing above and do the authentication here
+
+                //
+                window.localStorage.setItem("wsname", this.wsname);
+                window.localStorage.setItem("pic1", this.pic1);
+                window.localStorage.setItem("pic2", this.pic2);
+                window.localStorage.setItem("pic3", this.pic3);
+                window.localStorage.setItem("Total Seats", this.totalseat);
+                window.localStorage.setItem("Description", this.wsdes);
+                window.localStorage.setItem("Monday: ", this.monday);
+                window.localStorage.setItem("Tuesday: ", this.tuesday);
+                window.localStorage.setItem("Wednesday: ", this.wednesday);
+                window.localStorage.setItem("Thursday: ", this.thursday);
+                window.localStorage.setItem("Friday: ", this.friday);
+                window.localStorage.setItem("Saturday: ", this.saturday);
+                window.localStorage.setItem("Sunday: ", this.sunday);
+                window.localStorage.setItem("PowerOutlets: ", this.poweroutlet);
+                window.localStorage.setItem("Wifi:", this.wifi);
+                window.localStorage.setItem("location: ", this.location);
+                window.localStorage.setItem("location Link: ", this.locationLink);
+
+            },
+            created() {
+                console.log("please wait");
+                console.log(window.localStorage.getItem("pic1"));
+                // go main page
+                // this.$router.push('/tabs');
             }
-                )
+        },
+        clearLocal() {
+            window.localStorage.removeItem("pic1");
+            window.localStorage.removeItem("pic2");
+            console.log(" cleared");
+        },
+        logLocal() {
+            console.log("pic1 = " + window.localStorage.getItem("pic1"));
+            console.log("pic2 = " + window.localStorage.getItem("pic2"));
+        }
+    }
 </script>
 
 <style lang="css" scoped>
