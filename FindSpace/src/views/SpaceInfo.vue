@@ -1,6 +1,11 @@
 <template>
   <ion-page>
-    <!-- <ion-content :fullscreen="true">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{ searchWord }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
           <ion-title size="large">Tab 2</ion-title>
@@ -9,77 +14,83 @@
       <ion-button @click="reload()">
         reload
       </ion-button>
-    </ion-content> -->
-    <div class="mainDiv">
+    </ion-content>
+    <!-- <div class="mainDiv">
       <img class="nearbyBanner" :src="require('@/assets/img/NearBy.png')" />
       <div class="searchBox">search box</div>
       <div class="spaceList">
         <div
           v-for="space in spaces"
           :key="space.workspaceid"
-          @click="showSpaceInfo(space.workspaceid)"
+          @click="showSpaceInfo()"
         >
           {{ space.workspaceid }}
-          click me!!
         </div>
       </div>
-    </div>
+    </div> -->
   </ion-page>
 </template>
 
 <script lang="ts">
 import {
   IonPage,
-  // IonHeader,
-  // IonToolbar,
-  // IonTitle,
-  // IonContent,
-  // IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonButton,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import axios from "axios";
 
 export default defineComponent({
-  name: "Tab2",
+  name: "SpaceInfo",
   components: {
-    // IonHeader,
-    // IonToolbar,
-    // IonTitle,
-    // IonContent,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
     IonPage,
-    // IonButton,
+    IonButton,
   },
   beforeMount() {
-    console.log("hello from tab 2");
-    this.getSpaceList();
+    console.log("info");
+    console.log(this.$route.params.spaceID);
+    this.getSpaceInformation(this.$route.params.spaceID);
+    this.ultraLoop();
   },
   data() {
     return {
       searchWord: "",
       // isAlive: false,
-      spaces: [],
+      space: [],
     };
   },
   methods: {
     reload() {
       window.location.reload();
     },
-    getSpaceList() {
-      // axios.defaults.withCredentials = true;
+    getSpaceInformation(spaceID: any) {
       return axios
-        .get("http://localhost:5678/realtime/recommWS")
+        .get("http://localhost:5678/workspace/" + spaceID)
         .then((res) => {
           console.log(res.data);
-          this.spaces = res.data;
-          console.log(this.spaces);
+          this.space = res.data;
+          console.log(this.space);
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    showSpaceInfo(id: number) {
-      // console.log("this is id :" + id);
-      this.$router.push("/SpaceInfo/" + id);
+    ultraLoop() {
+      setTimeout(() => {
+        if (this.searchWord === "hi") {
+          this.searchWord = "hello";
+        } else {
+          this.searchWord = "hi";
+        }
+        this.ultraLoop();
+      }, 2000);
     },
   },
 });
