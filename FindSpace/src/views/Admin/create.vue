@@ -172,7 +172,8 @@
 
             } from "@ionic/vue";
             //import { useRouter } from "vue-router";
-            import { defineComponent } from "vue";
+    import { defineComponent } from "vue";
+    import axios from "axios";
     export default defineComponent({
         name: "Tab2",
         components: {
@@ -253,7 +254,15 @@
                 window.localStorage.setItem("Wifi:", this.wifi);
                 window.localStorage.setItem("location: ", this.location);
                 window.localStorage.setItem("location Link: ", this.locationLink);
-
+                
+                axios.get("http://localhost:5678/admin/workspace")
+                    .then((res: any) => {
+                        console.log(res.data);
+                        console.log(res.data.rows);
+                    })
+                    .catch((err: any) => {
+                        console.log(err);
+                    });
             },
             created() {
                 console.log("please wait");
