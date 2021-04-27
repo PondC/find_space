@@ -51,7 +51,7 @@ export default defineComponent({
   },
   beforeMount() {
     console.log("hello from tab 2");
-    this.getSpaceList();
+    this.getNearbySpaceList();
   },
   data() {
     return {
@@ -64,10 +64,17 @@ export default defineComponent({
     reload() {
       window.location.reload();
     },
-    getSpaceList() {
+    getNearbySpaceList() {
       // axios.defaults.withCredentials = true;
+      const userLat = 13.736281;
+      const userong = 100.53221;
+      const endPointURL =
+        "http://localhost:5678/homepage/recommWS?Lat=" +
+        userLat +
+        "&Long=" +
+        userong;
       return axios
-        .get("http://localhost:5678/realtime/recommWS")
+        .get(endPointURL)
         .then((res) => {
           console.log(res.data);
           this.spaces = res.data;

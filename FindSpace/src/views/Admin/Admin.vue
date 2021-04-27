@@ -10,13 +10,15 @@
                 <ion-button href="/modify">
                     MODIFY
                 </ion-button>
+               
+
             </div>
         </ion-content>
     </ion-page>
 </template>
 
 <script lang="ts">
-    import { IonContent, IonPage } from '@ionic/vue';
+    import { IonContent, IonPage} from '@ionic/vue';
     import { ellipse, square, triangle } from 'ionicons/icons';
 
     export default {

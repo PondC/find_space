@@ -2,10 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\backend",
+    "\\src\\router",
     "\\src\\theme",
     "\\src\\views",
     "\\src\\views\\Admin"
   ],
-  "SelectedNode": "\\src\\views\\Login.vue",
+  "SelectedNode": "\\src\\views\\Admin\\modify1.vue",
   "PreviewInSolutionExplorer": false
 }
