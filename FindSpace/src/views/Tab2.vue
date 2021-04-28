@@ -28,19 +28,16 @@
             <div class="spaceIcon">
               <img src="https://picsum.photos/100" />
             </div>
-            <div class="spaceName">
-              <div>
+            <div class="nameAndDistance">
+              <div class="spaceName">
                 {{ space.wsname }}
               </div>
-              <div>
+              <div class="spaceDistance">
                 {{ space.distance }}
               </div>
             </div>
             <div class="spaceCrowd">
               {{ space.crowdednessstatus }}
-            </div>
-            <div>
-              croud
             </div>
           </div>
           <div class="spaceFeed">
@@ -135,7 +132,6 @@ export default defineComponent({
 .spaceList {
   height: 80%;
   padding-top: 8px;
-  background-color: green;
 }
 .spaceCard {
   border-radius: 12px;
@@ -147,24 +143,34 @@ export default defineComponent({
 .spacePic {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  background-color: rgb(0, 81, 255);
   height: 104px;
   overflow: hidden;
 }
 .spaceInfo {
-  background-color: rgb(230, 103, 103);
   height: 48px;
   display: flex;
 }
 .spaceIcon {
   max-width: 48px;
 }
-.spaceName {
+.nameAndDistance {
+  padding-left: 4px;
   max-width: 160px;
-  background-color: rgb(110, 87, 116);
+  display: flex;
+  flex-direction: column;
+}
+.spaceName {
+  overflow: hidden;
+  height: 50%;
+  color: #4a4d3e;
+}
+.spaceDistance {
+  overflow: hidden;
+  height: 50%;
+  color: #4a4d3e;
 }
 .spaceCrowd {
-  max-width: 48px;
+  width: auto;
   background-color: rgb(117, 228, 222);
 }
 .spaceFeed {
