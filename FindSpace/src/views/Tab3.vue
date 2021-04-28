@@ -28,9 +28,11 @@
             Status
           </div>
           <div>
-            <ion-chip class="changeChip">
-              <ion-label> Subscribe </ion-label>
-            </ion-chip>
+              <ion-chip class="changeChip" href="/googlepay">
+                  <ion-label> Subscribe </ion-label>
+              </ion-chip>
+              <ion-button @click="gotosubscribe">SUBSCRIBE</ion-button>
+              <GooglePay />
           </div>
         </div>
         <a @click="askToDelete()">
@@ -59,15 +61,17 @@ import {
   IonLabel,
   // IonAlert,
   alertController,
-} from "@ionic/vue";
+    } from "@ionic/vue";
+    import axios from "axios";
 import { defineComponent } from "vue";
-import { useRouter } from "vue-router";
+    import { useRouter } from "vue-router";
+    
 // import DeleteAccountMessage from "../components/DeleteAccount.vue";
 // import { Geolocation } from "@ionic-native/geolocation/ngx";
 
 export default defineComponent({
   name: "Tab3",
-  components: {
+    components: {
     IonChip,
     IonPage,
     // IonButton,
@@ -93,10 +97,21 @@ export default defineComponent({
       console.log("no data!");
       // this.deletePopup = false;
       this.$router.push("/");
-    }
+      }
+
+    axios.get("http://localhost:5678/admin/workspace")
+                    .then((res: any) => {
+                        console.log(res.data);
+                        console.log(res.data.rows[1].wsname);
+                        this.subscribe = res.data.rows[1].wsname;
+                    })
+                    .catch((err: any) => {
+                        console.log(err);
+                    });
   },
   data() {
-    return {
+      return {
+      subscribe: "",
       userName: "",
       passWord: "",
       status: "regular",
@@ -114,7 +129,24 @@ export default defineComponent({
       router,
     };
   },
-  methods: {
+    methods: {
+        gotosubscribe() {
+            fetch('http://localhost:5678/subscription')
+                .then(response => {
+                  return response.text();
+                })
+                .then(data => {
+                    console.log("error");
+                })
+            /*axios.get("http://localhost:5678/subscription")
+                    .then((res: any) => {
+                        console.log(res.data);
+                        console.log(res.data.rows[1]);
+                    })
+                    .catch((err: any) => {
+                        console.log(err);
+                    });*/
+        },
     watchLocation() {
       // let watch = this.geo.watchPosition();
       const geo = navigator.geolocation;

@@ -276,11 +276,12 @@
                 window.localStorage.setItem("lat:", this.lat);
                 window.localStorage.setItem("location: ", this.location);
                 window.localStorage.setItem("location Link: ", this.locationLink);
-                
 
                 const endpointUrl = "http://localhost:5678/admin/workspace?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet;
-                console.log(endpointUrl);
-               /* return axios.post(endpointUrl)
+                //const photos = "http://localhost:5678/admin/pic?photo1=" + this.pic1 + "&photo2=" + this.pic2 + "&photo3=" + this.pic3 + "/:WorkspaceID";
+                //console.log(endpointUrl);
+                axios.post(endpointUrl);
+                /*axios.post(photos)
                     .then((res: any) => {
                         console.log(res.data);
                         console.log("success");
@@ -289,10 +290,12 @@
                         console.log(err);
                         console.log("error");
                     });
+                */
+                
       
-      */
+ 
                 //get data from db
-              
+              /*
                 axios.get("http://localhost:5678/admin/workspace")
                     .then((res: any) => {
                         console.log(res.data);
@@ -300,8 +303,12 @@
                     })
                     .catch((err: any) => {
                         console.log(err);
-                    });
+                    });*/
             },
+          
+            /*postworkspacePhoto() {
+
+            },*/
             created() {
                 console.log("please wait");
                 console.log(window.localStorage.getItem("pic1"));

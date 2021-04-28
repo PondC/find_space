@@ -6,7 +6,7 @@ import Admin from '../views/Admin/Admin.vue'
 import Create from '../views/Admin/create.vue'
 import Modify from '../views/Admin/modify.vue'
 import Modify1 from '../views/Admin/modify1.vue'
-import test from '../views/Admin/test.vue'
+
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -54,10 +54,6 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/modify1',
         component: Modify1
-    },
-    {
-        path: '/test',
-        component: test
     },
 ]
 

@@ -1,7 +1,7 @@
 <template>
     <ion-page>
         <ion-content :fullscreen="true">
-            <ion-header collapse="condense">
+            <ion-header>
 
                 <ion-list lines="full" class="ion-no-margin">
                     <ion-list-header lines="full">
@@ -13,10 +13,7 @@
                                 </ion-button>
 
                                 <div class="mainIcon">
-                                    <ion-input :value="workspaceName"
-                                               @input="workspaceName = $event.target.value"
-                                               placeholder="NAME"
-                                               name="workspaceName"></ion-input>
+                                    {{ workspacename}}
                                 </div>
 
                             </ion-item>
@@ -173,6 +170,7 @@
         //IonBackButton,
 
     } from "@ionic/vue";
+    import  axios  from 'axios';
     //import { useRouter } from "vue-router";
     import { defineComponent } from "vue";
     export default defineComponent({
@@ -180,7 +178,7 @@
         components: {
             IonHeader,
 
-            
+
             //IonList,
             //IonToolbar,
             IonContent,
@@ -189,6 +187,18 @@
             //IonButton,
             //IonBackButton,
 
+        },
+        beforeMount() {
+                console.log("hello before mount!");
+                axios.get("http://localhost:5678/admin/workspace")
+                    .then((res: any) => {
+                        console.log(res.data);
+                        console.log(res.data.rows[1].wsname);
+                        this.workspacename = res.data.rows[1].wsname;
+                    })
+                    .catch((err: any) => {
+                        console.log(err);
+                    });
         },
 
         data() {
@@ -209,6 +219,7 @@
                 wifi: "",
                 location: "",
                 locationLink: "",
+                workspacename: "",
             };
         },
         methods: {
@@ -254,32 +265,34 @@
                 window.localStorage.setItem("location: ", this.location);
                 window.localStorage.setItem("location Link: ", this.locationLink);
 
+
             },
             async presentAlertConfirm() {
-              const alert = await alertController
-                .create({
-                  cssClass: 'my-custom-class',
-                  header: 'Confirm!',
-                  message: 'Are you sure you want to delete this location?',
-                  buttons: [
-                    {
-                      text: 'YES',
-                      role: 'cancel',
-                      cssClass: 'secondary',
-                      handler: blah => {
-                        console.log('Confirm Cancel:', blah)
-                      },
-                    },
-                    {
-                      text: 'NO',
-                      handler: () => {
-                        console.log('Confirm Okay')
-                      },
-                    },
-                  ],
-                });
-              return alert.present();
+                const alert = await alertController
+                    .create({
+                        cssClass: 'my-custom-class',
+                        header: 'Confirm!',
+                        message: 'Are you sure you want to delete this location?',
+                        buttons: [
+                            {
+                                text: 'YES',
+                                role: 'cancel',
+                                cssClass: 'secondary',
+                                handler: blah => {
+                                    console.log('Confirm Cancel:', blah)
+                                },
+                            },
+                            {
+                                text: 'NO',
+                                handler: () => {
+                                    console.log('Confirm Okay')
+                                },
+                            },
+                        ],
+                    });
+                return alert.present();
             },
+            
         }
     })
 </script>
