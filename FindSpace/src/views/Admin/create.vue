@@ -1,7 +1,7 @@
 <template>
     <ion-page>
         <ion-content :fullscreen="true">
-            <ion-header collapse="condense">
+       
 
                 <ion-list lines="full" class="ion-no-margin">
                     <ion-list-header lines="full">
@@ -162,7 +162,6 @@
                 </ion-item>
 
                 <ion-item></ion-item>
-            </ion-header>
             
         </ion-content>
         <form action="/workspace" method="post">
@@ -179,7 +178,7 @@
             import {
                 IonPage,
                 //IonList,
-                IonHeader,
+                //IonHeader,
                 //IonAlert,
                 //IonToolbar,
                 IonContent,
@@ -194,7 +193,7 @@
     export default defineComponent({
         name: "Tab2",
         components: {
-            IonHeader,
+            //IonHeader,
             //IonAlert,
             //IonList,
             //IonToolbar,
