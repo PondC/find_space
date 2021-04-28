@@ -1,50 +1,51 @@
 <template>
-    <ion-page>
-        <ion-header>
-            <ion-toolbar>
-                <ion-title>Tab </ion-title>
-            </ion-toolbar>
-        </ion-header>
-        <ion-content :fullscreen="true">
-            <ion-header collapse="condense">
-                <ion-toolbar>
-                    <ion-title size="large">Tab 2</ion-title>
-                </ion-toolbar>
-            </ion-header>
-            <ion-button @click="reload()">
-                reload
-            </ion-button>
-            <ion-button href ="/modify1">
-                to modify
-            </ion-button>
-        </ion-content>
-    </ion-page>
+  <ion-page>
+    <div>
+      Hello wave
+    </div>
+    <div>
+      your workspace id is {{ workspaceID }}
+    </div>
+    <div>
+      thanks
+    </div>
+  </ion-page>
 </template>
 
 <script lang="ts">
-    import {
-        IonPage,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonContent,
-        IonButton,
-    } from "@ionic/vue";
+import {
+  IonPage,
+  //   IonHeader,
+  //   IonToolbar,
+  //   IonTitle,
+  //   IonContent,
+  //   IonButton,
+} from "@ionic/vue";
+import { defineComponent } from "vue";
 
-    export default {
-        name: "Tab2",
-        components: {
-            IonHeader,
-            IonToolbar,
-            IonTitle,
-            IonContent,
-            IonPage,
-            IonButton,
-        },
-        methods: {
-            reload() {
-                window.location.reload();
-            },
-        },
+export default defineComponent({
+  name: "Modify",
+  components: {
+    // IonHeader,
+    // IonToolbar,
+    // IonTitle,
+    // IonContent,
+    IonPage,
+    // IonButton,
+  },
+  beforeMount() {
+    console.log(this.$route.params);
+    this.workspaceID = this.$route.params.spaceID + "";
+  },
+  data() {
+    return {
+      workspaceID: "",
     };
+  },
+  methods: {
+    reload() {
+      window.location.reload();
+    },
+  },
+});
 </script>

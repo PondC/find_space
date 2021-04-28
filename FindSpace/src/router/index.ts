@@ -48,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Create,
   },
   {
-    path: "/modify",
+    path: "/modify/:spaceID",
     component: Modify,
   },
   {
