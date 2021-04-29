@@ -49,10 +49,10 @@
                 <!-- wait for crowdedness icons    -->
                 <ion-item lines="none">
                     <ion-label>Total Seats</ion-label>
-                    <ion-input :value="totSeats"
-                               @input="totSeats = $event.target.value"
+                    <ion-input :value="totalseat"
+                               @input="totalseat = $event.target.value"
                                placeholder="TotalSeats"
-                               name="totSeats"></ion-input>
+                               name="totalseat"></ion-input>
                 </ion-item>
                 <ion-item lines="none">
                     <ion-label>Description</ion-label>
@@ -61,6 +61,31 @@
                                placeholder="Description"
                                name="description"></ion-input>
                 </ion-item>
+                <ion-label>
+                    Menu
+                    <ion-item lines="none">
+                        <ion-label>Menu 1 link</ion-label>
+                        <ion-input :value="menu1"
+                                   @input="menu1 = $event.target.value"
+                                   placeholder="menu 1 link"
+                                   name="menu1"></ion-input>
+                    </ion-item>
+
+                    <ion-item lines="none">
+                        <ion-label>Menu 2 link</ion-label>
+                        <ion-input :value="menu2"
+                                   @input="menu2 = $event.target.value"
+                                   placeholder="menu 2 link"
+                                   name="menu2"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Menu 3 link</ion-label>
+                        <ion-input :value="menu3"
+                                   @input="menu3 = $event.target.value"
+                                   placeholder="menu 3 link"
+                                   name="menu3"></ion-input>
+                    </ion-item>
+                </ion-label>
                 <ion-label>
                     Operating Hours
                     <ion-item lines="none">
@@ -128,6 +153,20 @@
                                name="wifi"></ion-input>
                 </ion-item>
                 <ion-item lines="none">
+                    <ion-label>Latitude</ion-label>
+                    <ion-input :value="lat"
+                               @input="lat = $event.target.value"
+                               placeholder="XX"
+                               name="latitude"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label>Longitude</ion-label>
+                    <ion-input :value="long"
+                               @input="long = $event.target.value"
+                               placeholder="longitude"
+                               name="longitude"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
                     <ion-label>Location</ion-label>
                     <ion-input :value="location"
                                @input="location = $event.target.value"
@@ -150,9 +189,9 @@
                 <ion-button @click="() => onSubmit()">SAVE</ion-button>
             </ion-fab>
             <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-                <ion-button @click="presentAlertConfirm()">DELETE</ion-button>
+                <ion-button @click="presentAlertConfirm()">      DELETE</ion-button>
             </ion-fab>
-
+           
         </ion-content>
     </ion-page>
 </template>
@@ -174,13 +213,14 @@
 
     } from "@ionic/vue";
     //import { useRouter } from "vue-router";
+    import axios from "axios";
     import { defineComponent } from "vue";
     export default defineComponent({
         name: "Tab2",
         components: {
             IonHeader,
 
-            
+
             //IonList,
             //IonToolbar,
             IonContent,
@@ -190,13 +230,21 @@
             //IonBackButton,
 
         },
-
+        beforeMount() {
+            console.log(this.$route.params.spaceID);
+            this.workspaceID = this.$route.params.spaceID + "";
+        },
         data() {
             return {
+                wsname: "",
+                workspaceID: "",
                 pic1: "",
                 pic2: "",
                 pic3: "",
-                totSeats: "",
+                menu1: "",
+                menu2: "",
+                menu3: "",
+                totalseat: "",
                 description: "",
                 monday: "",
                 tuesday: "",
@@ -205,10 +253,13 @@
                 friday: "",
                 saturday: "",
                 sunday: "",
-                powerOut: "",
+                poweroutlet: "",
                 wifi: "",
+                lat: "",
+                long: "",
                 location: "",
                 locationLink: "",
+                ophours: [""],
             };
         },
         methods: {
@@ -220,7 +271,7 @@
                 console.log("pic1 = " + this.pic1);
                 console.log("pic2 = " + this.pic2);
                 console.log("pic3 = " + this.pic3);
-                console.log("TotalSeats = " + this.totSeats);
+                console.log("TotalSeats = " + this.totalseat);
                 console.log("Description = " + this.description);
                 console.log("Monday = " + this.monday);
                 console.log("Tuesday = " + this.tuesday);
@@ -229,7 +280,7 @@
                 console.log("Friday = " + this.friday);
                 console.log("Saturday = " + this.saturday);
                 console.log("Sunday = " + this.sunday);
-                console.log("PowerOutlets = " + this.powerOut);
+                console.log("PowerOutlets = " + this.poweroutlet);
                 console.log("Wifi = " + this.wifi);
                 console.log("Location = " + this.location);
                 console.log("Location Link = " + this.locationLink);
@@ -240,7 +291,10 @@
                 window.localStorage.setItem("pic1", this.pic1);
                 window.localStorage.setItem("pic2", this.pic2);
                 window.localStorage.setItem("pic3", this.pic3);
-                window.localStorage.setItem("Total Seats", this.totSeats);
+                window.localStorage.setItem("menu1", this.menu1);
+                window.localStorage.setItem("menu2", this.menu2);
+                window.localStorage.setItem("menu3", this.menu3);
+                window.localStorage.setItem("Total Seats", this.totalseat);
                 window.localStorage.setItem("Description", this.description);
                 window.localStorage.setItem("Monday: ", this.monday);
                 window.localStorage.setItem("Tuesday: ", this.tuesday);
@@ -249,13 +303,62 @@
                 window.localStorage.setItem("Friday: ", this.friday);
                 window.localStorage.setItem("Saturday: ", this.saturday);
                 window.localStorage.setItem("Sunday: ", this.sunday);
-                window.localStorage.setItem("PowerOutlets: ", this.powerOut);
+                window.localStorage.setItem("PowerOutlets: ", this.poweroutlet);
                 window.localStorage.setItem("Wifi:", this.wifi);
+                window.localStorage.setItem("lat", this.lat);
+                window.localStorage.setItem("long", this.long);
                 window.localStorage.setItem("location: ", this.location);
                 window.localStorage.setItem("location Link: ", this.locationLink);
 
+                this.ophours.pop();
+                this.ophours.push(this.monday);
+                this.ophours.push(this.tuesday);
+                this.ophours.push(this.wednesday);
+                this.ophours.push(this.thursday);
+                this.ophours.push(this.friday);
+                this.ophours.push(this.saturday);
+                this.ophours.push(this.sunday);
+                
+                console.log(this.ophours);
+                /*
+                console.log('kuy');
+                 console.log("this.ophours");
+                console.log(this.ophours);
+                this.ophours.map((ophour) => {
+                    console.log("ophours=" + ophour);
+                });*/
+                
+                axios.put("http://localhost:5678/admin/workspace/WS_Des/2?wsname=" + "&ws_des=" + this.description);
+                axios.put("http://localhost:5678/admin/workspace/coordinate/2?ws_lat=" + this.lat + "&ws_long=" + this.long);
+                axios.put("http://localhost:5678/admin/workspace/totalseats/2?wsname=" + "&totalseat=" + this.totalseat)
+                axios.put("http://localhost:5678/admin/workspace/wifi/2?wifi=" + "&ws_des=" + this.wifi);
+                axios.put("http://localhost:5678/admin/workspace/poweroutlets/2?poweroutlet=" + this.poweroutlet);
+                axios.put("http://localhost:5678/admin/pic/photo1/2?photo1=" + this.pic1);
+                axios.put("http://localhost:5678/admin/pic/photo2/2?photo2=" + this.pic2);
+                axios.put("http://localhost:5678/admin/pic/photo3/2?photo3=kuy");
+                axios.put("http://localhost:5678/admin/pic/menu1/2?menu1=" + this.menu1);
+                axios.put("http://localhost:5678/admin/pic/menu2/2?menu2=" + this.menu2);
+                axios.put("http://localhost:5678/admin/pic/menu3/2?menu3=" + this.menu3);
+                axios.put("http://localhost:5678/admin/ophour/time/2?time=" + this.ophours).then((res) => {
+                    console.log(res);
+                    console.log("success");
+                    })
+                    .catch((err) => {
+                    console.log(err);
+                  })
             },
+            /*
+            deleteSpace() {
+                axios.delete("http://localhost:5678/admin/workspace/8").then((res) => {
+                    console.log(res);
+            })
+            .catch((err) => {
+            console.log(err);
+          })
+            },
+            */
             async presentAlertConfirm() {
+              axios.delete("http://localhost:5678/admin/workspace/8");
               const alert = await alertController
                 .create({
                   cssClass: 'my-custom-class',
@@ -264,16 +367,23 @@
                   buttons: [
                     {
                       text: 'YES',
-                      role: 'cancel',
+                      role: 'Confirm',
                       cssClass: 'secondary',
-                      handler: blah => {
-                        console.log('Confirm Cancel:', blah)
+                      handler: ()=> {
+                          console.log('Confirm Okay:')
+                          axios.delete("http://localhost:5678/admin/workspace/9").then((res) => {
+                                console.log(res);
+                        })
+                        .catch((err) => {
+                        console.log(err);
+                      })
+                        
                       },
                     },
                     {
                       text: 'NO',
                       handler: () => {
-                        console.log('Confirm Okay')
+                        console.log('Confirm Cancel')
                       },
                     },
                   ],
