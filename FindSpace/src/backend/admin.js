@@ -159,12 +159,12 @@ route.delete("/workspace/:Workspace_ID", async (req, res) => {
 
 route.post("/pic", async (req, res) => {
     try {
-        const { photo1, photo2, photo3, WorkspaceID } = req.body;
+        const { photo1, photo2, photo3, WorkspaceID } = req.query;
         const newMenurec = await pool.query(
             "INSERT INTO ws_photo (photo1, photo2, photo3, WorkspaceID) VALUES($1,$2,$3,$4) RETURNING *",
             [photo1, photo2, photo3, WorkspaceID]
         );
-        console.log(req.body);
+        console.log(req.query);
     } catch (err) {
         console.error(err.message);
     }

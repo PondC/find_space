@@ -247,7 +247,6 @@ export default defineComponent({
         long: "",
       location: "",
         locationLink: "",
-      createdID: 0,
     };
   },
   methods: {
@@ -300,19 +299,68 @@ export default defineComponent({
       window.localStorage.setItem("location Link: ", this.locationLink);
 
         axios.post("http://localhost:5678/admin/workspace?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet);
-        
 
         /*
         axios.get("http://localhost:5678/admin/workspace")
-        .then((res) => {
-            for (let int i = 0; i < res.data.rows.length(); i++) {
-                this.createdID = i;
-                console.log(i);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          })*/
+        .then((res) => {                //
+                window.localStorage.setItem("wsname", this.wsname);
+                window.localStorage.setItem("pic1", this.pic1);
+                window.localStorage.setItem("pic2", this.pic2);
+                window.localStorage.setItem("pic3", this.pic3);
+                window.localStorage.setItem("Total Seats", this.totalseat);
+                window.localStorage.setItem("Description", this.wsdes);
+                window.localStorage.setItem("Monday: ", this.monday);
+                window.localStorage.setItem("Tuesday: ", this.tuesday);
+                window.localStorage.setItem("Wednesday: ", this.wednesday);
+                window.localStorage.setItem("Thursday: ", this.thursday);
+                window.localStorage.setItem("Friday: ", this.friday);
+                window.localStorage.setItem("Saturday: ", this.saturday);
+                window.localStorage.setItem("Sunday: ", this.sunday);
+                window.localStorage.setItem("PowerOutlets: ", this.poweroutlet);
+                window.localStorage.setItem("Wifi:", this.wifi);
+                window.localStorage.setItem("Long: ", this.long);
+                window.localStorage.setItem("lat:", this.lat);
+                window.localStorage.setItem("location: ", this.location);
+                window.localStorage.setItem("location Link: ", this.locationLink);
+
+                const endpointUrl = "http://localhost:5678/admin/workspace?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet;
+                //const photos = "http://localhost:5678/admin/pic?photo1=" + this.pic1 + "&photo2=" + this.pic2 + "&photo3=" + this.pic3 + "/:WorkspaceID";
+                //console.log(endpointUrl);
+                axios.post(endpointUrl);
+                /*axios.post(photos)
+                    .then((res: any) => {
+                        console.log(res.data);
+                        console.log("success");
+                    })
+                    .catch((err: any) => {
+                        console.log(err);
+                        console.log("error");
+                    });
+                */
+                
+      
+ 
+                //get data from db
+              /*
+                axios.get("http://localhost:5678/admin/workspace")
+                    .then((res: any) => {
+                        console.log(res.data);
+                        console.log(res.data.rows[1]);
+                    })
+                    .catch((err: any) => {
+                        console.log(err);
+                    });*/
+            },
+          
+            /*postworkspacePhoto() {
+
+            },*/
+            created() {
+                console.log("please wait");
+                console.log(window.localStorage.getItem("pic1"));
+                // go main page
+                // this.$router.push('/tabs');
+            },
         //axios.post("http://localhost:5678/admin/pic?photo1=" + this.pic1 + "&photo2=" + this.pic2 + "&photo3=" + this.pic3 + "workspaceID=" + this.createdID);
         //axios.post("http://localhost:5678/admin/menu?menu1=" + this.menu1 + "&menu2=" + this.menu2 + "&menu3=" + this.menu3 + "workspaceID=" + this.createdID);
       },
@@ -341,16 +389,6 @@ export default defineComponent({
       // go main page
       // this.$router.push('/tabs');
     },
-  },
-  clearLocal() {
-    window.localStorage.removeItem("pic1");
-    window.localStorage.removeItem("pic2");
-    console.log(" cleared");
-  },
-  logLocal() {
-    console.log("pic1 = " + window.localStorage.getItem("pic1"));
-    console.log("pic2 = " + window.localStorage.getItem("pic2"));
-  },
 });
 </script>
 <style lang="css" scoped>

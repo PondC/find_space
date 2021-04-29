@@ -1,7 +1,7 @@
 <template>
     <ion-page>
         <ion-content :fullscreen="true">
-            <ion-header collapse="condense">
+            <ion-header>
 
                 <ion-list lines="full" class="ion-no-margin">
                     <ion-list-header lines="full">
@@ -13,10 +13,7 @@
                                 </ion-button>
 
                                 <div class="mainIcon">
-                                    <ion-input :value="workspaceName"
-                                               @input="workspaceName = $event.target.value"
-                                               placeholder="NAME"
-                                               name="workspaceName"></ion-input>
+                                    {{ wsname}}
                                 </div>
 
                             </ion-item>
@@ -233,7 +230,18 @@
         beforeMount() {
             console.log(this.$route.params.spaceID);
             this.workspaceID = this.$route.params.spaceID + "";
+                console.log("hello before mount!");
+                axios.get("http://localhost:5678/admin/workspace")
+                    .then((res: any) => {
+                        console.log(res.data);
+                        console.log(res.data.rows[1].wsname);
+                        this.wsname = res.data.rows[1].wsname ; 
+                    })
+                    .catch((err: any) => {
+                        console.log(err);
+                    });
         },
+
         data() {
             return {
                 wsname: "",
@@ -259,7 +267,7 @@
                 long: "",
                 location: "",
                 locationLink: "",
-                //ophours: [""],
+                workspacename: "",
             };
         },
         methods: {
@@ -327,7 +335,6 @@
                 this.ophours.map((ophour) => {
                     console.log("ophours=" + ophour);
                 });*/
-                
                 axios.put("http://localhost:5678/admin/workspace/WS_Des/2?wsname=" + "&ws_des=" + this.description);
                 axios.put("http://localhost:5678/admin/workspace/coordinate/2?ws_lat=" + this.lat + "&ws_long=" + this.long);
                 axios.put("http://localhost:5678/admin/workspace/totalseats/2?wsname=" + "&totalseat=" + this.totalseat)
@@ -354,41 +361,68 @@
             })
             .catch((err) => {
             console.log(err);
-          })
+          }
             },
             */
             async presentAlertConfirm() {
-              axios.delete("http://localhost:5678/admin/workspace/8");
-              const alert = await alertController
-                .create({
-                  cssClass: 'my-custom-class',
-                  header: 'Confirm!',
-                  message: 'Are you sure you want to delete this location?',
-                  buttons: [
-                    {
-                      text: 'YES',
-                      role: 'Confirm',
-                      cssClass: 'secondary',
-                      handler: ()=> {
-                          console.log('Confirm Okay:')
-                          axios.delete("http://localhost:5678/admin/workspace/9").then((res) => {
-                                console.log(res);
-                        })
-                        .catch((err) => {
-                        console.log(err);
-                      })
-                        
-                      },
-                    },
-                    {
-                      text: 'NO',
-                      handler: () => {
-                        console.log('Confirm Cancel')
-                      },
-                    },
-                  ],
-                });
+                axios.delete("http://localhost:5678/admin/workspace/8");
+                const alert = await alertController
+                    .create({
+                        cssClass: 'my-custom-class',
+                        header: 'Confirm!',
+                        message: 'Are you sure you want to delete this location?',
+                        buttons: [
+                            {
+                                text: 'YES',
+                                role: 'Confirm',
+                                cssClass: 'secondary',
+                                handler: () => {
+                                    console.log('Confirm Okay:')
+                                    axios.delete("http://localhost:5678/admin/workspace/9").then((res) => {
+                                        console.log(res);
+                                    })
+                                        .catch((err) => {
+                                            console.log(err);
+                                        })
+
+                                },
+                            },
+                            {
+                                text: 'NO',
+                                handler: () => {
+                                    console.log('Confirm Cancel')
+                                },
+                            },
+                        ],
+                    });
+                /*
               return alert.present();
+                const alert = await alertController
+                    .create({
+                        cssClass: 'my-custom-class',
+                        header: 'Confirm!',
+                        message: 'Are you sure you want to delete this location?',
+                        buttons: [
+                            {
+                                text: 'YES',
+                                role: 'cancel',
+                                cssClass: 'secondary',
+                                handler: blah => {
+                                    console.log('Confirm Cancel:', blah)
+                                },
+                            },
+                            {
+                                text: 'NO',
+                                handler: () => {
+                                    console.log('Confirm Okay')
+                                },
+                            },
+                        ],
+                    });
+                return alert.present();
+
+            },
+            */
             },
         }
     })
