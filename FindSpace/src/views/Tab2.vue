@@ -1,15 +1,5 @@
 <template>
   <ion-page>
-    <!-- <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tab 2</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-button @click="reload()">
-        reload
-      </ion-button>
-    </ion-content> -->
     <div class="mainDiv">
       <img class="nearbyBanner" :src="require('@/assets/img/NearBy.png')" />
       <div class="searchBox">search box</div>
@@ -17,10 +7,8 @@
         <div
           v-for="space in spaces"
           :key="space.workspaceid"
-          @click="showSpaceInfo(space.workspaceid)"
         >
-          {{ space.workspaceid }}
-          click me!!
+          <spaceCard :space="space"></spaceCard>
         </div>
       </div>
     </div>
@@ -30,63 +18,69 @@
 <script lang="ts">
 import {
   IonPage,
-  // IonHeader,
-  // IonToolbar,
-  // IonTitle,
-  // IonContent,
-  // IonButton,
+  // IonIcon,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import axios from "axios";
+import spaceCard from "../components/spaceCard.vue";
 
 export default defineComponent({
   name: "Tab2",
   components: {
-    // IonHeader,
-    // IonToolbar,
-    // IonTitle,
-    // IonContent,
     IonPage,
-    // IonButton,
+    spaceCard,
+    // IonIcon,
   },
   beforeMount() {
     console.log("hello from tab 2");
-    this.getNearbySpaceList();
+    this.watchLocation();
+    // this.getNearbySpaceList();
   },
   data() {
     return {
       searchWord: "",
-      // isAlive: false,
       spaces: [],
+      location: {
+        lat: 0,
+        long: 0,
+      },
     };
   },
   methods: {
     reload() {
       window.location.reload();
     },
+    watchLocation() {
+      const geo = navigator.geolocation;
+      geo.watchPosition((res) => {
+        console.log("watching location....");
+        console.log(res);
+        this.updateLocation(res);
+        this.getNearbySpaceList();
+      });
+    },
+    updateLocation(data: any) {
+      this.location.lat = data.coords.latitude;
+      this.location.long = data.coords.longitude;
+      this.getNearbySpaceList();
+    },
     getNearbySpaceList() {
       // axios.defaults.withCredentials = true;
       const userLat = 13.736281;
-      const userong = 100.53221;
+      const userLong = 100.53221;
       const endPointURL =
         "http://localhost:5678/homepage/recommWS?Lat=" +
         userLat +
         "&Long=" +
-        userong;
+        userLong;
       return axios
         .get(endPointURL)
         .then((res) => {
-          console.log(res.data);
           this.spaces = res.data;
-          console.log(this.spaces);
         })
         .catch((err) => {
           console.log(err);
         });
-    },
-    showSpaceInfo(id: number) {
-      // console.log("this is id :" + id);
-      this.$router.push("/SpaceInfo/" + id);
     },
   },
 });
@@ -105,7 +99,7 @@ export default defineComponent({
   background-color: aqua;
 }
 .spaceList {
-  height: 20%;
-  background-color: green;
+  height: 80%;
+  padding-top: 8px;
 }
 </style>
