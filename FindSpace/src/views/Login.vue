@@ -1,3 +1,5 @@
+
+
 <template>
   <ion-page>
     <!-- <img src="@/assets/img/LoginImg.jpg" /> -->
@@ -7,8 +9,8 @@
       <div class="greenBar"></div>
       <div class="login_card" v-if="showPanel">
         <div class="sub_login_card">
-          <div>
-            Welcome Back
+          <div class = "ion-text-center">
+            Welcome Back!
           </div>
           <form @submit.prevent="onSubmit">
             <div class="textFieldBorder">
@@ -31,15 +33,25 @@
             </div>
             <!-- </ion-item> -->
             <!-- <ion-button @click="() => router.push('/tabs')"> -->
-            <a @click="reload()">
+            <ion-row>
+            <div class = "container">
+            <a @click="reload()" style="text-decoration: underline; color: grey;">
               Forget password
             </a>
-            <ion-button type="submit">
+            </div>
+            </ion-row>
+             <div class = "container">
+            <ion-button type="submit" shape=round color="secondary">
               Continue
             </ion-button>
-            <a @click="reload()">
+            </div>
+            <ion-row>
+              <div class = "container">
+            <a @click="reload()" style="text-decoration: underline; color: grey;">
               sign up
             </a>
+            </div>
+            </ion-row>
           </form>
           <ion-button @click="() => logLocal()">
             log local
@@ -206,4 +218,9 @@ export default defineComponent({
   border-radius: 3px;
   margin-top: 10%;
 }
+.container{
+  width: 100%;
+  text-align: center;
+}
+
 </style>

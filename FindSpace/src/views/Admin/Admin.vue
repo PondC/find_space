@@ -1,13 +1,13 @@
 <template>
     <ion-page>
         <ion-content>
-            <div id="admin_create">
-                <ion-button href="/create">
+            <div id="admin_create" class="container">
+                <ion-button href="/create" size="large" color="secondary">
                     CREATE
                 </ion-button>
             </div>
-            <div id="admin_modify">
-                <ion-button href="/modify">
+            <div id="admin_modify" class="container">
+                <ion-button href="/modify" size="large" color="tertiary">
                     MODIFY
                 </ion-button>
                
@@ -34,3 +34,12 @@
     }
 </script>
 
+<style lang="css" scoped>
+.container{
+  width: 100%;
+  text-align: center;
+}
+ion-content{
+    --ion-background-color:#111D12;
+}
+</style>

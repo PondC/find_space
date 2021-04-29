@@ -1,19 +1,25 @@
+
 <template>
     <ion-page>
         <ion-content :fullscreen="true">
+<<<<<<< Updated upstream
             <ion-header collapse="condense">
                 
+=======
+            <ion-header color="secondary">
+
+>>>>>>> Stashed changes
                 <ion-list lines="full" class="ion-no-margin">
                     <ion-list-header lines="full">
                         <ion-label>
                             <ion-item>
                                 <!-- can't use icon instead of texts    -->
                                 <ion-button href="/admin">
-                                    BACK
+                                    ❮
                                 </ion-button>
 
                                 <div class="mainIcon">
-                                    <ion-input :value="wsname"
+                                    <ion-input style="margin-left: 150px;" :value="wsname"
                                                @input="wsname = $event.target.value"
                                                placeholder="NAME"
                                                name="wsname"></ion-input>
@@ -22,6 +28,7 @@
                             </ion-item>
                         </ion-label>
                     </ion-list-header>
+<<<<<<< Updated upstream
                     
                         <ion-item lines="none">
                             <ion-label>Picture 1 link</ion-label>
@@ -60,6 +67,69 @@
                                    @input="wsdes = $event.target.value"
                                    placeholder="Description"
                                    name="wsdes"></ion-input>
+=======
+
+                    <ion-item lines="none">
+                        <ion-label color="warning">Picture 1 link</ion-label>
+                        <ion-input :value="pic1"
+                                   @input="pic1 = $event.target.value"
+                                   placeholder="Enter picture 1 link"
+                                   name="pic1"></ion-input>
+                    </ion-item>
+
+                    <ion-item lines="none">
+                        <ion-label color="warning"> Picture 2 link</ion-label>
+                        <ion-input :value="pic2"
+                                   @input="pic2 = $event.target.value"
+                                   placeholder="Enter picture 2 link"
+                                   name="pic2"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="warning">Picture 3 link</ion-label>
+                        <ion-input :value="pic3"
+                                   @input="pic3 = $event.target.value"
+                                   placeholder="Enter picture 3 link"
+                                   name="pic3"></ion-input>
+                    </ion-item>
+                </ion-list>
+                <!-- wait for crowdedness icons    -->
+                <ion-item lines="none">
+                    <ion-label color="warning">Total Seats</ion-label>
+                    <ion-input :value="totalseat"
+                               @input="totalseat = $event.target.value"
+                               placeholder="Enter totalseat"
+                               name="totalseat"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label color="warning">Description</ion-label>
+                    <ion-input :value="wsdes"
+                               @input="wsdes = $event.target.value"
+                               placeholder="Enter Description"
+                               name="wsdes"></ion-input>
+                </ion-item>
+                <ion-label color="warning" style="margin-left: 15px;">
+                    Operating Hours
+                    <ion-item lines="none">
+                        <ion-label color="warning" style="margin-left: 100px;">Monday</ion-label>
+                        <ion-input :value="monday"
+                                   @input="monday = $event.target.value"
+                                   placeholder="00:00 - 00:00"
+                                   name="monday"></ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label color="warning" style="margin-left: 100px;">Tuesday</ion-label>
+                        <ion-input :value="tuesday"
+                                   @input="tuesday = $event.target.value"
+                                   placeholder="00:00 - 00:00"
+                                   name="tuesday"></ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label color="warning" style="margin-left: 100px;">Wednesday</ion-label>
+                        <ion-input :value="wednesday"
+                                   @input="wednesday = $event.target.value"
+                                   placeholder="00:00 - 00:00"
+                                   name="wednesday"></ion-input>
+>>>>>>> Stashed changes
                     </ion-item>
                     <ion-label>
                         Operating Hours
@@ -115,6 +185,7 @@
                     </ion-label>
 
                     <ion-item lines="none">
+<<<<<<< Updated upstream
                         <ion-label>PowerOutlets</ion-label>
                         <ion-input :value="poweroutlet"
                                    @input="poweroutlet = $event.target.value"
@@ -146,6 +217,91 @@
                     </ion-item>
                   
                     <ion-item></ion-item>
+=======
+                        <ion-label color="warning" style="margin-left: 100px;"> Thursday</ion-label>
+                        <ion-input :value="thursday"
+                                   @input="thursday = $event.target.value"
+                                   placeholder="00:00 - 00:00"
+                                   name="thursday"></ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label color="warning" style="margin-left: 100px;">Friday</ion-label>
+                        <ion-input :value="friday"
+                                   @input="friday = $event.target.value"
+                                   placeholder="00:00 - 00:00"
+                                   name="friday"></ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label color="warning" style="margin-left: 100px;">Saturday</ion-label>
+                        <ion-input :value="saturday"
+                                   @input="saturday = $event.target.value"
+                                   placeholder="00:00 - 00:00"
+                                   name="saturday"></ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label color="warning" style="margin-left: 100px;">Sunday</ion-label>
+                        <ion-input :value="sunday"
+                                   @input="sunday = $event.target.value"
+                                   placeholder="00:00 - 00:00"
+                                   name="sunday"></ion-input>
+                    </ion-item>
+                </ion-label>
+
+                <ion-item lines="none">
+                    <ion-label color="warning">PowerOutlets</ion-label>
+                    <ion-input :value="poweroutlet"
+                               @input="poweroutlet = $event.target.value"
+                               placeholder="Enter number"
+                               name="poweroutlet"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label color="warning">Wifi</ion-label>
+                    <ion-input :value="wifi"
+                               @input="wifi = $event.target.value"
+                               placeholder="Available/ Not Available"
+                               name="wifi"></ion-input>
+                               <ion-toolbar>
+        <ion-segment value="all">
+          <ion-segment-button value="all">Available</ion-segment-button>
+          <ion-segment-button value="favorites">Not Available</ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+                </ion-item>
+                
+                <ion-item lines="none">
+                    <ion-label color="warning">Latitude</ion-label>
+                    <ion-input :value="lat"
+                               @input="lat = $event.target.value"
+                               placeholder="Enter latitude"
+                               name="latitude"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label color="warning">Longitude</ion-label>
+                    <ion-input :value="long"
+                               @input="long = $event.target.value"
+                               placeholder="Enter longitude"
+                               name="long"></ion-input>
+                </ion-item>
+                    
+                <ion-item lines="none">
+                    <ion-label color="warning" >Location</ion-label>
+                    <ion-input :value="location"
+                               @input="location = $event.target.value"
+                               placeholder="Enter location"
+                               name="location"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label color="warning">Location Link</ion-label>
+                    <div name="textfieldBorder">
+                        <ion-input :value="locationLink"
+                                   @input="locationLink = $event.target.value"
+                                   placeholder="Enter location link"
+                                   name="locationLink"></ion-input>
+                    </div>
+                </ion-item>
+
+                <ion-item></ion-item>
+>>>>>>> Stashed changes
             </ion-header>
             <form action="/workspace" method="post">
                 <ion-fab vertical="bottom" horizontal="center" slot="fixed">
@@ -153,6 +309,14 @@
                 </ion-fab>
             </form>
         </ion-content>
+<<<<<<< Updated upstream
+=======
+        <form action="/workspace" method="post">
+            <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+                <ion-button @click="() => onSubmit() " color="tertiary" shape="round">CREATE</ion-button>
+            </ion-fab>
+        </form>
+>>>>>>> Stashed changes
     </ion-page>
 </template>
 
@@ -163,8 +327,13 @@
                 IonPage,
                 //IonList,
                 IonHeader,
+<<<<<<< Updated upstream
                 // IonAlert,
                 //IonToolbar,
+=======
+                //IonAlert,
+                IonToolbar,
+>>>>>>> Stashed changes
                 IonContent,
                 // IonButton,
                 //IonItemGroup,
@@ -276,7 +445,7 @@
 <style lang="css" scoped>
 
     .mainIcon {
-        align-items: end;
+        align-items: center;
     }
     .textFieldBorder {
           border-bottom: #4a4d3e;
