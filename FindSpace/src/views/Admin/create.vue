@@ -80,110 +80,115 @@
                                placeholder="menu 3 link"
                                name="menu3"></ion-input>
                 </ion-item>
-                </ion-label>
-                <ion-label>
-                    Operating Hours
-                    <ion-item lines="none">
-                        <ion-label>Monday</ion-label>
-                        <ion-input :value="monday"
-                                   @input="monday = $event.target.value"
-                                   placeholder="00:00 - 00:00"
-                                   name="monday"></ion-input>
-                    </ion-item>
-                    <ion-item lines="none">
-                        <ion-label>Tuesday</ion-label>
-                        <ion-input :value="tuesday"
-                                   @input="tuesday = $event.target.value"
-                                   placeholder="00:00 - 00:00"
-                                   name="tuesday"></ion-input>
-                    </ion-item>
-                    <ion-item lines="none">
-                        <ion-label>Wednesday</ion-label>
-                        <ion-input :value="wednesday"
-                                   @input="wednesday = $event.target.value"
-                                   placeholder="00:00 - 00:00"
-                                   name="wednesday"></ion-input>
-                    </ion-item>
-                    <ion-item lines="none">
-                        <ion-label>Thursday</ion-label>
-                        <ion-input :value="thursday"
-                                   @input="thursday = $event.target.value"
-                                   placeholder="00:00 - 00:00"
-                                   name="thursday"></ion-input>
-                    </ion-item>
-                    <ion-item lines="none">
-                        <ion-label>Friday</ion-label>
-                        <ion-input :value="friday"
-                                   @input="friday = $event.target.value"
-                                   placeholder="00:00 - 00:00"
-                                   name="friday"></ion-input>
-                    </ion-item>
-                    <ion-item lines="none">
-                        <ion-label>Saturday</ion-label>
-                        <ion-input :value="saturday"
-                                   @input="saturday = $event.target.value"
-                                   placeholder="00:00 - 00:00"
-                                   name="saturday"></ion-input>
-                    </ion-item>
-                    <ion-item lines="none">
-                        <ion-label>Sunday</ion-label>
-                        <ion-input :value="sunday"
-                                   @input="sunday = $event.target.value"
-                                   placeholder="00:00 - 00:00"
-                                   name="sunday"></ion-input>
-                    </ion-item>
-                </ion-label>
+            </ion-label>
+            <ion-label>
+                Operating Hours
+                <ion-item lines="none">
+                    <ion-label>Monday</ion-label>
+                    <ion-input :value="monday"
+                               @input="monday = $event.target.value"
+                               placeholder="00:00 - 00:00"
+                               name="monday"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label>Tuesday</ion-label>
+                    <ion-input :value="tuesday"
+                               @input="tuesday = $event.target.value"
+                               placeholder="00:00 - 00:00"
+                               name="tuesday"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label>Wednesday</ion-label>
+                    <ion-input :value="wednesday"
+                               @input="wednesday = $event.target.value"
+                               placeholder="00:00 - 00:00"
+                               name="wednesday"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label>Thursday</ion-label>
+                    <ion-input :value="thursday"
+                               @input="thursday = $event.target.value"
+                               placeholder="00:00 - 00:00"
+                               name="thursday"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label>Friday</ion-label>
+                    <ion-input :value="friday"
+                               @input="friday = $event.target.value"
+                               placeholder="00:00 - 00:00"
+                               name="friday"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label>Saturday</ion-label>
+                    <ion-input :value="saturday"
+                               @input="saturday = $event.target.value"
+                               placeholder="00:00 - 00:00"
+                               name="saturday"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                    <ion-label>Sunday</ion-label>
+                    <ion-input :value="sunday"
+                               @input="sunday = $event.target.value"
+                               placeholder="00:00 - 00:00"
+                               name="sunday"></ion-input>
+                </ion-item>
+            </ion-label>
 
-                <ion-item lines="none">
-                    <ion-label>PowerOutlets</ion-label>
-                    <ion-input :value="poweroutlet"
-                               @input="poweroutlet = $event.target.value"
-                               placeholder="XX"
-                               name="poweroutlet"></ion-input>
-                </ion-item>
-                <ion-item lines="none">
-                    <ion-label>Wifi</ion-label>
-                    <ion-input :value="wifi"
-                               @input="wifi = $event.target.value"
-                               placeholder="Available / Unavailable"
-                               name="wifi"></ion-input>
-                </ion-item>
-                <ion-item lines="none">
-                    <ion-label>Latitude</ion-label>
-                    <ion-input :value="lat"
-                               @input="lat = $event.target.value"
-                               placeholder="XX"
-                               name="latitude"></ion-input>
-                </ion-item>
-                <ion-item lines="none">
-                    <ion-label>Longitude</ion-label>
-                    <ion-input :value="long"
-                               @input="long = $event.target.value"
-                               placeholder="longitude"
-                               name="longitude"></ion-input>
-                </ion-item>
-                <ion-item lines="none">
-                    <ion-label>Location</ion-label>
-                    <ion-input :value="location"
-                               @input="location = $event.target.value"
-                               placeholder="location"
-                               name="location"></ion-input>
-                </ion-item>
-                <ion-item lines="none">
-                    <ion-label>Location Link</ion-label>
-                    <div name="textfieldBorder">
-                        <ion-input :value="locationLink"
-                                   @input="locationLink = $event.target.value"
-                                   placeholder="location link"
-                                   name="locationLink"></ion-input>
-                    </div>
-                </ion-item>
-                <ion-item></ion-item>
-                <ion-item></ion-item>
-</ion-content>
+            <ion-item lines="none">
+                <ion-label>PowerOutlets</ion-label>
+                <ion-input :value="poweroutlet"
+                           @input="poweroutlet = $event.target.value"
+                           placeholder="XX"
+                           name="poweroutlet"></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+                <ion-label>Wifi</ion-label>
+                <ion-input :value="wifi"
+                           @input="wifi = $event.target.value"
+                           placeholder="Available / Unavailable"
+                           name="wifi"></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+                <ion-label>Latitude</ion-label>
+                <ion-input :value="lat"
+                           @input="lat = $event.target.value"
+                           placeholder="XX"
+                           name="latitude"></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+                <ion-label>Longitude</ion-label>
+                <ion-input :value="long"
+                           @input="long = $event.target.value"
+                           placeholder="longitude"
+                           name="longitude"></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+                <ion-label>Location</ion-label>
+                <ion-input :value="location"
+                           @input="location = $event.target.value"
+                           placeholder="location"
+                           name="location"></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+                <ion-label>Location Link</ion-label>
+                <div name="textfieldBorder">
+                    <ion-input :value="locationLink"
+                               @input="locationLink = $event.target.value"
+                               placeholder="location link"
+                               name="locationLink"></ion-input>
+                </div>
+            </ion-item>
+            <ion-item></ion-item>
+            <ion-item></ion-item>
+        </ion-content>
         <form action="/workspace" method="post">
-            <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+            <ion-fab vertical="bottom" horizontal="start" slot="fixed">
                 <ion-button @click="() => onSubmit()">CREATE</ion-button>
+            </ion-fab>
+        </form>
+        <form action="/workspace" method="post">
+            <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+                <ion-button @click="() => insertWeak()">Insert Weak</ion-button>
             </ion-fab>
         </form>
     </ion-page>
@@ -295,6 +300,8 @@ export default defineComponent({
       window.localStorage.setItem("location Link: ", this.locationLink);
 
         axios.post("http://localhost:5678/admin/workspace?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet);
+        
+
         /*
         axios.get("http://localhost:5678/admin/workspace")
         .then((res) => {
@@ -308,6 +315,25 @@ export default defineComponent({
           })*/
         //axios.post("http://localhost:5678/admin/pic?photo1=" + this.pic1 + "&photo2=" + this.pic2 + "&photo3=" + this.pic3 + "workspaceID=" + this.createdID);
         //axios.post("http://localhost:5678/admin/menu?menu1=" + this.menu1 + "&menu2=" + this.menu2 + "&menu3=" + this.menu3 + "workspaceID=" + this.createdID);
+      },
+      insertWeak() {
+          window.localStorage.setItem("Monday: ", this.monday);
+          window.localStorage.setItem("Tuesday: ", this.tuesday);
+          window.localStorage.setItem("Wednesday: ", this.wednesday);
+          window.localStorage.setItem("Thursday: ", this.thursday);
+          window.localStorage.setItem("Friday: ", this.friday);
+          window.localStorage.setItem("Saturday: ", this.saturday);
+          window.localStorage.setItem("Sunday: ", this.sunday);
+          window.localStorage.setItem("pic1", this.pic1);
+          window.localStorage.setItem("pic2", this.pic2);
+          window.localStorage.setItem("pic3", this.pic3);
+          window.localStorage.setItem("menu1", this.menu1);
+            window.localStorage.setItem("menu2", this.menu2);
+            window.localStorage.setItem("menu3", this.menu3);
+
+        axios.post("http://localhost:5678/admin/pic?photo1=" + this.pic1 + "&photo2=" + this.pic2 + "&photo3=" + this.pic3 + "&WorkspaceID=53");
+        axios.post("http://localhost:5678/admin/menu?menu1=" + this.menu1 + "&menu2=" + this.menu2 + "&menu3=" + this.menu3 + "&WorkspaceID=53");
+        axios.post("http://localhost:5678/admin/ophour?mon=" + this.monday + "&tue=" + this.tuesday + "&wed=" + this.wednesday + "&thu=" + this.thursday + "&fri=" + this.friday + "&sat=" + this.saturday + "&sun=" + this.sunday + "&WorkspaceID=53");
       },
     created() {
       console.log("please wait");

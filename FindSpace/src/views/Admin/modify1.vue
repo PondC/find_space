@@ -259,7 +259,7 @@
                 long: "",
                 location: "",
                 locationLink: "",
-                ophours: [""],
+                //ophours: [""],
             };
         },
         methods: {
@@ -309,7 +309,7 @@
                 window.localStorage.setItem("long", this.long);
                 window.localStorage.setItem("location: ", this.location);
                 window.localStorage.setItem("location Link: ", this.locationLink);
-
+                /*
                 this.ophours.pop();
                 this.ophours.push(this.monday);
                 this.ophours.push(this.tuesday);
@@ -319,7 +319,7 @@
                 this.ophours.push(this.saturday);
                 this.ophours.push(this.sunday);
                 
-                console.log(this.ophours);
+                console.log(this.ophours);*/
                 /*
                 console.log('kuy');
                  console.log("this.ophours");
@@ -335,17 +335,17 @@
                 axios.put("http://localhost:5678/admin/workspace/poweroutlets/2?poweroutlet=" + this.poweroutlet);
                 axios.put("http://localhost:5678/admin/pic/photo1/2?photo1=" + this.pic1);
                 axios.put("http://localhost:5678/admin/pic/photo2/2?photo2=" + this.pic2);
-                axios.put("http://localhost:5678/admin/pic/photo3/2?photo3=kuy");
+                axios.put("http://localhost:5678/admin/pic/photo3/2?photo3=" + this.pic3);
                 axios.put("http://localhost:5678/admin/pic/menu1/2?menu1=" + this.menu1);
                 axios.put("http://localhost:5678/admin/pic/menu2/2?menu2=" + this.menu2);
                 axios.put("http://localhost:5678/admin/pic/menu3/2?menu3=" + this.menu3);
-                axios.put("http://localhost:5678/admin/ophour/time/2?time=" + this.ophours).then((res) => {
-                    console.log(res);
-                    console.log("success");
-                    })
-                    .catch((err) => {
-                    console.log(err);
-                  })
+                axios.put("http://localhost:5678/admin/ophour/mon/2?mon=" + this.monday);
+                axios.put("http://localhost:5678/admin/ophour/tue/2?tue=" + this.tuesday);
+                axios.put("http://localhost:5678/admin/ophour/wed/2?wed=" + this.wednesday);
+                axios.put("http://localhost:5678/admin/ophour/thu/2?thu=" + this.thursday);
+                axios.put("http://localhost:5678/admin/ophour/fri/2?fri=" + this.friday);
+                axios.put("http://localhost:5678/admin/ophour/sat/2?sat=" + this.saturday);
+                axios.put("http://localhost:5678/admin/ophour/sun/2?sun=" + this.sunday);
             },
             /*
             deleteSpace() {
