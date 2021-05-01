@@ -207,10 +207,10 @@
         <ion-item lines="none">
           <ion-toolbar>
             <ion-segment value="all">
-              <ion-segment-button class="btn" value="all"
+              <ion-segment-button class="btn" value="all" @click="wifiTrue()"
                 >Available</ion-segment-button
               >
-              <ion-segment-button class="btn" value="favorites"
+              <ion-segment-button class="btn" value="favorites" @click="wifiFalse()"
                 >Not Available</ion-segment-button
               >
             </ion-segment>
@@ -314,18 +314,25 @@ export default defineComponent({
       saturday: "",
       sunday: "",
       poweroutlet: "",
-      wifi: "",
+      wifi: "true",
       lat: "",
       long: "",
       location: "",
       locationLink: "",
+      tempwifi: "",
     };
   },
   methods: {
     reload() {
       window.location.reload();
+      },
+     wifiTrue() {
+         window.localStorage.setItem('wifi', "true");
+      },
+     wifiFalse() {
+         window.localStorage.setItem('wifi', "false");
     },
-    onSubmit() {
+      onSubmit() {
       console.log("wsname = " + this.wsname);
       console.log("pic1 = " + this.pic1);
       console.log("pic2 = " + this.pic2);
@@ -340,13 +347,14 @@ export default defineComponent({
       console.log("Saturday = " + this.saturday);
       console.log("Sunday = " + this.sunday);
       console.log("PowerOutlets = " + this.poweroutlet);
-      console.log("Wifi = " + this.wifi);
+      console.log("Wifi = " + localStorage.getItem('wifi'));
       console.log("Location = " + this.location);
       console.log("Location Link = " + this.locationLink);
 
       // Delete the thing above and do the authentication here
 
-      //
+          //
+          this.wifi = "" + localStorage.getItem('wifi');
       window.localStorage.setItem("wsname", this.wsname);
       window.localStorage.setItem("pic1", this.pic1);
       window.localStorage.setItem("pic2", this.pic2);
@@ -364,7 +372,7 @@ export default defineComponent({
       window.localStorage.setItem("Saturday: ", this.saturday);
       window.localStorage.setItem("Sunday: ", this.sunday);
       window.localStorage.setItem("PowerOutlets: ", this.poweroutlet);
-      window.localStorage.setItem("Wifi:", this.wifi);
+      //window.localStorage.setItem("Wifi:", localStorage.getItem('wifi'));
       window.localStorage.setItem("lat", this.lat);
       window.localStorage.setItem("long", this.long);
       window.localStorage.setItem("location: ", this.location);

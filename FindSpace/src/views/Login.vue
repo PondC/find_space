@@ -137,7 +137,7 @@ export default defineComponent({
     IonInput,
     IonButton,
     IonRow,
-    alertController,
+    //alertController,
     // IonItem,
   },
   beforeMount() {
