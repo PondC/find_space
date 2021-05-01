@@ -4,7 +4,11 @@
       <img class="nearbyBanner" :src="require('@/assets/img/NearBy.png')" />
       <div class="searchBox">search box</div>
       <div class="spaceList">
-        <div v-for="space in spaces" :key="space.workspaceid">
+        <div
+          v-for="space in spaces"
+          :key="space.workspaceid"
+          @click="toSpaceInfo(space.workspaceid)"
+        >
           <spaceCard :space="space"></spaceCard>
         </div>
       </div>
@@ -127,6 +131,9 @@ export default defineComponent({
         .catch((err) => {
           console.log(err);
         });
+    },
+    toSpaceInfo(id: number) {
+      this.$router.push("/SpaceInfo/" + id);
     },
   },
 });

@@ -1,7 +1,10 @@
 <template>
-  <IonCard
+  <!-- <IonCard
     style="max-width:96%;margin-left:2%;background-color:white;border-radius:8px"
     @click="showSpaceInfo(space.workspaceid)"
+  > -->
+  <IonCard
+    style="max-width:96%;margin-left:2%;background-color:white;border-radius:8px"
   >
     <div class="spacePic">
       <!-- <img :src="require('@/assets/img/LoginImg.jpg')" /> -->
@@ -77,13 +80,13 @@ export default defineComponent({
     };
   },
   methods: {
-    showSpaceInfo(id: number) {
+    // showSpaceInfo(id: number) {
       // This one is for admin page
       // this.$router.push("/modify/" + id);
 
       // This one is for user page
-      this.$router.push("/SpaceInfo/" + id);
-    },
+      // this.$router.push("/SpaceInfo/" + id);
+    // },
     createFeedBackMSG(spaceInfo: any) {
       if (spaceInfo.feedbackstatus) {
         this.feedbackText =

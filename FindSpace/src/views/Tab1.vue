@@ -1,14 +1,12 @@
 <template>
   <ion-page>
-    
-      <img class="nearbyBanner" :src="require('@/assets/img/FavSpace.png')" />
-      <div class="searchBox">search box</div>
-      <div class="spaceList">
-        <div  v-for="space in spaces" :key="space.workspaceid">
-          <spaceList :space="space"></spaceList>
-        </div>
+    <img class="nearbyBanner" :src="require('@/assets/img/FavSpace.png')" />
+    <div class="searchBox">search box</div>
+    <div class="spaceList">
+      <div v-for="space in spaces" :key="space.workspaceid">
+        <spaceList :space="space"></spaceList>
       </div>
-    
+    </div>
   </ion-page>
 </template>
 

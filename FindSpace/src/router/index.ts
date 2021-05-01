@@ -8,6 +8,8 @@ import Modify from "../views/Admin/modify.vue";
 import Modify1 from "../views/Admin/modify1.vue";
 import SpaceInfo from "../views/SpaceInfo.vue";
 
+
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -48,19 +50,19 @@ const routes: Array<RouteRecordRaw> = [
     component: Create,
   },
   {
-    path: "/modify/:spaceID",
+    path: "/modify",
     component: Modify,
   },
   {
-    path: "/modify1",
+    path: "/modify1/:spaceID",
     component: Modify1,
   },
   {
     path: "/SpaceInfo/:spaceID",
     component: SpaceInfo,
-  },
+    },
+    
 ];
-
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,

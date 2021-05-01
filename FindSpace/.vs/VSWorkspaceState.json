@@ -8,6 +8,6 @@
     "\\src\\views",
     "\\src\\views\\Admin"
   ],
-  "SelectedNode": "\\src\\views\\Admin\\create.vue",
+  "SelectedNode": "\\src\\router\\index.ts",
   "PreviewInSolutionExplorer": false
 }
