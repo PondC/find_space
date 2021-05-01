@@ -1,13 +1,13 @@
 <template>
     <ion-page>
         <ion-content>
-            <div id="admin_create" class="container">
-                <ion-button href="/create" size="large" color="secondary">
+            <div id="admin_create">
+                <ion-button class ="container" href="/create" size="large" color="secondary">
                     CREATE
                 </ion-button>
             </div>
             <div id="admin_modify" class="container">
-                <ion-button href="/modify" size="large" color="tertiary">
+                <ion-button class ="container" href="/modify" size="large" color="tertiary">
                     MODIFY
                 </ion-button>
                
@@ -36,7 +36,7 @@
 
 <style lang="css" scoped>
 .container{
-  width: 100%;
+  width: 200px;
   text-align: center;
 }
 ion-content{

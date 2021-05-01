@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <div class="mainDiv">
+    
       <img class="nearbyBanner" :src="require('@/assets/img/FavSpace.png')" />
       <div class="searchBox">search box</div>
       <div class="spaceList">
@@ -8,7 +8,7 @@
           <spaceList :space="space"></spaceList>
         </div>
       </div>
-    </div>
+    
   </ion-page>
 </template>
 

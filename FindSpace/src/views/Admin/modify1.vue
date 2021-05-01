@@ -62,6 +62,36 @@
                                name="description"></ion-input>
                 </ion-item>
                 <ion-label>
+          Menu
+          <ion-item lines="none">
+            <ion-label>Menu1</ion-label>
+            <ion-input
+              :value="menu1"
+              @input="menu1 = $event.target.value"
+              placeholder="mmenu1"
+              name="menu1"
+            ></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>Tuesday</ion-label>
+            <ion-input
+              :value="menu2"
+              @input="menu2 = $event.target.value"
+              placeholder="menu2"
+              name="menu2"
+            ></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>Wednesday</ion-label>
+            <ion-input
+              :value="menu3"
+              @input="menu3 = $event.target.value"
+              placeholder="menu3"
+              name="menu3"
+            ></ion-input>
+          </ion-item>
+        </ion-label>
+                <ion-label>
                     Operating Hours
                     <ion-item lines="none">
                         <ion-label>Monday</ion-label>

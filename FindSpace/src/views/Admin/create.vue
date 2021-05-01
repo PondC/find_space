@@ -5,68 +5,118 @@
       <ion-header>
         <ion-list lines="full" class="ion-no-margin">
           <ion-list-header lines="full" class="orangeHeader">
-                <ion-button href="/admin">❮</ion-button>
-                <div class="spaceName">
-                  <ion-input
-                    style="margin-left: 150px;"
-                    :value="wsname"
-                    @input="wsname = $event.target.value"
-                    placeholder="NAME"
-                    name="wsname"
-                  ></ion-input>
-                </div>
+            <ion-button href="/admin" color= "danger" >❮</ion-button>
+            <div class="spaceName">
+              <ion-input
+                style="margin-left: 110px; font-weight: bold; font-size:25px;"
+                :value="wsname"
+                @input="wsname = $event.target.value"
+                placeholder="NAME"
+                name="wsname"
+              ></ion-input>
+            </div>
           </ion-list-header>
           <ion-item lines="none">
-            <ion-label>Picture 1 link</ion-label>
+            <ion-label color="warning">Picture 1 link</ion-label>
             <ion-input
               :value="pic1"
               @input="pic1 = $event.target.value"
-              placeholder="picture 1 link"
+              placeholder="Enter picture 1 link"
               name="pic1"
             ></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-label>Picture 2 link</ion-label>
+            <ion-label color="warning">Picture 2 link</ion-label>
             <ion-input
               :value="pic2"
               @input="pic2 = $event.target.value"
-              placeholder="picture 2 link"
+              placeholder="Enter picture 2 link"
               name="pic2"
             ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>Picture 3 link</ion-label>
+            <ion-label color="warning">Picture 3 link</ion-label>
             <ion-input
               :value="pic3"
               @input="pic3 = $event.target.value"
-              placeholder="picture 3 link"
+              placeholder="Enter picture 3 link"
               name="pic3"
             ></ion-input>
           </ion-item>
         </ion-list>
+        <ion-item lines="none">
+            <ion-icon
+            style="margin-left: 150px;"
+          class="personIcon"
+          :src="require('@/assets/icon/cPerson.svg')"
+        ></ion-icon>
+        <ion-icon
+          class="personIcon"
+          :src="require('@/assets/icon/cPerson.svg')"
+        ></ion-icon>
+        <ion-icon
+          class="personIcon"
+          :src="require('@/assets/icon/cPerson.svg')"
+        ></ion-icon>
+        <ion-icon
+          class="personIcon"
+          :src="require('@/assets/icon/cPerson.svg')"
+        ></ion-icon>
+        </ion-item>
+  
         <!-- wait for crowdedness icons    -->
         <ion-item lines="none">
-          <ion-label>Total Seats</ion-label>
+          <ion-label color="warning">Total Seats</ion-label>
           <ion-input
             :value="totalseat"
             @input="totalseat = $event.target.value"
-            placeholder="totalseat"
+            placeholder="Enter total seats"
             name="totalseat"
           ></ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-label>Description</ion-label>
+          <ion-label color="warning">Description</ion-label>
           <ion-input
             :value="wsdes"
             @input="wsdes = $event.target.value"
-            placeholder="Description"
+            placeholder="Enter description"
             name="wsdes"
           ></ion-input>
         </ion-item>
-        <ion-label>
+        <ion-label color="warning" style="margin-left: 15px;">
+          Menu
+          <ion-item lines="none">
+            <ion-label color="warning">Menu1</ion-label>
+            <ion-input
+              :value="menu1"
+              @input="menu1 = $event.target.value"
+              placeholder="Add menu1"
+              name="menu1"
+            ></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label color="warning">Menu2</ion-label>
+            <ion-input
+              :value="menu2"
+              @input="menu2 = $event.target.value"
+              placeholder="Add menu2"
+              name="menu2"
+            ></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label color="warning">Menu3</ion-label>
+            <ion-input
+              :value="menu3"
+              @input="menu3 = $event.target.value"
+              placeholder="Add menu3"
+              name="menu3"
+            ></ion-input>
+          </ion-item>
+        </ion-label>
+        <ion-label color="warning" style="margin-left: 15px;">
           Operating Hours
           <ion-item lines="none">
-            <ion-label>Monday</ion-label>
+            <ion-label color="warning" style="margin-left: 100px;">Monday</ion-label>
             <ion-input
               :value="monday"
               @input="monday = $event.target.value"
@@ -75,7 +125,7 @@
             ></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-label>Tuesday</ion-label>
+            <ion-label color="warning" style="margin-left: 100px;">Tuesday</ion-label>
             <ion-input
               :value="tuesday"
               @input="tuesday = $event.target.value"
@@ -84,7 +134,7 @@
             ></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-label>Wednesday</ion-label>
+            <ion-label color="warning" style="margin-left: 100px;">Wednesday</ion-label>
             <ion-input
               :value="wednesday"
               @input="wednesday = $event.target.value"
@@ -92,42 +142,7 @@
               name="wednesday"
             ></ion-input>
           </ion-item>
-          <ion-item lines="none">
-            <ion-label>Thursday</ion-label>
-            <ion-input
-              :value="thursday"
-              @input="thursday = $event.target.value"
-              placeholder="00:00 - 00:00"
-              name="thursday"
-            ></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label>Friday</ion-label>
-            <ion-input
-              :value="friday"
-              @input="friday = $event.target.value"
-              placeholder="00:00 - 00:00"
-              name="friday"
-            ></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label>Saturday</ion-label>
-            <ion-input
-              :value="saturday"
-              @input="saturday = $event.target.value"
-              placeholder="00:00 - 00:00"
-              name="saturday"
-            ></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label>Sunday</ion-label>
-            <ion-input
-              :value="sunday"
-              @input="sunday = $event.target.value"
-              placeholder="00:00 - 00:00"
-              name="sunday"
-            ></ion-input>
-          </ion-item>
+         
         </ion-label>
         <ion-item lines="none">
           <ion-label color="warning" style="margin-left: 100px;">Thursday</ion-label>
@@ -176,16 +191,12 @@
         </ion-item>
         <ion-item lines="none">
           <ion-label color="warning">Wifi</ion-label>
-          <ion-input
-            :value="wifi"
-            @input="wifi = $event.target.value"
-            placeholder="Available/ Not Available"
-            name="wifi"
-          ></ion-input>
+          </ion-item>
+          <ion-item lines="none">
           <ion-toolbar>
             <ion-segment value="all">
-              <ion-segment-button value="all">Available</ion-segment-button>
-              <ion-segment-button value="favorites">Not Available</ion-segment-button>
+              <ion-segment-button class="btn" value="all" >Available</ion-segment-button>
+              <ion-segment-button class="btn" value="favorites">Not Available</ion-segment-button>
             </ion-segment>
           </ion-toolbar>
         </ion-item>
@@ -227,12 +238,8 @@
             ></ion-input>
           </div>
         </ion-item>
+        <ion-item></ion-item>
       </ion-header>
-      <form action="/workspace" method="post">
-        <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-          <ion-button @click="() => onSubmit() ">CREATE</ion-button>
-        </ion-fab>
-      </form>
     </ion-content>
     <form action="/workspace" method="post">
       <ion-fab vertical="bottom" horizontal="center" slot="fixed">
@@ -358,6 +365,7 @@ export default defineComponent({
 <style lang="css" scoped>
 .spaceName {
   align-items: center;
+  color: #ffffff
 }
 .textFieldBorder {
   border-bottom: #4a4d3e;
@@ -368,6 +376,9 @@ export default defineComponent({
   margin-top: 10%;
 }
 .orangeHeader {
-  background-color: tomato;
+  background-color: #E05900;
 }
+.btn:active
+ { background: #949F74; } 
+
 </style>
