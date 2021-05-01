@@ -7,7 +7,7 @@
     <div class="login_div">
       <img class="mainIcon" :src="require('@/assets/icon/FindSpaceIcon.png')" />
       <div class="greenBar"></div>
-      <div class="login_card" v-if="showPanel">
+      <div class="login_card" v-if="loginMode">
         <div class="sub_login_card">
           <div class = "ion-text-center">
             Welcome Back!
@@ -15,20 +15,18 @@
           <form @submit.prevent="onSubmit">
             <div class="textFieldBorder">
               <ion-input
-                :value="userName"
-                @input="userName = $event.target.value"
-                placeholder="Username"
-                name="userName"
+                :value="email"
+                @input="email = $event.target.value"
+                placeholder="E-mail"
+                name="email"
               ></ion-input>
             </div>
-
-            <!-- <ion-item class="textFieldBorder"> -->
             <div class="textFieldBorder">
               <ion-input
-                :value="passWord"
-                @input="passWord = $event.target.value"
+                :value="password"
+                @input="password = $event.target.value"
                 placeholder="Password"
-                name="passWord"
+                name="password"
               ></ion-input>
             </div>
             <!-- </ion-item> -->
@@ -58,7 +56,57 @@
           </ion-button>
           <ion-button @click="() => clearLocal()">
             clear all
-          </ion-button>
+          </ion-button> -->
+        </div>
+      </div>
+      <!-- I'm too lazy to create new page -->
+      <div class="registerCard" v-if="!loginMode">
+        <div class="sub_register_card">
+          <div class="titleText">
+            <div style="margin-left: 20%">
+              register
+            </div>
+          </div>
+          <form @submit.prevent="onSubmit">
+            <div class="textFieldBorder">
+              <ion-input
+                :value="newEmail"
+                @input="newEmail = $event.target.value"
+                placeholder="E-mail"
+                name="newEmail"
+              ></ion-input>
+            </div>
+            <div class="textFieldBorder">
+              <ion-input
+                :value="newUsername"
+                @input="newUsername = $event.target.value"
+                placeholder="Username"
+                name="newUsername"
+              ></ion-input>
+            </div>
+            <div class="textFieldBorder">
+              <ion-input
+                :value="newPassword"
+                @input="newPassword = $event.target.value"
+                placeholder="Password"
+                name="newPassword"
+              ></ion-input>
+            </div>
+            <div class="textFieldBorder">
+              <ion-input
+                :value="confirmNewPassword"
+                @input="confirmNewPassword = $event.target.value"
+                placeholder="Confirm password"
+                name="confirmNewPassword"
+              ></ion-input>
+            </div>
+            <ion-button class="continueButton" type="submit">
+              Continue
+            </ion-button>
+          </form>
+          <a style="margin-left: 40%;" @click="registerMode()">
+            back
+          </a>
         </div>
       </div>
     </div>
@@ -68,21 +116,22 @@
 <script lang="ts">
 import {
   IonInput,
-  // IonLabel,
   IonButton,
   IonPage,
+  alertController,
   // IonItem,
 } from "@ionic/vue";
 import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
+import axios from "axios";
 
 export default defineComponent({
   name: "Login",
   components: {
     IonPage,
     IonInput,
-    // IonLabel,
     IonButton,
+    alertController,
     // IonItem,
   },
   beforeMount() {
@@ -93,7 +142,6 @@ export default defineComponent({
       console.log("have information");
       console.log(userName);
       console.log(passWord);
-      this.showPanel = false;
       if (window.localStorage.getItem("LoginPageReloaded") === "no") {
         window.localStorage.setItem("LoginPageReloaded", "yes");
         window.location.reload();
@@ -105,9 +153,14 @@ export default defineComponent({
   },
   data() {
     return {
-      userName: "",
-      passWord: "",
-      showPanel: true,
+      email: "",
+      password: "",
+      loginMode: true,
+      newEmail: "",
+      newUsername: "",
+      newPassword: "",
+      confirmNewPassword: "",
+      backendEndpoint: "http://localhost:5678",
     };
   },
   setup() {
@@ -118,15 +171,71 @@ export default defineComponent({
   },
   methods: {
     onSubmit() {
-      console.log("username = " + this.userName);
-      console.log("password = " + this.passWord);
-      // Delete the thing above and do the authentication here
-
-      //
-      window.localStorage.setItem("username", this.userName);
-      window.localStorage.setItem("password", this.passWord);
-      this.showPanel = false;
-      this.$router.push("/tabs");
+      if (this.loginMode) {
+        console.log("username = " + this.email);
+        console.log("password = " + this.password);
+        // Delete the thing above and do the authentication here
+        const endPointURL =
+          this.backendEndpoint +
+          "/users/login?email=" +
+          this.email +
+          "&password=" +
+          this.password;
+        axios
+          .post(endPointURL)
+          .then((res) => {
+            if (res.data == "matched") {
+              window.localStorage.setItem("username", this.email);
+              // window.localStorage.setItem("password", this.password);
+              this.$router.push("/tabs");
+            } else {
+              this.loginError(res.data);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        //
+      } else {
+        console.log(this.newUsername);
+        console.log(this.newEmail);
+        console.log(this.newPassword);
+        console.log(this.confirmNewPassword);
+        const createAccountURL =
+          this.backendEndpoint +
+          "/users/register?name=" +
+          this.newUsername +
+          "&email=" +
+          this.newEmail +
+          "&password=" +
+          this.newPassword +
+          "&password2=" +
+          this.confirmNewPassword;
+        axios
+          .post(createAccountURL)
+          .then(() => {
+            console.log("create success");
+          })
+          .catch((err) => {
+            console.log("u fkd up");
+            console.log(err);
+          });
+      }
+    },
+    async loginError(msg: string) {
+      const deleteAlert = await alertController.create({
+        message: "Error: " + msg,
+        buttons: [
+          {
+            text: "ok",
+            handler: () => {
+              console.log("try again");
+            },
+          },
+        ],
+      });
+      await deleteAlert.present();
+      await deleteAlert.onDidDismiss();
     },
     created() {
       console.log("please wait");
@@ -139,6 +248,10 @@ export default defineComponent({
         // go main page
         // this.$router.push('/tabs');
       });
+    },
+    registerMode() {
+      console.log("hello");
+      this.loginMode = !this.loginMode;
     },
     clearLocal() {
       window.localStorage.removeItem("username");
@@ -168,7 +281,7 @@ export default defineComponent({
 .login_div {
   position: absolute;
   min-width: 100%;
-  height: 60%;
+  height: 64%;
   margin-top: 40%;
   margin-bottom: 20%;
   padding-left: 16px;
@@ -194,6 +307,22 @@ export default defineComponent({
   margin-left: 50%;
   margin-right: 50%;
 } */
+.registerCard {
+  color: #4a4d3e;
+  background-color: white;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  height: 90%;
+  padding-top: 8%;
+}
+.sub_register_card {
+  width: 80%;
+  margin-left: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  /* background-color: #9da778; */
+  align-items: center;
+}
 .greenBar {
   /* position: absolute; */
   background-color: #4a4d3e;
@@ -223,4 +352,16 @@ export default defineComponent({
   text-align: center;
 }
 
+.continueButton {
+  --background: #da8a55;
+  --border-radius: 100px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  margin-left: 24%;
+}
+.titleText {
+  color: #4a4d3e;
+  margin-left: 16%;
+  font-size: 24px;
+}
 </style>

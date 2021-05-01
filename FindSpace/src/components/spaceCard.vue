@@ -79,10 +79,10 @@ export default defineComponent({
   methods: {
     showSpaceInfo(id: number) {
       // This one is for admin page
-      this.$router.push("/modify/" + id);
+      // this.$router.push("/modify/" + id);
 
       // This one is for user page
-      // this.$router.push("/SpaceInfo/" + id);
+      this.$router.push("/SpaceInfo/" + id);
     },
     createFeedBackMSG(spaceInfo: any) {
       if (spaceInfo.feedbackstatus) {
@@ -99,9 +99,6 @@ export default defineComponent({
         Number((spaceInfo.distance + "").split(".")[0]) / 1000 + " Km";
     },
     displayCrowdedNess(spaceInfo: any) {
-      console.log("hphphphphph");
-      console.log(spaceInfo);
-
       if (spaceInfo.crowdednessstatus == 1) {
         console.log("green");
         this.personIcon1 = "cPersonGreen.svg";

@@ -78,17 +78,17 @@ export default defineComponent({
   beforeMount() {
     console.log("hello before mount page 3!");
     const tempUserName = window.localStorage.getItem("username");
-    const tempPassWord = window.localStorage.getItem("password");
-    if (tempUserName && tempPassWord) {
+    // const tempPassWord = window.localStorage.getItem("password");
+    if (tempUserName) {
       console.log("have information");
       // this.deletePopup = false;
       this.userName = tempUserName;
-      this.passWord = tempPassWord;
+      // this.passWord = tempPassWord;
       if (window.localStorage.getItem("UserPageReloaded") === "no") {
         window.localStorage.setItem("UserPageReloaded", "yes");
         window.location.reload();
       }
-      this.watchLocation();
+      // this.watchLocation();
     } else {
       console.log("no data!");
       // this.deletePopup = false;
@@ -115,21 +115,21 @@ export default defineComponent({
     };
   },
   methods: {
-    watchLocation() {
-      // let watch = this.geo.watchPosition();
-      const geo = navigator.geolocation;
-      geo.watchPosition((res) => {
-        console.log("watching location....");
-        console.log(res);
-        this.updateLocation(res);
-      });
-    },
-    updateLocation(data: any) {
-      // console.log("updatingText");
-      this.isAlive = !this.isAlive;
-      this.location.lat = data.coords.latitude;
-      this.location.long = data.coords.longitude;
-    },
+    // watchLocation() {
+    //   // let watch = this.geo.watchPosition();
+    //   const geo = navigator.geolocation;
+    //   geo.watchPosition((res) => {
+    //     console.log("watching location....");
+    //     console.log(res);
+    //     this.updateLocation(res);
+    //   });
+    // },
+    // updateLocation(data: any) {
+    //   // console.log("updatingText");
+    //   this.isAlive = !this.isAlive;
+    //   this.location.lat = data.coords.latitude;
+    //   this.location.long = data.coords.longitude;
+    // },
     logOut() {
       console.log("logout complete");
       window.localStorage.removeItem("username");
@@ -138,11 +138,11 @@ export default defineComponent({
       window.localStorage.setItem("UserPageReloaded", "no");
       window.localStorage.setItem("NearbyPageReloaded", "no");
       window.localStorage.setItem("MainPageReloaded", "no");
+      window.localStorage.clear();
       console.log("username and password forgotten");
       this.$router.push("/");
     },
     async askToDelete() {
-      // this.deletePopup = !this.deletePopup;
       console.log(this.deletePopup);
       const deleteAlert = await alertController.create({
         // cssClass: "alertCard",

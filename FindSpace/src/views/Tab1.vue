@@ -4,7 +4,7 @@
       <img class="nearbyBanner" :src="require('@/assets/img/FavSpace.png')" />
       <div class="searchBox">search box</div>
       <div class="spaceList">
-        <div v-for="space in spaces" :key="space.workspaceid">
+        <div  v-for="space in spaces" :key="space.workspaceid">
           <spaceList :space="space"></spaceList>
         </div>
       </div>
@@ -22,7 +22,7 @@ import axios from "axios";
 import spaceList from "../components/spaceList.vue";
 
 export default defineComponent({
-  name: "Tab2",
+  name: "Tab1",
   components: {
     IonPage,
     spaceList,
@@ -31,7 +31,7 @@ export default defineComponent({
   beforeMount() {
     console.log("hello from tab 2");
     this.watchLocation();
-    // this.getNearbySpaceList();
+    this.getFavoriteSpace();
   },
   data() {
     return {
@@ -51,17 +51,30 @@ export default defineComponent({
       const geo = navigator.geolocation;
       geo.watchPosition((res) => {
         console.log("watching location....");
-        console.log(res);
         this.updateLocation(res);
-        this.getNearbySpaceList();
+        this.getFavoriteSpace();
       });
     },
     updateLocation(data: any) {
       this.location.lat = data.coords.latitude;
       this.location.long = data.coords.longitude;
-      this.getNearbySpaceList();
+      this.getFavoriteSpace();
     },
-    getNearbySpaceList() {
+    // putSomething() {
+    //   console.log("starting");
+    //   axios
+    //     .put("http://localhost:5678/admin/pic/photo3/2?photo3=Ai_Sus")
+    //     .then((res) => {
+    //       console.log("this is ther result");
+    //       console.log(res);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+
+    //   console.log("finished");
+    // },
+    getFavoriteSpace() {
       const endPointURL = "http://localhost:5678/admin/workspace";
       // const endPointURL =
       //   "http://localhost:5678/homepage/recommWS?Lat=" +
@@ -96,5 +109,6 @@ export default defineComponent({
 .spaceList {
   height: 80%;
   padding-top: 8px;
+  overflow: scroll;
 }
 </style>
