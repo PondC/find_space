@@ -9,6 +9,7 @@ import Modify1 from "../views/Admin/modify1.vue";
 import SpaceInfo from "../views/SpaceInfo.vue";
 
 
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -59,7 +60,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/SpaceInfo/:spaceID",
     component: SpaceInfo,
-  },
+    },
+    
 ];
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

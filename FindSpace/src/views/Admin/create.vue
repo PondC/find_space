@@ -18,7 +18,6 @@
                         </ion-item>
                     </ion-label>
                 </ion-list-header>
-
                 <ion-item lines="none">
                     <ion-label>Picture 1 link</ion-label>
                     <ion-input :value="pic1"
@@ -186,11 +185,6 @@
                 <ion-button @click="() => onSubmit()">CREATE</ion-button>
             </ion-fab>
         </form>
-        <form action="/workspace" method="post">
-            <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-                <ion-button @click="() => insertWeak()">Insert Weak</ion-button>
-            </ion-fab>
-        </form>
     </ion-page>
 </template>
 
@@ -278,8 +272,8 @@ export default defineComponent({
       window.localStorage.setItem("wsname", this.wsname);
       window.localStorage.setItem("pic1", this.pic1);
       window.localStorage.setItem("pic2", this.pic2);
-        window.localStorage.setItem("pic3", this.pic3);
-        window.localStorage.setItem("menu1", this.menu1);
+      window.localStorage.setItem("pic3", this.pic3);
+      window.localStorage.setItem("menu1", this.menu1);
       window.localStorage.setItem("menu2", this.menu2);
       window.localStorage.setItem("menu3", this.menu3);
       window.localStorage.setItem("Total Seats", this.totalseat);
@@ -299,7 +293,6 @@ export default defineComponent({
       window.localStorage.setItem("location Link: ", this.locationLink);
 
         axios.post("http://localhost:5678/admin/workspace?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet);
-
         /*
         axios.get("http://localhost:5678/admin/workspace")
         .then((res) => {                //
@@ -363,8 +356,10 @@ export default defineComponent({
             },
         //axios.post("http://localhost:5678/admin/pic?photo1=" + this.pic1 + "&photo2=" + this.pic2 + "&photo3=" + this.pic3 + "workspaceID=" + this.createdID);
         //axios.post("http://localhost:5678/admin/menu?menu1=" + this.menu1 + "&menu2=" + this.menu2 + "&menu3=" + this.menu3 + "workspaceID=" + this.createdID);
-      },
-      insertWeak() {
+    },
+  /*
+    insertWeak() {
+          window.localStorage.setItem("wsid", this.wsid);
           window.localStorage.setItem("Monday: ", this.monday);
           window.localStorage.setItem("Tuesday: ", this.tuesday);
           window.localStorage.setItem("Wednesday: ", this.wednesday);
@@ -378,11 +373,11 @@ export default defineComponent({
           window.localStorage.setItem("menu1", this.menu1);
             window.localStorage.setItem("menu2", this.menu2);
             window.localStorage.setItem("menu3", this.menu3);
-
-        axios.post("http://localhost:5678/admin/pic?photo1=" + this.pic1 + "&photo2=" + this.pic2 + "&photo3=" + this.pic3 + "&WorkspaceID=53");
-        axios.post("http://localhost:5678/admin/menu?menu1=" + this.menu1 + "&menu2=" + this.menu2 + "&menu3=" + this.menu3 + "&WorkspaceID=53");
-        axios.post("http://localhost:5678/admin/ophour?mon=" + this.monday + "&tue=" + this.tuesday + "&wed=" + this.wednesday + "&thu=" + this.thursday + "&fri=" + this.friday + "&sat=" + this.saturday + "&sun=" + this.sunday + "&WorkspaceID=53");
-      },
+        //wsid must not be serial for it to not need hardcode
+        axios.post("http://localhost:5678/admin/pic?photo1=" + this.pic1 + "&photo2=" + this.pic2 + "&photo3=" + this.pic3 + "&WorkspaceID=" + this.wsid);
+        axios.post("http://localhost:5678/admin/menu?menu1=" + this.menu1 + "&menu2=" + this.menu2 + "&menu3=" + this.menu3 + "&WorkspaceID=" + this.wsid);
+        axios.post("http://localhost:5678/admin/ophour?mon=" + this.monday + "&tue=" + this.tuesday + "&wed=" + this.wednesday + "&thu=" + this.thursday + "&fri=" + this.friday + "&sat=" + this.saturday + "&sun=" + this.sunday + "&WorkspaceID=" + this.wsid);
+      },*/
     created() {
       console.log("please wait");
       console.log(window.localStorage.getItem("pic1"));

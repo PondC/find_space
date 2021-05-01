@@ -335,9 +335,9 @@
                 this.ophours.map((ophour) => {
                     console.log("ophours=" + ophour);
                 });*/
-                axios.put("http://localhost:5678/admin/workspace/WS_Des/2?wsname=" + "&ws_des=" + this.description);
-                axios.put("http://localhost:5678/admin/workspace/coordinate/2?ws_lat=" + this.lat + "&ws_long=" + this.long);
-                axios.put("http://localhost:5678/admin/workspace/totalseats/2?wsname=" + "&totalseat=" + this.totalseat)
+                axios.put("http://localhost:5678/admin/workspace/WS_Des/2?ws_des=" + this.description);
+                axios.put("http://localhost:5678/admin/workspace/coordinate/2?" + "ws_lat=" + this.lat + "&ws_long=" + this.long);
+                axios.put("http://localhost:5678/admin/workspace/totalseats/2?" + "&totalseat=" + this.totalseat)
                 axios.put("http://localhost:5678/admin/workspace/wifi/2?wifi=" + "&ws_des=" + this.wifi);
                 axios.put("http://localhost:5678/admin/workspace/poweroutlets/2?poweroutlet=" + this.poweroutlet);
                 axios.put("http://localhost:5678/admin/pic/photo1/2?photo1=" + this.pic1);
@@ -365,7 +365,7 @@
             },
             */
             async presentAlertConfirm() {
-                axios.delete("http://localhost:5678/admin/workspace/8");
+                //axios.delete("http://localhost:5678/admin/workspace/10");
                 const alert = await alertController
                     .create({
                         cssClass: 'my-custom-class',
@@ -378,7 +378,7 @@
                                 cssClass: 'secondary',
                                 handler: () => {
                                     console.log('Confirm Okay:')
-                                    axios.delete("http://localhost:5678/admin/workspace/9").then((res) => {
+                                    axios.delete("http://localhost:5678/admin/workspace/10").then((res) => {
                                         console.log(res);
                                     })
                                         .catch((err) => {
@@ -395,8 +395,9 @@
                             },
                         ],
                     });
+                return alert.present();
                 /*
-              return alert.present();
+              
                 const alert = await alertController
                     .create({
                         cssClass: 'my-custom-class',
