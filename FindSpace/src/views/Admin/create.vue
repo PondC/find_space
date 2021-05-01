@@ -319,7 +319,8 @@ export default defineComponent({
       long: "",
       location: "",
       locationLink: "",
-      tempwifi: "",
+        tempwifi: "",
+        workspaceid: 0,
     };
   },
   methods: {
@@ -331,7 +332,53 @@ export default defineComponent({
       },
      wifiFalse() {
          window.localStorage.setItem('wifi', "false");
-    },
+      },
+       insertWeak() {
+          //window.localStorage.setItem("wsid", this.wsid);
+          window.localStorage.setItem("Monday: ", this.monday);
+          window.localStorage.setItem("Tuesday: ", this.tuesday);
+          window.localStorage.setItem("Wednesday: ", this.wednesday);
+          window.localStorage.setItem("Thursday: ", this.thursday);
+          window.localStorage.setItem("Friday: ", this.friday);
+          window.localStorage.setItem("Saturday: ", this.saturday);
+          window.localStorage.setItem("Sunday: ", this.sunday);
+          window.localStorage.setItem("pic1", this.pic1);
+          window.localStorage.setItem("pic2", this.pic2);
+          window.localStorage.setItem("pic3", this.pic3);
+          window.localStorage.setItem("menu1", this.menu1);
+            window.localStorage.setItem("menu2", this.menu2);
+            window.localStorage.setItem("menu3", this.menu3);
+        //wsid must not be serial for it to not need hardcode
+           /*
+        axios.post("http://localhost:5678/admin/pic?photo1=" + this.pic1 + "&photo2=" + this.pic2 + "&photo3=" + this.pic3 );
+        axios.post("http://localhost:5678/admin/menu?menu1=" + this.menu1 + "&menu2=" + this.menu2 + "&menu3=" + this.menu3 );
+        axios.post("http://localhost:5678/admin/ophour?mon=" + this.monday + "&tue=" + this.tuesday + "&wed=" + this.wednesday + "&thu=" + this.thursday + "&fri=" + this.friday + "&sat=" + this.saturday + "&sun=" + this.sunday );
+     */
+           axios.get("http://localhost:5678/admin/workspaceid?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet)
+               .then((res: any) => {
+                   this.workspaceid = res.data.rows;
+                   console.log(res.data.rows);
+              })
+           axios.put("http://localhost:5678/admin/pic/photo1/" + this.workspaceid + " ? photo1 = " + this.pic1);
+          axios.put("http://localhost:5678/admin/pic/photo2/ " + this.workspaceid + "?photo2=" + this.pic2);
+          axios.put("http://localhost:5678/admin/pic/photo3/ " + this.workspaceid + "?photo3=" + this.pic3);
+          axios.put("http://localhost:5678/admin/pic/menu1/" + this.workspaceid + "?menu1=" + this.menu1);
+          axios.put("http://localhost:5678/admin/pic/menu2/" + this.workspaceid + "?menu2=" + this.menu2);
+          axios.put("http://localhost:5678/admin/pic/menu3/" + this.workspaceid + "?menu3=" + this.menu3);
+          axios.put("http://localhost:5678/admin/ophour/mon/" + this.workspaceid + "?mon=" + this.monday);
+          axios.put("http://localhost:5678/admin/ophour/tue/" + this.workspaceid + "?tue=" + this.tuesday);
+          axios.put(
+            "http://localhost:5678/admin/ophour/wed/" + this.workspaceid + "?wed=" + this.wednesday
+          );
+          axios.put(
+            "http://localhost:5678/admin/ophour/thu/" + this.workspaceid + "?thu=" + this.thursday
+          );
+          axios.put("http://localhost:5678/admin/ophour/fri/" + this.workspaceid + "?fri=" + this.friday);
+          axios.put(
+            "http://localhost:5678/admin/ophour/sat/" + this.workspaceid + "?sat=" + this.saturday
+          );
+          axios.put("http://localhost:5678/admin/ophour/sun/" + this.workspaceid + "?sun=" + this.sunday);
+     },
       onSubmit() {
       console.log("wsname = " + this.wsname);
       console.log("pic1 = " + this.pic1);
@@ -395,7 +442,8 @@ export default defineComponent({
           this.wifi +
           "&poweroutlet=" +
           this.poweroutlet
-      );
+          );
+          this.insertWeak();
       /*
         axios.get("http://localhost:5678/admin/workspace")
         .then((res) => {                //
@@ -458,27 +506,8 @@ export default defineComponent({
     //axios.post("http://localhost:5678/admin/pic?photo1=" + this.pic1 + "&photo2=" + this.pic2 + "&photo3=" + this.pic3 + "workspaceID=" + this.createdID);
     //axios.post("http://localhost:5678/admin/menu?menu1=" + this.menu1 + "&menu2=" + this.menu2 + "&menu3=" + this.menu3 + "workspaceID=" + this.createdID);
   },
-  /*
-    insertWeak() {
-          window.localStorage.setItem("wsid", this.wsid);
-          window.localStorage.setItem("Monday: ", this.monday);
-          window.localStorage.setItem("Tuesday: ", this.tuesday);
-          window.localStorage.setItem("Wednesday: ", this.wednesday);
-          window.localStorage.setItem("Thursday: ", this.thursday);
-          window.localStorage.setItem("Friday: ", this.friday);
-          window.localStorage.setItem("Saturday: ", this.saturday);
-          window.localStorage.setItem("Sunday: ", this.sunday);
-          window.localStorage.setItem("pic1", this.pic1);
-          window.localStorage.setItem("pic2", this.pic2);
-          window.localStorage.setItem("pic3", this.pic3);
-          window.localStorage.setItem("menu1", this.menu1);
-            window.localStorage.setItem("menu2", this.menu2);
-            window.localStorage.setItem("menu3", this.menu3);
-        //wsid must not be serial for it to not need hardcode
-        axios.post("http://localhost:5678/admin/pic?photo1=" + this.pic1 + "&photo2=" + this.pic2 + "&photo3=" + this.pic3 + "&WorkspaceID=" + this.wsid);
-        axios.post("http://localhost:5678/admin/menu?menu1=" + this.menu1 + "&menu2=" + this.menu2 + "&menu3=" + this.menu3 + "&WorkspaceID=" + this.wsid);
-        axios.post("http://localhost:5678/admin/ophour?mon=" + this.monday + "&tue=" + this.tuesday + "&wed=" + this.wednesday + "&thu=" + this.thursday + "&fri=" + this.friday + "&sat=" + this.saturday + "&sun=" + this.sunday + "&WorkspaceID=" + this.wsid);
-      },*/
+  
+  
   created() {
     console.log("please wait");
     console.log(window.localStorage.getItem("pic1"));
