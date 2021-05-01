@@ -1,5 +1,3 @@
-
-
 <template>
   <ion-page>
     <!-- <img src="@/assets/img/LoginImg.jpg" /> -->
@@ -9,7 +7,7 @@
       <div class="greenBar"></div>
       <div class="login_card" v-if="loginMode">
         <div class="sub_login_card">
-          <div class = "ion-text-center">
+          <div class="ion-text-center">
             Welcome Back!
           </div>
           <form @submit.prevent="onSubmit">
@@ -32,23 +30,29 @@
             <!-- </ion-item> -->
             <!-- <ion-button @click="() => router.push('/tabs')"> -->
             <ion-row>
-            <div class = "container">
-            <a @click="reload()" style="text-decoration: underline; color: grey;">
-              Forget password
-            </a>
-            </div>
+              <div class="container">
+                <a
+                  @click="reload()"
+                  style="text-decoration: underline; color: grey;"
+                >
+                  Forget password
+                </a>
+              </div>
             </ion-row>
-             <div class = "container">
-            <ion-button type="submit" shape=round color="secondary">
-              Continue
-            </ion-button>
+            <div class="container">
+              <ion-button type="submit" shape="round" color="secondary">
+                Continue
+              </ion-button>
             </div>
             <ion-row>
-              <div class = "container">
-            <a @click="reload()" style="text-decoration: underline; color: grey;">
-              sign up
-            </a>
-            </div>
+              <div class="container">
+                <a
+                  @click="reload()"
+                  style="text-decoration: underline; color: grey;"
+                >
+                  sign up
+                </a>
+              </div>
             </ion-row>
           </form>
           <ion-button @click="() => logLocal()">
@@ -56,7 +60,7 @@
           </ion-button>
           <ion-button @click="() => clearLocal()">
             clear all
-          </ion-button> -->
+          </ion-button>
         </div>
       </div>
       <!-- I'm too lazy to create new page -->
@@ -118,6 +122,7 @@ import {
   IonInput,
   IonButton,
   IonPage,
+  IonRow,
   alertController,
   // IonItem,
 } from "@ionic/vue";
@@ -131,6 +136,7 @@ export default defineComponent({
     IonPage,
     IonInput,
     IonButton,
+    IonRow,
     alertController,
     // IonItem,
   },
@@ -347,7 +353,7 @@ export default defineComponent({
   border-radius: 3px;
   margin-top: 10%;
 }
-.container{
+.container {
   width: 100%;
   text-align: center;
 }
