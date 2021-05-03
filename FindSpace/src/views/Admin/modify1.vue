@@ -23,7 +23,7 @@
             <ion-input
               :value="pic1"
               @input="pic1 = $event.target.value"
-              placeholder="picture 1 link"
+              placeholder={{pic1}} 
               name="pic1"
             ></ion-input>
           </ion-item>
@@ -33,7 +33,7 @@
             <ion-input
               :value="pic2"
               @input="pic2 = $event.target.value"
-              placeholder="picture 2 link"
+              placeholder= {{pic2}} 
               name="pic2"
             ></ion-input>
           </ion-item>
@@ -42,7 +42,7 @@
             <ion-input
               :value="pic3"
               @input="pic3 = $event.target.value"
-              placeholder="picture 3 link"
+              placeholder= {{pic3}} 
               name="pic3"
             ></ion-input>
           </ion-item>
@@ -53,7 +53,7 @@
           <ion-input
             :value="totalseat"
             @input="totalseat = $event.target.value"
-            placeholder="TotalSeats"
+            placeholder= {{totalseat}} 
             name="totalseat"
           ></ion-input>
         </ion-item>
@@ -62,7 +62,7 @@
           <ion-input
             :value="description"
             @input="description = $event.target.value"
-            placeholder="Description"
+            placeholder={{description}}
             name="description"
           ></ion-input>
         </ion-item>
@@ -73,7 +73,7 @@
             <ion-input
               :value="menu1"
               @input="menu1 = $event.target.value"
-              placeholder="menu 1 link"
+              placeholder={{menu1}}
               name="menu1"
             ></ion-input>
           </ion-item>
@@ -83,7 +83,7 @@
             <ion-input
               :value="menu2"
               @input="menu2 = $event.target.value"
-              placeholder="menu 2 link"
+              placeholder= {{menu2}}
               name="menu2"
             ></ion-input>
           </ion-item>
@@ -92,7 +92,7 @@
             <ion-input
               :value="menu3"
               @input="menu3 = $event.target.value"
-              placeholder="menu 3 link"
+              placeholder= {{menu3}}
               name="menu3"
             ></ion-input>
           </ion-item>
@@ -104,7 +104,7 @@
             <ion-input
               :value="monday"
               @input="monday = $event.target.value"
-              placeholder="00:00 - 00:00"
+              placeholder= {{monday}}
               name="monday"
             ></ion-input>
           </ion-item>
@@ -113,7 +113,7 @@
             <ion-input
               :value="tuesday"
               @input="tuesday = $event.target.value"
-              placeholder="00:00 - 00:00"
+              placeholder= {{tuesday}}
               name="tuesday"
             ></ion-input>
           </ion-item>
@@ -122,7 +122,7 @@
             <ion-input
               :value="wednesday"
               @input="wednesday = $event.target.value"
-              placeholder="00:00 - 00:00"
+              placeholder= {{wednesday}}
               name="wednesday"
             ></ion-input>
           </ion-item>
@@ -131,7 +131,7 @@
             <ion-input
               :value="thursday"
               @input="thursday = $event.target.value"
-              placeholder="00:00 - 00:00"
+              placeholder= {{thursday}}
               name="thursday"
             ></ion-input>
           </ion-item>
@@ -140,7 +140,7 @@
             <ion-input
               :value="friday"
               @input="friday = $event.target.value"
-              placeholder="00:00 - 00:00"
+              placeholder={{friday}}
               name="friday"
             ></ion-input>
           </ion-item>
@@ -149,7 +149,7 @@
             <ion-input
               :value="saturday"
               @input="saturday = $event.target.value"
-              placeholder="00:00 - 00:00"
+              placeholder={{saturday}}
               name="saturday"
             ></ion-input>
           </ion-item>
@@ -158,7 +158,7 @@
             <ion-input
               :value="sunday"
               @input="sunday = $event.target.value"
-              placeholder="00:00 - 00:00"
+              placeholder={{sunday}}
               name="sunday"
             ></ion-input>
           </ion-item>
@@ -168,7 +168,7 @@
           <ion-input
             :value="powerOut"
             @input="powerOut = $event.target.value"
-            placeholder="00:00 - 00:00"
+            placeholder={{poweroutlet}}
             name="powerOut"
           ></ion-input>
         </ion-item>
@@ -177,7 +177,7 @@
           <ion-input
             :value="wifi"
             @input="wifi = $event.target.value"
-            placeholder="Available"
+            placeholder={{wifi}}
             name="wifi"
           ></ion-input>
         </ion-item>
@@ -186,7 +186,7 @@
           <ion-input
             :value="lat"
             @input="lat = $event.target.value"
-            placeholder="XX"
+            placeholder={{lat}}
             name="latitude"
           ></ion-input>
         </ion-item>
@@ -195,17 +195,8 @@
           <ion-input
             :value="long"
             @input="long = $event.target.value"
-            placeholder="longitude"
+            placeholder={{long}}
             name="longitude"
-          ></ion-input>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label>Location</ion-label>
-          <ion-input
-            :value="location"
-            @input="location = $event.target.value"
-            placeholder="location"
-            name="location"
           ></ion-input>
         </ion-item>
         <ion-item lines="none">
@@ -214,7 +205,7 @@
             <ion-input
               :value="locationLink"
               @input="locationLink = $event.target.value"
-              placeholder="location link"
+              placeholder={{locationlink}}
               name="locationLink"
             ></ion-input>
           </div>
@@ -267,13 +258,45 @@ export default defineComponent({
     axios
       .get("http://localhost:5678/admin/workspace")
       .then((res: any) => {
-        console.log(res.data);
-        console.log(res.data.rows[1].wsname);
-        this.wsname = res.data.rows[1].wsname;
+          console.log(res.data);
+          this.wsname = res.data.rows[this.workspaceID].wsname;
+          this.description = res.data.rows[this.workspaceID].wsname;
+          this.totalseat = res.data.rows[this.workspaceID].totalseat;
+          this.poweroutlet = res.data.rows[this.workspaceID].poweroutlet;
+          this.wifi = res.data.rows[this.workspaceID].wifi;
+          this.lat = res.data.rows[this.workspaceID].ws_lat;
+          this.long = res.data.rows[this.workspaceID].ws_long;
+          this.locationLink = res.data.rows[this.workspaceID].ws_link;
       })
       .catch((err: any) => {
         console.log(err);
       });
+      axios
+          .get("http://localhost:5678/admin/ws_menu")
+          .then((res: any) => {
+              this.menu1 = res.data.rows[this.workspaceID].menu1;
+              this.menu2 = res.data.rows[this.workspaceID].menu2;
+              this.menu3 = res.data.rows[this.workspaceID].menu3;
+          })
+      axios
+          .get("http://localhost:5678/admin/ws_photo")
+          .then((res: any) => {
+              console.log("success pic");
+              this.pic1 = res.data.rows[this.workspaceID].pic1;
+              this.pic2 = res.data.rows[this.workspaceID].pic2;
+              this.pic3 = res.data.rows[this.workspaceID].pic3;
+          })
+      axios
+          .get("http://localhost:5678/admin/ws_oh")
+          .then((res: any) => {
+              this.monday = res.data.rows[this.workspaceID].mon;
+              this.tuesday = res.data.rows[this.workspaceID].tue;
+              this.wednesday = res.data.rows[this.workspaceID].wed;
+              this.thursday = res.data.rows[this.workspaceID].thu;
+              this.friday = res.data.rows[this.workspaceID].fri;
+              this.saturday = res.data.rows[this.workspaceID].sat;
+              this.sunday = res.data.rows[this.workspaceID].sun;
+          })
   },
 
   data() {
@@ -437,7 +460,7 @@ export default defineComponent({
             handler: () => {
               console.log("Confirm Okay:");
               axios
-                .delete("http://localhost:5678/admin/workspace/10")
+                .delete("http://localhost:5678/admin/workspace/137")
                 .then((res) => {
                   console.log(res);
                 })
@@ -455,34 +478,6 @@ export default defineComponent({
         ],
       });
       return alert.present();
-      /*
-              
-                const alert = await alertController
-                    .create({
-                        cssClass: 'my-custom-class',
-                        header: 'Confirm!',
-                        message: 'Are you sure you want to delete this location?',
-                        buttons: [
-                            {
-                                text: 'YES',
-                                role: 'cancel',
-                                cssClass: 'secondary',
-                                handler: blah => {
-                                    console.log('Confirm Cancel:', blah)
-                                },
-                            },
-                            {
-                                text: 'NO',
-                                handler: () => {
-                                    console.log('Confirm Okay')
-                                },
-                            },
-                        ],
-                    });
-                return alert.present();
-
-            },
-            */
     },
   },
 });
