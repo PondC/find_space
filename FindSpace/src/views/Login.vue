@@ -55,12 +55,7 @@
               </div>
             </ion-row>
           </form>
-          <ion-button @click="() => logLocal()">
-            log local
-          </ion-button>
-          <ion-button @click="() => clearLocal()">
-            clear all
-          </ion-button>
+          
         </div>
       </div>
       <!-- I'm too lazy to create new page -->
@@ -68,7 +63,7 @@
         <div class="sub_register_card">
           <div class="titleText">
             <div style="margin-left: 20%">
-              register
+              Sign Up
             </div>
           </div>
           <form @submit.prevent="onSubmit">
@@ -108,7 +103,7 @@
               Continue
             </ion-button>
           </form>
-          <a style="margin-left: 40%;" @click="registerMode()">
+          <a style="margin-left: 40%;text-decoration:underline; color:grey;" @click="registerMode()">
             back
           </a>
         </div>

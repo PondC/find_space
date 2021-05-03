@@ -4,7 +4,8 @@
       <img class="greenDeskPic" :src="require('@/assets/img/greenDesk.png')" />
       <img class="profilePic" :src="require('@/assets/img/profileDummy.png')" />
       <div class="subDiv" v-if="panelMode === 'view'">
-        {{ userName }}
+        <div style="font-weight: bold;">
+        {{ userName }}</div>
         <div class="changeInfoDiv">
           <div>Username</div>
           <div>
@@ -13,7 +14,7 @@
             </ion-chip>
           </div>
         </div>
-        <div class="changeInfoDiv">
+        <div class="changeInfoDiv2">
           <div>
             Password
           </div>
@@ -23,20 +24,21 @@
             </ion-chip>
           </div>
         </div>
-        <div class="changeInfoDiv">
+        <div class="changeInfoDiv2">
           <div>
             Status
           </div>
           <div>
-            <ion-chip class="changeChip" href="/googlepay">
+            <ion-chip class="changeChip2" href="/googlepay">
               <ion-label> Subscribe </ion-label>
             </ion-chip>
             <!-- <ion-button @click="gotosubscribe">SUBSCRIBE</ion-button> -->
           </div>
         </div>
-        <a @click="askToDelete()">
+        <div>
+        <a @click="askToDelete()" style="text-decoration: underline; color: grey;">
           Delete Account
-        </a>
+        </a></div>
         <ion-chip class="logOutChip" @click="logOut()">
           <ion-label> Log Out </ion-label>
         </ion-chip>
@@ -70,12 +72,14 @@
               type="password"
             ></ion-input>
           </div>
-          <ion-button class="continueButton" @click="panelMode = 'view'">
+          <div>
+          <ion-button class="backButton" @click="panelMode = 'view'">
             Back
-          </ion-button>
+          </ion-button></div>
+          <div>
           <ion-button class="continueButton" type="submit">
             Continue
-          </ion-button>
+          </ion-button></div>
         </form>
       </div>
       <div class="subDiv" v-if="panelMode === 'username'">
@@ -326,14 +330,28 @@ export default defineComponent({
   height: 100%;
 }
 .subDiv {
-  margin-top: 16%;
+  margin-top: 10%;
   background-color: #faf6f0;
-  color: black;
+  text-align: center;
+  color:#949F74;
   height: 100%;
   width: 92%;
   margin-left: 4%;
 }
 .changeInfoDiv {
+  margin-top: 15%;
+  color: #4a4d3e;
+  border-bottom-color: #4a4d3e;
+  border-width: 1px;
+  border-bottom-style: solid;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  /* vertical-align: middle; */
+}
+.changeInfoDiv2 {
   color: #4a4d3e;
   border-bottom-color: #4a4d3e;
   border-width: 1px;
@@ -351,6 +369,16 @@ export default defineComponent({
   border-style: solid;
   border-width: 1px;
   color: #4a4d3e;
+  margin-left: 60px;
+  /* min-width: 100%; */
+}
+.changeChip2 {
+  background-color: #969e78;
+  border-color: #4a4d3e;
+  border-style: solid;
+  border-width: 1px;
+  color: #4a4d3e;
+  margin-left: 137px;
   /* min-width: 100%; */
 }
 .logOutChip {
@@ -359,6 +387,7 @@ export default defineComponent({
   border-style: solid;
   border-width: 1px;
   color: #4a4d3e;
+  margin-top: 70%;
   /* min-width: 100%; */
 }
 
@@ -384,13 +413,18 @@ export default defineComponent({
 .continueButton {
   --background: #da8a55;
   --border-radius: 100px;
-  /* margin-top: 12px;
+  margin-top: 12px;
   margin-bottom: 4px;
-  margin-left: 24%; */
-  margin: 0;
-  position: relative;
-  /* top: 50%; */
-  left: 40%;
+  margin-left: 35%; 
+  -ms-transform: translate(-50%);
+  transform: translate(-50%);
+}
+.backButton {
+  --background: #da8a55;
+  --border-radius: 100px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  margin-left: 25%; 
   -ms-transform: translate(-50%);
   transform: translate(-50%);
 }
