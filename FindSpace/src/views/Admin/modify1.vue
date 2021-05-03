@@ -460,7 +460,7 @@ export default defineComponent({
             handler: () => {
               console.log("Confirm Okay:");
               axios
-                .delete("http://localhost:5678/admin/workspace/10")
+                .delete("http://localhost:5678/admin/workspace/137")
                 .then((res) => {
                   console.log(res);
                 })
@@ -478,34 +478,6 @@ export default defineComponent({
         ],
       });
       return alert.present();
-      /*
-              
-                const alert = await alertController
-                    .create({
-                        cssClass: 'my-custom-class',
-                        header: 'Confirm!',
-                        message: 'Are you sure you want to delete this location?',
-                        buttons: [
-                            {
-                                text: 'YES',
-                                role: 'cancel',
-                                cssClass: 'secondary',
-                                handler: blah => {
-                                    console.log('Confirm Cancel:', blah)
-                                },
-                            },
-                            {
-                                text: 'NO',
-                                handler: () => {
-                                    console.log('Confirm Okay')
-                                },
-                            },
-                        ],
-                    });
-                return alert.present();
-
-            },
-            */
     },
   },
 });
