@@ -13,8 +13,8 @@ import SpaceInfo from "../views/SpaceInfo.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: "/tabs",
-    // redirect: "/login",
+    // redirect: "/tabs",
+    redirect: "/login",
   },
   {
     path: "/login",
