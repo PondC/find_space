@@ -19,7 +19,7 @@
 <script lang="ts">
 import {
   IonPage,
-  alertController,
+  // alertController,
   // IonIcon,
 } from "@ionic/vue";
 import { defineComponent } from "vue";

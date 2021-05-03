@@ -118,16 +118,15 @@ export default defineComponent({
     IonIcon,
   },
   beforeMount() {
-    console.log("info");
-    console.log(this.$route.params);
-    console.log("info");
+    console.log("THIS IS SPACE INFOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
     this.spaceID = Number(this.$route.params.spaceID);
     this.getSpaceInformation(this.spaceID);
     this.getPic(this.spaceID);
     this.getMenu(this.spaceID);
     this.getOPHR(this.spaceID);
     this.getCRWDNESS(this.spaceID);
-    // this.ultraLoop();
+    this.fetchEvery();
+    // this.checkReload();
   },
   data() {
     return {
@@ -138,6 +137,7 @@ export default defineComponent({
       menu: [],
       ophr: [],
       availableSeat: 0,
+      totalSeat: 0,
       crwdness: 0,
       personIcon1: "cPersonGreen.svg",
       personIcon2: "cPersonLight.svg",
@@ -145,33 +145,44 @@ export default defineComponent({
       personIcon4: "cPersonRed.svg",
       heartIcon: "hollowHeart.svg",
       favorite: false,
-      backendEndpoint: "http://localhost:5678",
+      // backendURL: "http://localhost:5678",
+      backendURL: "http://192.168.1.118:5678",
     };
   },
   methods: {
-    reload() {
-      window.location.reload();
+    // reload() {
+    //   window.location.reload();
+    // },
+    checkReload() {
+      console.log("checking reload");
+      console.log("checking reload");
+      setTimeout(() => {
+        if (window.localStorage.getItem("spaceinforeloaded") === "no") {
+          window.localStorage.setItem("spaceinforeloaded", "yes");
+          console.log("gonna reload");
+          window.location.reload();
+        }
+      }, 500);
     },
     backHome() {
       this.$router.push("/tabs");
     },
     getSpaceInformation(spaceID: any) {
-      const url = this.backendEndpoint + "/wsdetail/workspace/" + spaceID;
+      const url = this.backendURL + "/wsdetail/workspace/" + spaceID;
       return axios
         .get(url)
         .then((res) => {
           console.log(res.data);
           this.spaceName = res.data.wsname;
           this.space = res.data;
-          const ppleInSpace = 1; // have top get this from hardware
-          this.availableSeat = res.data.totalseat - ppleInSpace;
+          this.totalSeat = res.data.totalseat;
         })
         .catch((err) => {
           console.log(err);
         });
     },
     getPic(spaceID: any) {
-      const url = this.backendEndpoint + "/wsdetail/showpic/" + spaceID;
+      const url = this.backendURL + "/wsdetail/showpic/" + spaceID;
       return axios
         .get(url)
         .then((res) => {
@@ -183,7 +194,7 @@ export default defineComponent({
         });
     },
     getMenu(spaceID: any) {
-      const url = this.backendEndpoint + "/wsdetail/showmenu/" + spaceID;
+      const url = this.backendURL + "/wsdetail/showmenu/" + spaceID;
       return axios
         .get(url)
         .then((res) => {
@@ -195,7 +206,7 @@ export default defineComponent({
         });
     },
     getOPHR(spaceID: any) {
-      const url = this.backendEndpoint + "/wsdetail/showophour/" + spaceID;
+      const url = this.backendURL + "/wsdetail/showophour/" + spaceID;
       return axios
         .get(url)
         .then((res) => {
@@ -207,34 +218,41 @@ export default defineComponent({
         });
     },
     getCRWDNESS(spaceID: any) {
-      const url = this.backendEndpoint + "/wsdetail/crowdedness/" + spaceID;
+      console.log("getCRWDNESS");
+      console.log("getCRWDNESS");
+      const url = this.backendURL + "/wsdetail/crowdedness/" + spaceID;
       return axios
         .get(url)
         .then((res) => {
           console.log("getCRWDNESS");
-          this.crwdness = res.data;
+          console.log(res);
+          console.log(res.data);
+          console.log("getCRWDNESS");
+          this.crwdness = res.data.crowdednessstatus;
+          this.availableSeat = res.data.totalseat - Number(res.data.ppl_in_ws);
+          this.displayCrowdedNess(this.crwdness);
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    displayCrowdedNess(spaceInfo: any) {
-      if (spaceInfo.crowdednessstatus == 1) {
+    displayCrowdedNess(crwdness: any) {
+      if (crwdness == 1) {
         this.personIcon1 = "cPersonGreen.svg";
         this.personIcon2 = "cPerson.svg";
         this.personIcon3 = "cPerson.svg";
         this.personIcon4 = "cPerson.svg";
-      } else if (spaceInfo.crowdednessstatus == 2.4) {
+      } else if (crwdness == 2.4) {
         this.personIcon1 = "cPersonGreen.svg";
         this.personIcon2 = "cPersonLight.svg";
         this.personIcon3 = "cPerson.svg";
         this.personIcon4 = "cPerson.svg";
-      } else if (spaceInfo.crowdednessstatus == 3.6) {
+      } else if (crwdness == 3.6) {
         this.personIcon1 = "cPersonGreen.svg";
         this.personIcon2 = "cPersonLight.svg";
         this.personIcon3 = "cPersonOrange.svg";
         this.personIcon4 = "cPerson.svg";
-      } else if (spaceInfo.crowdednessstatus == 5) {
+      } else if (crwdness == 5) {
         this.personIcon1 = "cPersonGreen.svg";
         this.personIcon2 = "cPersonLight.svg";
         this.personIcon3 = "cPersonOrange.svg";
@@ -256,17 +274,29 @@ export default defineComponent({
       window.localStorage.setItem("latestVisitedSpaceID", this.spaceID + "");
       window.localStorage.setItem("givenFeedback", "No");
     },
-    fetchSeatFromHardware() {
+    fetchEvery() {
       setTimeout(() => {
-        console.log("hardware pls");
-        // if (this.searchWord === "hi") {
-        //   this.searchWord = "hello";
-        // } else {
-        //   this.searchWord = "hi";
-        // }
-        this.fetchSeatFromHardware();
-      }, 2000);
+        console.log("fetching");
+        console.log(this.spaceID);
+        this.getSpaceInformation(this.spaceID);
+        this.getPic(this.spaceID);
+        this.getMenu(this.spaceID);
+        this.getOPHR(this.spaceID);
+        this.getCRWDNESS(this.spaceID);
+        this.fetchEvery();
+      }, 5000);
     },
+    // fetchSeatFromHardware() {
+    //   setTimeout(() => {
+    //     console.log("hardware pls");
+    //     // if (this.searchWord === "hi") {
+    //     //   this.searchWord = "hello";
+    //     // } else {
+    //     //   this.searchWord = "hi";
+    //     // }
+    //     this.fetchSeatFromHardware();
+    //   }, 2000);
+    // },
   },
 });
 </script>
@@ -318,7 +348,7 @@ export default defineComponent({
   margin-left: 22%;
 }
 .subSection {
-  background-color: rgb(91, 160, 137);
+  /* background-color: rgb(91, 160, 137); */
   /* overflow: scroll; */
 }
 .onelineSection {
@@ -327,6 +357,7 @@ export default defineComponent({
   font-size: 22px;
   border-bottom-color: #4a4d3e;
   border-bottom-style: solid;
+  border-bottom-width: 1px;
 }
 .navigateButton {
   --background: #da8a55;

@@ -14,5 +14,12 @@ export default defineComponent({
     IonApp,
     IonRouterOutlet
   }
+  ,methods: {
+    getBackendURL() {
+      // const burl = "http://192.168.1.40:5678";
+      const burl = "http://localhost:5678";
+      return burl;
+    }
+  }
 });
 </script>

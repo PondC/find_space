@@ -47,7 +47,7 @@
             <ion-row>
               <div class="container">
                 <a
-                  @click="reload()"
+                  @click="registerMode()"
                   style="text-decoration: underline; color: grey;"
                 >
                   sign up
@@ -137,14 +137,15 @@ export default defineComponent({
     IonInput,
     IonButton,
     IonRow,
-    alertController,
+    // alertController,
     // IonItem,
   },
   beforeMount() {
     console.log("hello before mount!");
     const userName = window.localStorage.getItem("username");
+    const userEmail = window.localStorage.getItem("useremail");
     const passWord = window.localStorage.getItem("password");
-    if (userName && passWord) {
+    if (userName && passWord && userEmail) {
       console.log("have information");
       console.log(userName);
       console.log(passWord);
@@ -166,7 +167,8 @@ export default defineComponent({
       newUsername: "",
       newPassword: "",
       confirmNewPassword: "",
-      backendEndpoint: "http://localhost:5678",
+      // backendURL: "http://localhost:5678",
+      backendURL: "http://192.168.1.118:5678",
     };
   },
   setup() {
@@ -178,11 +180,10 @@ export default defineComponent({
   methods: {
     onSubmit() {
       if (this.loginMode) {
-        console.log("username = " + this.email);
+        console.log("userEmail = " + this.email);
         console.log("password = " + this.password);
-        // Delete the thing above and do the authentication here
         const endPointURL =
-          this.backendEndpoint +
+          this.backendURL +
           "/users/login?email=" +
           this.email +
           "&password=" +
@@ -190,46 +191,64 @@ export default defineComponent({
         axios
           .post(endPointURL)
           .then((res) => {
-            if (res.data == "matched") {
-              window.localStorage.setItem("username", this.email);
-              // window.localStorage.setItem("password", this.password);
-              this.$router.push("/tabs");
-            } else {
+            console.log(res);
+            console.log(res.data);
+            console.log(res.data[0]);
+            if (res.data == "password incorrect") {
               this.loginError(res.data);
+            } else {
+              window.localStorage.setItem("useremail", this.email);
+              window.localStorage.setItem("username", res.data[0].uname);
+              window.localStorage.setItem("password", this.password);
+              this.$router.push("/tabs");
             }
           })
           .catch((err) => {
             console.log(err);
           });
-        //
       } else {
         console.log(this.newUsername);
         console.log(this.newEmail);
         console.log(this.newPassword);
         console.log(this.confirmNewPassword);
-        const createAccountURL =
-          this.backendEndpoint +
-          "/users/register?name=" +
-          this.newUsername +
-          "&email=" +
-          this.newEmail +
-          "&password=" +
-          this.newPassword +
-          "&password2=" +
-          this.confirmNewPassword;
-        axios
-          .post(createAccountURL)
-          .then(() => {
-            console.log("create success");
-          })
-          .catch((err) => {
-            console.log("u fkd up");
-            console.log(err);
-          });
+        if (this.newPassword.length < 6 || this.confirmNewPassword.length < 6) {
+          this.loginError("Password must be 6 characters or more");
+        }
+        if (this.newPassword !== this.confirmNewPassword) {
+          this.loginError("Password do not match");
+        } else {
+          const createAccountURL =
+            this.backendURL +
+            "/users/register?name=" +
+            this.newUsername +
+            "&email=" +
+            this.newEmail +
+            "&password=" +
+            this.newPassword +
+            "&password2=" +
+            this.confirmNewPassword;
+          axios
+            .post(createAccountURL)
+            .then((res) => {
+              console.log("create success");
+              // console.log(res);
+              if (res.data === "Account Created") {
+                this.loginMode = true;
+                console.log("here");
+              } else {
+                this.loginError(res.data);
+              }
+            })
+            .catch((err) => {
+              console.log("u fkd up");
+              console.log(err);
+              this.loginError(err);
+            });
+        }
       }
     },
     async loginError(msg: string) {
-      const deleteAlert = await alertController.create({
+      const errorAlert = await alertController.create({
         message: "Error: " + msg,
         buttons: [
           {
@@ -240,8 +259,8 @@ export default defineComponent({
           },
         ],
       });
-      await deleteAlert.present();
-      await deleteAlert.onDidDismiss();
+      await errorAlert.present();
+      await errorAlert.onDidDismiss();
     },
     created() {
       console.log("please wait");

@@ -3,7 +3,7 @@
     <div class="mainDiv">
       <img class="greenDeskPic" :src="require('@/assets/img/greenDesk.png')" />
       <img class="profilePic" :src="require('@/assets/img/profileDummy.png')" />
-      <div class="subDiv">
+      <div class="subDiv" v-if="panelMode === 'view'">
         {{ userName }}
         <div class="changeInfoDiv">
           <div>Username</div>
@@ -18,7 +18,7 @@
             Password
           </div>
           <div>
-            <ion-chip class="changeChip">
+            <ion-chip class="changeChip" @click="changePassword()">
               <ion-label> Change Password </ion-label>
             </ion-chip>
           </div>
@@ -31,23 +31,89 @@
             <ion-chip class="changeChip" href="/googlepay">
               <ion-label> Subscribe </ion-label>
             </ion-chip>
-            <ion-button @click="gotosubscribe">SUBSCRIBE</ion-button>
-            <GooglePay />
+            <!-- <ion-button @click="gotosubscribe">SUBSCRIBE</ion-button> -->
           </div>
         </div>
         <a @click="askToDelete()">
           Delete Account
         </a>
-        <!-- <div>Your Latitude: {{ location.lat }}</div>
-        <div>Your Longtitude: {{ location.long }}</div> -->
-        <!-- <div v-if="isAlive">I'm Alive!</div>
-        <ion-button @click="reload()">
-          reload
-        </ion-button> -->
         <ion-chip class="logOutChip" @click="logOut()">
           <ion-label> Log Out </ion-label>
         </ion-chip>
-        <!-- <DeleteAccountMessage v-if="deletePopup"> </DeleteAccountMessage> -->
+      </div>
+      <div class="subDiv" v-if="panelMode === 'password'">
+        <form @submit.prevent="onSubmit">
+          <div class="textFieldBorder">
+            <ion-input
+              :value="oldPass"
+              @input="oldPass = $event.target.value"
+              placeholder="Old password"
+              name="oldPass"
+              type="password"
+            ></ion-input>
+          </div>
+          <div class="textFieldBorder">
+            <ion-input
+              :value="newPass"
+              @input="newPass = $event.target.value"
+              placeholder="New password"
+              name="newPass"
+              type="password"
+            ></ion-input>
+          </div>
+          <div class="textFieldBorder">
+            <ion-input
+              :value="newPass2"
+              @input="newPass2 = $event.target.value"
+              placeholder="Confirm password"
+              name="newPass2"
+              type="password"
+            ></ion-input>
+          </div>
+          <ion-button class="continueButton" @click="panelMode = 'view'">
+            Back
+          </ion-button>
+          <ion-button class="continueButton" type="submit">
+            Continue
+          </ion-button>
+        </form>
+      </div>
+      <div class="subDiv" v-if="panelMode === 'username'">
+        <!-- <form @submit.prevent="onSubmit">
+          <div class="textFieldBorder">
+            <ion-input
+              :value="oldPass"
+              @input="oldPass = $event.target.value"
+              placeholder="Old password"
+              name="oldPass"
+              type="password"
+            ></ion-input>
+          </div>
+          <div class="textFieldBorder">
+            <ion-input
+              :value="newPass"
+              @input="newPass = $event.target.value"
+              placeholder="New password"
+              name="newPass"
+              type="password"
+            ></ion-input>
+          </div>
+          <div class="textFieldBorder">
+            <ion-input
+              :value="newPass2"
+              @input="newPass2 = $event.target.value"
+              placeholder="Confirm password"
+              name="newPass2"
+              type="password"
+            ></ion-input>
+          </div>
+          <ion-button class="continueButton" @click="panelMode = 'view'">
+            Back
+          </ion-button>
+          <ion-button class="continueButton" type="submit">
+            Continue
+          </ion-button>
+        </form> -->
       </div>
     </div>
   </ion-page>
@@ -56,7 +122,8 @@
 <script lang="ts">
 import {
   IonPage,
-  // IonButton,
+  IonInput,
+  IonButton,
   IonChip,
   IonLabel,
   // IonAlert,
@@ -74,7 +141,8 @@ export default defineComponent({
   components: {
     IonChip,
     IonPage,
-    // IonButton,
+    IonInput,
+    IonButton,
     IonLabel,
     // IonAlert,
     // DeleteAccountMessage,
@@ -82,25 +150,22 @@ export default defineComponent({
   beforeMount() {
     console.log("hello before mount page 3!");
     const tempUserName = window.localStorage.getItem("username");
-    // const tempPassWord = window.localStorage.getItem("password");
+    const tempPassWord = window.localStorage.getItem("password");
     if (tempUserName) {
       console.log("have information");
-      // this.deletePopup = false;
       this.userName = tempUserName;
-      // this.passWord = tempPassWord;
+      this.passWord = tempPassWord + "";
       if (window.localStorage.getItem("UserPageReloaded") === "no") {
         window.localStorage.setItem("UserPageReloaded", "yes");
         window.location.reload();
       }
-      // this.watchLocation();
     } else {
       console.log("no data!");
-      // this.deletePopup = false;
       this.$router.push("/");
     }
 
     axios
-      .get("http://localhost:5678/admin/workspace")
+      .get(this.backendURL + "/admin/workspace")
       .then((res: any) => {
         console.log(res.data);
         console.log(res.data.rows[1].wsname);
@@ -115,6 +180,11 @@ export default defineComponent({
       subscribe: "",
       userName: "",
       passWord: "",
+      oldPass: "",
+      newPass: "",
+      newPass2: "",
+      panelMode: "view",
+      changeErrMsg: "",
       status: "regular",
       deletePopup: false,
       isAlive: false,
@@ -122,6 +192,8 @@ export default defineComponent({
         lat: 0,
         long: 0,
       },
+      // backendURL: "http://localhost:5678",
+      backendURL: "http://192.168.1.118:5678",
     };
   },
   setup() {
@@ -130,29 +202,35 @@ export default defineComponent({
       router,
     };
   },
-  // watchLocation() {
-  //   // let watch = this.geo.watchPosition();
-  //   const geo = navigator.geolocation;
-  //   geo.watchPosition((res) => {
-  //     console.log("watching location....");
-  //     console.log(res);
-  //     this.updateLocation(res);
-  //   });
-  // },
-  // updateLocation(data: any) {
-  //   // console.log("updatingText");
-  //   this.isAlive = !this.isAlive;
-  //   this.location.lat = data.coords.latitude;
-  //   this.location.long = data.coords.longitude;
-  // },
   methods: {
+    onSubmit() {
+      if (this.panelMode === "password") {
+        console.log("go change some password");
+        console.log(this.newPass);
+        console.log(this.newPass2);
+        if (this.oldPass !== this.passWord) {
+          this.changeErrMsg = "Current password does not match";
+          console.log(this.changeErrMsg);
+        } else {
+          if (this.newPass === this.newPass2) {
+            this.confirmChangePassword();
+          } else {
+            this.changeErrMsg = "The password does not match";
+            console.log(this.changeErrMsg);
+          }
+        }
+      } else if (this.panelMode === "username") {
+        console.log("go change some username");
+      }
+    },
     gotosubscribe() {
-      fetch("http://localhost:5678/subscription")
+      fetch(this.backendURL + "/subscription")
         .then((response) => {
           return response.text();
         })
         .then((data) => {
           console.log("error");
+          console.log(data);
         });
       /*axios.get("http://localhost:5678/subscription")
                     .then((res: any) => {
@@ -163,25 +241,10 @@ export default defineComponent({
                         console.log(err);
                     });*/
     },
-    watchLocation() {
-      // let watch = this.geo.watchPosition();
-      const geo = navigator.geolocation;
-      geo.watchPosition((res) => {
-        console.log("watching location....");
-        console.log(res);
-        this.updateLocation(res);
-      });
-    },
-    updateLocation(data: any) {
-      // console.log("updatingText");
-      this.isAlive = !this.isAlive;
-      this.location.lat = data.coords.latitude;
-      this.location.long = data.coords.longitude;
-    },
     logOut() {
       console.log("logout complete");
       window.localStorage.removeItem("username");
-      window.localStorage.removeItem("password");
+      // window.localStorage.removeItem("password");
       window.localStorage.setItem("LoginPageReloaded", "no");
       window.localStorage.setItem("UserPageReloaded", "no");
       window.localStorage.setItem("NearbyPageReloaded", "no");
@@ -221,6 +284,32 @@ export default defineComponent({
       // talk with backend
       this.logOut();
     },
+    changePassword() {
+      this.panelMode = "password";
+    },
+    confirmChangePassword() {
+      // "http://localhost:5678/users/profileManage/changePassword?password=Ultimate8&password2=Ultimate8&email=helppls2@gmail.com"
+      // console.log(window.localStorage.getItem("useremail"));
+      const endpointURL =
+        this.backendURL +
+        "/users/profileManage/changePassword?password=" +
+        this.newPass +
+        "&password2=" +
+        this.newPass2 +
+        "&email=" +
+        window.localStorage.getItem("useremail");
+      axios
+        .post(endpointURL)
+        .then((res) => {
+          console.log(res);
+          window.localStorage.setItem("password", this.newPass);
+          this.panelMode = "view";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     reload() {
       window.location.reload();
     },
@@ -283,5 +372,26 @@ export default defineComponent({
   width: 80px;
   margin-left: -40px;
   border-radius: 999px;
+}
+.textFieldBorder {
+  border-bottom: #4a4d3e;
+  color: #4a4d3e;
+  border-width: thin;
+  border-style: solid;
+  border-radius: 3px;
+  margin-top: 10%;
+}
+.continueButton {
+  --background: #da8a55;
+  --border-radius: 100px;
+  /* margin-top: 12px;
+  margin-bottom: 4px;
+  margin-left: 24%; */
+  margin: 0;
+  position: relative;
+  /* top: 50%; */
+  left: 40%;
+  -ms-transform: translate(-50%);
+  transform: translate(-50%);
 }
 </style>

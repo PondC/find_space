@@ -81,14 +81,16 @@ export default defineComponent({
   },
   methods: {
     // showSpaceInfo(id: number) {
-      // This one is for admin page
-      // this.$router.push("/modify/" + id);
+    // This one is for admin page
+    // this.$router.push("/modify/" + id);
 
-      // This one is for user page
-      // this.$router.push("/SpaceInfo/" + id);
+    // This one is for user page
+    // this.$router.push("/SpaceInfo/" + id);
     // },
     createFeedBackMSG(spaceInfo: any) {
-      if (spaceInfo.feedbackstatus) {
+      // console.log("spaceInfo");
+      // console.log(spaceInfo.feedbackstatus);
+      if (!spaceInfo.feedbackstatus) {
         this.feedbackText =
           new Date(spaceInfo.feedbacktime).toLocaleTimeString() + " No seats";
       } else {
@@ -103,7 +105,7 @@ export default defineComponent({
     },
     displayCrowdedNess(spaceInfo: any) {
       if (spaceInfo.crowdednessstatus == 1) {
-        console.log("green");
+        // console.log("green");
         this.personIcon1 = "cPersonGreen.svg";
         this.personIcon2 = "cPerson.svg";
         this.personIcon3 = "cPerson.svg";
@@ -113,19 +115,19 @@ export default defineComponent({
         this.personIcon2 = "cPersonLight.svg";
         this.personIcon3 = "cPerson.svg";
         this.personIcon4 = "cPerson.svg";
-        console.log("light");
+        // console.log("light");
       } else if (spaceInfo.crowdednessstatus == 3.6) {
         this.personIcon1 = "cPersonGreen.svg";
         this.personIcon2 = "cPersonLight.svg";
         this.personIcon3 = "cPersonOrange.svg";
         this.personIcon4 = "cPerson.svg";
-        console.log("orange");
+        // console.log("orange");
       } else if (spaceInfo.crowdednessstatus == 5) {
         this.personIcon1 = "cPersonGreen.svg";
         this.personIcon2 = "cPersonLight.svg";
         this.personIcon3 = "cPersonOrange.svg";
         this.personIcon4 = "cPersonRed.svg";
-        console.log("red");
+        // console.log("red");F
       }
     },
   },

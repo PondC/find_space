@@ -1,10 +1,12 @@
 <template>
   <ion-page>
-    <img class="nearbyBanner" :src="require('@/assets/img/FavSpace.png')" />
-    <div class="searchBox">search box</div>
-    <div class="spaceList">
-      <div v-for="space in spaces" :key="space.workspaceid">
-        <spaceList :space="space"></spaceList>
+    <div class="mainDiv">
+      <img class="nearbyBanner" :src="require('@/assets/img/FavSpace.png')" />
+      <div class="searchBox">search box</div>
+      <div class="spaceList">
+        <div v-for="space in spaces" :key="space.workspaceid">
+          <spaceList :space="space"></spaceList>
+        </div>
       </div>
     </div>
   </ion-page>
@@ -34,6 +36,8 @@ export default defineComponent({
   data() {
     return {
       searchWord: "",
+      backendURL: "http://localhost:5678",
+      // backendURL: "http://192.168.1.118:5678",
       spaces: [],
       location: {
         lat: 0,
@@ -58,31 +62,18 @@ export default defineComponent({
       this.location.long = data.coords.longitude;
       this.getFavoriteSpace();
     },
-    // putSomething() {
-    //   console.log("starting");
-    //   axios
-    //     .put("http://localhost:5678/admin/pic/photo3/2?photo3=Ai_Sus")
-    //     .then((res) => {
-    //       console.log("this is ther result");
-    //       console.log(res);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-
-    //   console.log("finished");
-    // },
     getFavoriteSpace() {
-      const endPointURL = "http://localhost:5678/admin/workspace";
-      // const endPointURL =
-      //   "http://localhost:5678/homepage/recommWS?Lat=" +
-      //   userLat +
-      //   "&Long=" +
-      //   userLong;
+      // const endPointURL = this.backendURL + "/admin/workspace";
+      const endPointURL =
+        "http://localhost:5678/users/favorite?email=" +
+        window.localStorage.getItem("useremail");
       return axios
         .get(endPointURL)
         .then((res) => {
-          this.spaces = res.data.rows;
+          console.log("res");
+          console.log(res);
+          console.log(res.data);
+          // this.spaces = res.data.rows;
         })
         .catch((err) => {
           console.log(err);
