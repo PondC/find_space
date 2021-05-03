@@ -237,7 +237,6 @@ export default defineComponent({
     },
     toSpaceInfo(id: number) {
       console.log("this is fking spaceInfo : " + id);
-      window.localStorage.setItem("spaceinforeloaded", "no");
       this.$router.push("/SpaceInfo/" + id);
     },
     updateList() {

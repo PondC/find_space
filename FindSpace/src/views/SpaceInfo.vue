@@ -145,8 +145,8 @@ export default defineComponent({
       personIcon4: "cPersonRed.svg",
       heartIcon: "hollowHeart.svg",
       favorite: false,
-      // backendURL: "http://localhost:5678",
-      backendURL: "http://192.168.1.118:5678",
+      backendURL: "http://localhost:5678",
+      // backendURL: "http://192.168.1.118:5678",
     };
   },
   methods: {
@@ -165,6 +165,8 @@ export default defineComponent({
       }, 500);
     },
     backHome() {
+      console.log("pressed back");
+      window.localStorage.setItem("spaceinforeloaded", "no");
       this.$router.push("/tabs");
     },
     getSpaceInformation(spaceID: any) {
@@ -263,6 +265,26 @@ export default defineComponent({
       this.favorite = !this.favorite;
       if (this.favorite) {
         this.heartIcon = "blackHeart.svg";
+        const url =
+          this.backendURL +
+          "/users/home?email=" +
+          window.localStorage.getItem("useremail") +
+          "&heart=" +
+          this.spaceID;
+        console.log("url");
+        console.log(url);
+        axios
+          .post(url)
+          .then((res) => {
+            console.log("res");
+            console.log(res);
+            // if (res === "error") {
+
+            // }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
         this.heartIcon = "hollowHeart.svg";
       }

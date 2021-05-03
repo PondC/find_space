@@ -164,16 +164,16 @@ export default defineComponent({
       this.$router.push("/");
     }
 
-    axios
-      .get(this.backendURL + "/admin/workspace")
-      .then((res: any) => {
-        console.log(res.data);
-        console.log(res.data.rows[1].wsname);
-        this.subscribe = res.data.rows[1].wsname;
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
+    // axios
+    //   .get(this.backendURL + "/admin/workspace")
+    //   .then((res: any) => {
+    //     console.log(res.data);
+    //     console.log(res.data.rows[1].wsname);
+    //     this.subscribe = res.data.rows[1].wsname;
+    //   })
+    //   .catch((err: any) => {
+    //     console.log(err);
+    //   });
   },
   data() {
     return {
