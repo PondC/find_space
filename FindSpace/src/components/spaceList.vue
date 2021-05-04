@@ -2,7 +2,8 @@
   <div class="mainList" @click="showSpaceInfo(space.workspaceid)">
     <div class="spaceInfo">
       <div class="spaceIcon">
-        <img src="https://picsum.photos/100" />
+        <!-- <img src="https://picsum.photos/100" /> -->
+        <img :src="iconPic ? iconPic : loremPicsum" />
       </div>
       <div class="nameAndDistance">
         <div class="spaceName">
@@ -58,6 +59,7 @@ export default defineComponent({
     this.createFeedBackMSG(spaceInfo);
     this.createDistanceMSG();
     this.getCRWDNESS(spaceInfo.workspaceid);
+    this.getPic(spaceInfo.workspaceid);
     // this.displayCrowdedNess();
   },
   data() {
@@ -68,6 +70,8 @@ export default defineComponent({
       personIcon4: "cPersonRed.svg",
       feedbackText: "",
       kmFromSpace: "",
+      iconPic: "",
+      loremPicsum: "https://picsum.photos/100",
       // backendURL: "http://localhost:5678",
       backendURL: "https://find-space-app.herokuapp.com",
     };
@@ -159,6 +163,17 @@ export default defineComponent({
       const distanceInM = d * 1000;
       this.kmFromSpace =
         Number((distanceInM + "").split(".")[0]) / 1000 + " Km";
+    },
+    getPic(spaceID: any) {
+      const url = this.backendURL + "/wsdetail/showpic/" + spaceID;
+      return axios
+        .get(url)
+        .then((res) => {
+          this.iconPic = res.data.photo2;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 });
