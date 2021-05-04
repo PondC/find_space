@@ -290,7 +290,7 @@ export default defineComponent({
     this.workspaceID = this.$route.params.spaceID + "";
     console.log("hello before mount!");
     axios
-      .get("http://localhost:5678/admin/workspace")
+      .get(this.backendURL + "/admin/workspace")
       .then((res: any) => {
         console.log(res.data);
         this.wsname = res.data.rows[this.workspaceID].wsname;
@@ -305,18 +305,18 @@ export default defineComponent({
       .catch((err: any) => {
         console.log(err);
       });
-    axios.get("http://localhost:5678/admin/ws_menu").then((res: any) => {
+    axios.get(this.backendURL + "/admin/ws_menu").then((res: any) => {
       this.menu1 = res.data.rows[this.workspaceID].menu1;
       this.menu2 = res.data.rows[this.workspaceID].menu2;
       this.menu3 = res.data.rows[this.workspaceID].menu3;
     });
-    axios.get("http://localhost:5678/admin/ws_photo").then((res: any) => {
+    axios.get(this.backendURL + "/admin/ws_photo").then((res: any) => {
       console.log("success pic");
       this.pic1 = res.data.rows[this.workspaceID].pic1;
       this.pic2 = res.data.rows[this.workspaceID].pic2;
       this.pic3 = res.data.rows[this.workspaceID].pic3;
     });
-    axios.get("http://localhost:5678/admin/ws_oh").then((res: any) => {
+    axios.get(this.backendURL + "/admin/ws_oh").then((res: any) => {
       this.monday = res.data.rows[this.workspaceID].mon;
       this.tuesday = res.data.rows[this.workspaceID].tue;
       this.wednesday = res.data.rows[this.workspaceID].wed;
@@ -328,7 +328,9 @@ export default defineComponent({
   },
 
   data() {
-    return {
+      return {
+        backendURL: "http://localhost:5678",
+      //backendURL: "http://192.168.1.118:5678",
       wsname: "",
       workspaceID: "",
       pic1: "",
@@ -419,50 +421,50 @@ export default defineComponent({
                 this.ophours.map((ophour) => {
                     console.log("ophours=" + ophour);
                 });*/
-      axios.put(
-        "http://localhost:5678/admin/workspace/WS_Des/2?ws_des=" +
+        axios.put(
+            this.backendURL + "/admin/workspace/WS_Des/" + this.workspaceID + "?ws_des=" +
           this.description
       );
-      axios.put(
-        "http://localhost:5678/admin/workspace/coordinate/2?" +
+        axios.put(
+            this.backendURL + "/admin/workspace/coordinate/" + this.workspaceID+" ? " +
           "ws_lat=" +
           this.lat +
           "&ws_long=" +
           this.long
       );
       axios.put(
-        "http://localhost:5678/admin/workspace/totalseats/2?" +
+        this.backendURL + "/admin/workspace/totalseats/" + this.workspaceID + "?" +
           "&totalseat=" +
           this.totalseat
       );
       axios.put(
-        "http://localhost:5678/admin/workspace/wifi/2?wifi=" +
+        this.backendURL + "/admin/workspace/wifi/" + this.workspaceID + "?wifi=" +
           "&ws_des=" +
           this.wifi
       );
       axios.put(
-        "http://localhost:5678/admin/workspace/poweroutlets/2?poweroutlet=" +
+        this.backendURL + "/admin/workspace/poweroutlets/" + this.workspaceID + "?poweroutlet=" +
           this.poweroutlet
       );
-      axios.put("http://localhost:5678/admin/pic/photo1/2?photo1=" + this.pic1);
-      axios.put("http://localhost:5678/admin/pic/photo2/2?photo2=" + this.pic2);
-      axios.put("http://localhost:5678/admin/pic/photo3/2?photo3=" + this.pic3);
-      axios.put("http://localhost:5678/admin/pic/menu1/2?menu1=" + this.menu1);
-      axios.put("http://localhost:5678/admin/pic/menu2/2?menu2=" + this.menu2);
-      axios.put("http://localhost:5678/admin/pic/menu3/2?menu3=" + this.menu3);
-      axios.put("http://localhost:5678/admin/ophour/mon/2?mon=" + this.monday);
-      axios.put("http://localhost:5678/admin/ophour/tue/2?tue=" + this.tuesday);
+      axios.put(this.backendURL + "/admin/pic/photo1/" + this.workspaceID + "?photo1=" + this.pic1);
+      axios.put(this.backendURL + "/admin/pic/photo2/" + this.workspaceID + "?photo2=" + this.pic2);
+      axios.put(this.backendURL + "/admin/pic/photo3/" + this.workspaceID + "?photo3=" + this.pic3);
+      axios.put(this.backendURL + "/admin/pic/menu1/" + this.workspaceID + "?menu1=" + this.menu1);
+      axios.put(this.backendURL + "/admin/pic/menu2/" + this.workspaceID + "?menu2=" + this.menu2);
+      axios.put(this.backendURL + "/admin/pic/menu3/" + this.workspaceID + "?menu3=" + this.menu3);
+      axios.put(this.backendURL + "/admin/ophour/mon/" + this.workspaceID + "?mon=" + this.monday);
+      axios.put(this.backendURL + "/admin/ophour/tue/" + this.workspaceID + "?tue=" + this.tuesday);
       axios.put(
-        "http://localhost:5678/admin/ophour/wed/2?wed=" + this.wednesday
+        this.backendURL + "/admin/ophour/wed/" + this.workspaceID + "?wed=" + this.wednesday
       );
       axios.put(
-        "http://localhost:5678/admin/ophour/thu/2?thu=" + this.thursday
+        this.backendURL + "/admin/ophour/thu/" + this.workspaceID + "?thu=" + this.thursday
       );
-      axios.put("http://localhost:5678/admin/ophour/fri/2?fri=" + this.friday);
+      axios.put(this.backendURL + "/admin/ophour/fri/" + this.workspaceID + "?fri=" + this.friday);
       axios.put(
-        "http://localhost:5678/admin/ophour/sat/2?sat=" + this.saturday
+        this.backendURL + "/admin/ophour/sat/" + this.workspaceID + "?sat=" + this.saturday
       );
-      axios.put("http://localhost:5678/admin/ophour/sun/2?sun=" + this.sunday);
+      axios.put(this.backendURL + "/admin/ophour/sun/" + this.workspaceID + "?sun=" + this.sunday);
     },
     /*
             deleteSpace() {
@@ -488,7 +490,7 @@ export default defineComponent({
             handler: () => {
               console.log("Confirm Okay:");
               axios
-                .delete("http://localhost:5678/admin/workspace/137")
+                .delete(this.backendURL + "/admin/workspace/137")
                 .then((res) => {
                   console.log(res);
                 })

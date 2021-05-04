@@ -227,6 +227,8 @@ import { defineComponent } from "vue";
         },
         data() {
             return {
+                backendURL: "http://localhost:5678",
+                //backendURL: "http://192.168.1.118:5678",
                 wsname: "",
                 pic1: "",
                 pic2: "",
@@ -265,9 +267,9 @@ import { defineComponent } from "vue";
          window.localStorage.setItem('wifi', "false");
       },
       cancelcreateWorkspace() {
-         console.log("cancel create workspace");
-          console.log("http://localhost:5678/admin/workspaceid?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet);
-          axios.get("http://localhost:5678/admin/workspaceid?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet)
+          console.log("cancel create workspace");
+          console.log(this.backendURL + "/admin/workspaceid?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet);
+          axios.get(this.backendURL + "/admin/workspaceid?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet)
               .then((res: any) => {
                   console.log(res);
                   //const data = res.data;
@@ -286,7 +288,7 @@ import { defineComponent } from "vue";
           console.log('wsid2=' + this.workspaceid);
       },
       cancelcreateWorkspace2(workspaceid: any) {
-          axios.delete("http://localhost:5678/admin/workspace/" + this.workspaceid);
+          axios.delete(this.backendURL + "/admin/workspace/" + this.workspaceid);
       },
       insertWeak() {
           //wsname: any, wsdes: any, lat: any, long: any, locationLink: any, totalseat: any, wifi: any, poweroutlet: any
@@ -310,8 +312,8 @@ import { defineComponent } from "vue";
           window.localStorage.setItem("poweroutlet: ", this.poweroutlet);
           console.log(this.wsname + this.wsdes + this.lat + this.long + this.locationLink + this.totalseat + this.wifi + this.poweroutlet);*/
           console.log("insert weak 1");
-          console.log("http://localhost:5678/admin/workspaceid?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet);
-          axios.get("http://localhost:5678/admin/workspaceid?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet)
+          console.log(this.backendURL + "/admin/workspaceid?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet);
+          axios.get(this.backendURL + "/admin/workspaceid?wsname=" + this.wsname + "&ws_des=" + this.wsdes + "&ws_lat=" + this.lat + "&ws_long=" + this.long + "&ws_link=" + this.locationLink + "&totalseat=" + this.totalseat + "&wifi=" + this.wifi + "&poweroutlet=" + this.poweroutlet)
               .then((res: any) => {
                   console.log(res);
                   //const data = res.data;
@@ -355,25 +357,25 @@ import { defineComponent } from "vue";
         axios.post("http://localhost:5678/admin/ophour?mon=" + this.monday + "&tue=" + this.tuesday + "&wed=" + this.wednesday + "&thu=" + this.thursday + "&fri=" + this.friday + "&sat=" + this.saturday + "&sun=" + this.sunday );
      */
            
-          axios.put("http://localhost:5678/admin/pic/photo1/" + this.workspaceid + "?photo1=" + this.pic1);
-          axios.put("http://localhost:5678/admin/pic/photo2/ " + this.workspaceid + "?photo2=" + this.pic2);
-          axios.put("http://localhost:5678/admin/pic/photo3/ " + this.workspaceid + "?photo3=" + this.pic3);
-          axios.put("http://localhost:5678/admin/pic/menu1/" + this.workspaceid + "?menu1=" + this.menu1);
-          axios.put("http://localhost:5678/admin/pic/menu2/" + this.workspaceid + "?menu2=" + this.menu2);
-          axios.put("http://localhost:5678/admin/pic/menu3/" + this.workspaceid + "?menu3=" + this.menu3);
-          axios.put("http://localhost:5678/admin/ophour/mon/" + this.workspaceid + "?mon=" + this.monday);
-          axios.put("http://localhost:5678/admin/ophour/tue/" + this.workspaceid + "?tue=" + this.tuesday);
+          axios.put(this.backendURL + "/admin/pic/photo1/" + this.workspaceid + "?photo1=" + this.pic1);
+          axios.put(this.backendURL + "/admin/pic/photo2/ " + this.workspaceid + "?photo2=" + this.pic2);
+          axios.put(this.backendURL + "/admin/pic/photo3/ " + this.workspaceid + "?photo3=" + this.pic3);
+          axios.put(this.backendURL + "/admin/pic/menu1/" + this.workspaceid + "?menu1=" + this.menu1);
+          axios.put(this.backendURL + "/admin/pic/menu2/" + this.workspaceid + "?menu2=" + this.menu2);
+          axios.put(this.backendURL + "/admin/pic/menu3/" + this.workspaceid + "?menu3=" + this.menu3);
+          axios.put(this.backendURL + "/admin/ophour/mon/" + this.workspaceid + "?mon=" + this.monday);
+          axios.put(this.backendURL + "/admin/ophour/tue/" + this.workspaceid + "?tue=" + this.tuesday);
           axios.put(
-            "http://localhost:5678/admin/ophour/wed/" + this.workspaceid + "?wed=" + this.wednesday
+            this.backendURL + "/admin/ophour/wed/" + this.workspaceid + "?wed=" + this.wednesday
           );
           axios.put(
-            "http://localhost:5678/admin/ophour/thu/" + this.workspaceid + "?thu=" + this.thursday
+            this.backendURL + "/admin/ophour/thu/" + this.workspaceid + "?thu=" + this.thursday
           );
-          axios.put("http://localhost:5678/admin/ophour/fri/" + this.workspaceid + "?fri=" + this.friday);
+          axios.put(this.backendURL + "/admin/ophour/fri/" + this.workspaceid + "?fri=" + this.friday);
           axios.put(
-            "http://localhost:5678/admin/ophour/sat/" + this.workspaceid + "?sat=" + this.saturday
+            this.backendURL + "/admin/ophour/sat/" + this.workspaceid + "?sat=" + this.saturday
           );
-          axios.put("http://localhost:5678/admin/ophour/sun/" + this.workspaceid + "?sun=" + this.sunday);
+          axios.put(this.backendURL + "/admin/ophour/sun/" + this.workspaceid + "?sun=" + this.sunday);
      },
       onSubmit() {
       console.log("wsname = " + this.wsname);
@@ -420,7 +422,7 @@ import { defineComponent } from "vue";
       window.localStorage.setItem("long", this.long);
       window.localStorage.setItem("location: ", this.location);
       window.localStorage.setItem("location Link: ", this.locationLink);
-       console.log( "http://localhost:5678/admin/workspace?wsname=" +
+       console.log( this.backendURL + "/admin/workspace?wsname=" +
           this.wsname +
           "&ws_des=" +
           this.wsdes +
@@ -438,7 +440,7 @@ import { defineComponent } from "vue";
           this.poweroutlet
           );
       axios.post(
-        "http://localhost:5678/admin/workspace?wsname=" +
+        this.backendURL + "/admin/workspace?wsname=" +
           this.wsname +
           "&ws_des=" +
           this.wsdes +
