@@ -52,19 +52,16 @@
           <div class="multiLineSection">
             <div class="multiLineTopicText">Description</div>
             <div class="multiLineInfo">
-              {{
-                space.ws_des +
-                  " some dummy text some dummy text some dummy text some dummy text some dummy text some dummy text some dummy text"
-              }}
+              {{ space.ws_des }}
             </div>
           </div>
           <div class="multiLineSection">
             <div class="multiLineTopicText">Menu</div>
-            <div>info</div>
+            <div class="multiLineInfo">info</div>
           </div>
           <div class="multiLineSection">
             <div class="multiLineTopicText">Operating Hours</div>
-            <div>info</div>
+            <div class="multiLineInfo">info</div>
           </div>
           <div class="onelineSection">
             <div class="onelineTopicText">Power Outlet</div>
@@ -224,6 +221,7 @@ export default defineComponent({
         .then((res) => {
           console.log("getOPHR");
           this.ophr = res.data;
+          console.log(this.ophr);
         })
         .catch((err) => {
           console.log(err);
@@ -435,6 +433,7 @@ export default defineComponent({
 }
 .subSection {
   /* background-color: rgb(91, 160, 137); */
+  max-height: 56%;
   overflow: scroll;
 }
 .onelineSection {
@@ -484,6 +483,7 @@ export default defineComponent({
   --background: #da8a55;
   --border-radius: 100px;
   position: absolute;
-  bottom: 16px;
+  bottom: 4px;
+  left: 32%;
 }
 </style>

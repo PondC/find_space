@@ -3,23 +3,19 @@
     <ion-tabs>
       <!-- <ion-tab-bar class="mainBar" slot="bottom" > -->
       <ion-tab-bar class="mainBar">
-        <ion-tab-button tab="tab1" href="/tabs/tab1" @click="reload()" >
-          <ion-icon class="personIcon"
-                    :src="require('@/assets/icon/whiteheart.svg')">
-          </ion-icon>
+        <ion-tab-button tab="tab1" href="/tabs/tab1" @click="reload()">
+          <ion-icon :icon="triangle" />
         </ion-tab-button>
 
-        <ion-tab-button tab="tab2" href="/tabs/tab2" @click="reload()" >
+        <ion-tab-button tab="tab2" href="/tabs/tab2" @click="reload()">
           <img
             class="mainIcon"
             :src="require('@/assets/icon/FindSpaceIcon.png')"
           />
         </ion-tab-button>
 
-        <ion-tab-button tab="tab3" href="/tabs/tab3" @click="reload()" >
-           <ion-icon class="personIcon"
-                    :src="require('@/assets/icon/whiteuser.svg')">
-          </ion-icon>
+        <ion-tab-button tab="tab3" href="/tabs/tab3" @click="reload()">
+          <ion-icon :icon="square" />
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
@@ -48,7 +44,9 @@ export default {
   },
   methods: {
     reload() {
-      setInterval(() => { window.location.reload(); }, 200);
+      setInterval(() => {
+        window.location.reload();
+      }, 200);
     },
   },
 };
