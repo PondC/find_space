@@ -1,64 +1,71 @@
 <template>
-  <ion-page>
-    <div class="mainDiv" v-if="!showAds">
-      <img class="nearbyBanner" :src="require('@/assets/img/NearBy.png')" />
-      <div class="searchBox">
-        <div class="textFieldBorder">
-          <ion-input
-            :value="searchWord"
-            @input="searchWord = $event.target.value"
-            @keyup="searching($event)"
-            placeholder="Search"
-            name="searchWord"
-          ></ion-input>
-        </div>
-      </div>
-      <div class="spaceList" v-if="!showSearch">
-        <div
-          v-for="space in spaces"
-          :key="space.workspaceid"
-          @click="toSpaceInfo(space.workspaceid)"
-        >
-          <spaceCard :space="space" :key="space"></spaceCard>
-        </div>
-      </div>
-      <div class="spaceList" v-if="showSearch">
-        <div
-          v-for="space in searchSpace"
-          :key="space.workspaceid"
-          @click="toSpaceInfo(space.workspaceid)"
-        >
-          <searchingList
-            :space="space"
-            :userLat="location.lat"
-            :userLong="location.long"
-            :key="space"
-          ></searchingList>
-        </div>
-      </div>
-    </div>
-    <video
-      id="myVideo"
-      width="320"
-      height="176"
-      v-if="showAds"
-      class="ads"
-      autoplay
-    >
-      <source
-        src="https://uploads.overwolf.com/owclient/discord/2020/07/23/f61f495a-8c69-4dde-ae32-2aff2d708fa9.mp4"
-        type="video/mp4"
-      />
-      <source src="mov_bbb.ogg" type="video/ogg" />
-      Your browser does not support HTML5 video.
-    </video>
+  <ion-page>    
+      <div class="mainDiv" v-if="!showAds">
+          <ion-list-header lines="full" class="orangeHeader">
+              <ion-label>
+                  <!-- can't use icon instead of texts    -->
+                  <ion-button href="/Admin">
+                      <ion-icon class="personIcon"
+                                :src="require('@/assets/icon/back.svg')">
+                      </ion-icon>
+                  </ion-button>
+
+                  <div class="mainIcon">
+
+                  </div>
+              </ion-label>
+          </ion-list-header>
+          <div class="searchBox">
+              <div class="textFieldBorder">
+                  <ion-input :value="searchWord"
+                             @input="searchWord = $event.target.value"
+                             @keyup="searching($event)"
+                             placeholder="Search"
+                             name="searchWord"></ion-input>
+              </div>
+          </div>
+          <div class="spaceList" v-if="!showSearch">
+              <div v-for="space in spaces"
+                   :key="space.workspaceid"
+                   @click="toSpaceInfo(space.workspaceid)">
+                  <spaceCard :space="space" :key="space"></spaceCard>
+              </div>
+          </div>
+          <div class="spaceList" v-if="showSearch">
+              <div v-for="space in searchSpace"
+                   :key="space.workspaceid"
+                   @click="toSpaceInfo(space.workspaceid)">
+                  <searchingList :space="space"
+                                 :userLat="location.lat"
+                                 :userLong="location.long"
+                                 :key="space"></searchingList>
+              </div>
+          </div>
+            <div class="spaceList" v-if="!showSearch">
+                <div v-for="space in spaces"
+                     :key="space.workspaceid"
+                     @click="toSpaceInfo(space.workspaceid)">
+                    <spaceCard :space="space" :key="space"></spaceCard>
+                </div>
+            </div>
+            <div class="spaceList" v-if="showSearch">
+                <div v-for="space in searchSpace"
+                     :key="space.workspaceid"
+                     @click="toSpaceInfo(space.workspaceid)">
+                    <searchingList :space="space"
+                                   :userLat="location.lat"
+                                   :userLong="location.long"
+                                   :key="space"></searchingList>
+                </div>
+            </div>
+</div>
   </ion-page>
 </template>
 
 <script lang="ts">
 import {
   IonPage,
-  IonInput,
+  //IonInput,
   alertController,
   // IonSearchbar,
   // IonIcon,
@@ -74,7 +81,7 @@ export default defineComponent({
     IonPage,
     spaceCard,
     searchingList,
-    IonInput,
+    //IonInput,
     // IonSearchbar,
     // IonIcon,
   },
@@ -262,7 +269,7 @@ export default defineComponent({
       }
       if (event.keyCode === 13) {
         this.showSearch = true;
-        this.makeAdsAppear(1000);
+        
         if (this.searchSpace.length === 0) {
           this.searchSpace = this.allSpaces;
         }
@@ -283,12 +290,6 @@ export default defineComponent({
       //   console.log(e.wsname);
       // });
     },
-    makeAdsAppear(time: number) {
-      this.showAds = true;
-      setTimeout(() => {
-        this.showAds = false;
-      }, time);
-    },
   },
 });
 </script>
@@ -305,6 +306,7 @@ export default defineComponent({
 
 .searchBox {
   height: 10%;
+  margin-top: 3%;
   /* background-color: aqua; */
 }
 
@@ -326,5 +328,8 @@ export default defineComponent({
   position: absolute;
   height: auto;
   width: 100%;
+}
+.orangeHeader {
+  background-color: #e05900;
 }
 </style>
