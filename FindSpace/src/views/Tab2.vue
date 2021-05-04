@@ -211,8 +211,8 @@ export default defineComponent({
     getNearbySpaceList() {
       // axios.defaults.withCredentials = true;
       console.log("################################");
-      const userLat = 13.736281;
-      const userLong = 100.53221;
+      const userLat = 13.73;
+      const userLong = 100.53;
       const endPointURL =
         this.backendURL +
         "/homepage/recommWS?Lat=" +

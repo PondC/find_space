@@ -105,6 +105,8 @@ export default defineComponent({
         .get(endPointURL)
         .then((res) => {
           this.favSpaces = res.data;
+          console.log("this.favSpaces");
+          console.log(this.favSpaces);
         })
         .catch((err) => {
           console.log(err);

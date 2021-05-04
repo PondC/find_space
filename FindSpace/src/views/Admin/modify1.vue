@@ -5,27 +5,27 @@
         <ion-list lines="full" class="ion-no-margin">
           <ion-list-header lines="full" class="orangeHeader">
             <ion-label>
-              <ion-item>
-                <!-- can't use icon instead of texts    -->
-                <ion-button href="/modify">
-                  mee white arrow<ion-icon class="personIcon"
-                    :src="require('@/assets/icon/back.svg')">
-          </ion-icon>
-                </ion-button>
+              <!-- can't use icon instead of texts    -->
+              <ion-button href="/modify">
+                <ion-icon
+                  class="personIcon"
+                  :src="require('@/assets/icon/back.svg')"
+                >
+                </ion-icon>
+              </ion-button>
 
-                <div class="mainIcon">
-                  {{ wsname }}
-                </div>
-              </ion-item>
+              <div class="mainIcon">
+                {{ wsname }}
+              </div>
             </ion-label>
           </ion-list-header>
 
-          <ion-item  lines="none">
+          <ion-item lines="none">
             <ion-label color="warning">Picture 1 link</ion-label>
             <ion-input
               :value="pic1"
               @input="pic1 = $event.target.value"
-              placeholder={{pic1}} 
+              placeholder="{{pic1}}"
               name="pic1"
             ></ion-input>
           </ion-item>
@@ -35,7 +35,7 @@
             <ion-input
               :value="pic2"
               @input="pic2 = $event.target.value"
-              placeholder= {{pic2}} 
+              placeholder="{{pic2}}"
               name="pic2"
             ></ion-input>
           </ion-item>
@@ -44,28 +44,36 @@
             <ion-input
               :value="pic3"
               @input="pic3 = $event.target.value"
-              placeholder= {{pic3}} 
+              placeholder="{{pic3}}"
               name="pic3"
             ></ion-input>
           </ion-item>
         </ion-list>
         <ion-item lines="none">
-                    <ion-icon style="margin-left: 150px;"
-                              class="personIcon"
-                              :src="require('@/assets/icon/cPersonGreen.svg')"></ion-icon>
-                    <ion-icon class="personIcon"
-                              :src="require('@/assets/icon/cPersonLight.svg')"></ion-icon>
-                    <ion-icon class="personIcon"
-                              :src="require('@/assets/icon/cPersonOrange.svg')"></ion-icon>
-                    <ion-icon class="personIcon"
-                              :src="require('@/assets/icon/cPersonRed.svg')"></ion-icon>
-                </ion-item>
+          <ion-icon
+            style="margin-left: 150px;"
+            class="personIcon"
+            :src="require('@/assets/icon/cPersonGreen.svg')"
+          ></ion-icon>
+          <ion-icon
+            class="personIcon"
+            :src="require('@/assets/icon/cPersonLight.svg')"
+          ></ion-icon>
+          <ion-icon
+            class="personIcon"
+            :src="require('@/assets/icon/cPersonOrange.svg')"
+          ></ion-icon>
+          <ion-icon
+            class="personIcon"
+            :src="require('@/assets/icon/cPersonRed.svg')"
+          ></ion-icon>
+        </ion-item>
         <ion-item lines="none">
           <ion-label color="warning">Total Seats</ion-label>
           <ion-input
             :value="totalseat"
             @input="totalseat = $event.target.value"
-            placeholder= {{totalseat}} 
+            placeholder="{{totalseat}}"
             name="totalseat"
           ></ion-input>
         </ion-item>
@@ -74,7 +82,7 @@
           <ion-input
             :value="description"
             @input="description = $event.target.value"
-            placeholder={{description}}
+            placeholder="{{description}}"
             name="description"
           ></ion-input>
         </ion-item>
@@ -85,7 +93,7 @@
             <ion-input
               :value="menu1"
               @input="menu1 = $event.target.value"
-              placeholder={{menu1}}
+              placeholder="{{menu1}}"
               name="menu1"
             ></ion-input>
           </ion-item>
@@ -95,7 +103,7 @@
             <ion-input
               :value="menu2"
               @input="menu2 = $event.target.value"
-              placeholder= {{menu2}}
+              placeholder="{{menu2}}"
               name="menu2"
             ></ion-input>
           </ion-item>
@@ -104,82 +112,97 @@
             <ion-input
               :value="menu3"
               @input="menu3 = $event.target.value"
-              placeholder= {{menu3}}
+              placeholder="{{menu3}}"
               name="menu3"
             ></ion-input>
           </ion-item>
         </ion-label>
         <ion-label color="warning" style="margin-left: 15px;">
-          Operating Hours </ion-label>
-          <ion-item lines="none">
-            <ion-label color="warning" style="margin-left: 100px;">Monday</ion-label>
-            <ion-input
-              :value="monday"
-              @input="monday = $event.target.value"
-              placeholder= {{monday}}
-              name="monday"
-            ></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label color="warning" style="margin-left: 100px;">Tuesday</ion-label>
-            <ion-input
-              :value="tuesday"
-              @input="tuesday = $event.target.value"
-              placeholder= {{tuesday}}
-              name="tuesday"
-            ></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label color="warning" style="margin-left: 100px;">Wednesday</ion-label>
-            <ion-input
-              :value="wednesday"
-              @input="wednesday = $event.target.value"
-              placeholder= {{wednesday}}
-              name="wednesday"
-            ></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label color="warning" style="margin-left: 100px;">Thursday</ion-label>
-            <ion-input
-              :value="thursday"
-              @input="thursday = $event.target.value"
-              placeholder= {{thursday}}
-              name="thursday"
-            ></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label color="warning" style="margin-left: 100px;">Friday</ion-label>
-            <ion-input
-              :value="friday"
-              @input="friday = $event.target.value"
-              placeholder={{friday}}
-              name="friday"
-            ></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label color="warning" style="margin-left: 100px;">Saturday</ion-label>
-            <ion-input
-              :value="saturday"
-              @input="saturday = $event.target.value"
-              placeholder={{saturday}}
-              name="saturday"
-            ></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label color="warning" style="margin-left: 100px;">Sunday</ion-label>
-            <ion-input
-              :value="sunday"
-              @input="sunday = $event.target.value"
-              placeholder={{sunday}}
-              name="sunday"
-            ></ion-input>
-          </ion-item>
+          Operating Hours
+        </ion-label>
+        <ion-item lines="none">
+          <ion-label color="warning" style="margin-left: 100px;"
+            >Monday</ion-label
+          >
+          <ion-input
+            :value="monday"
+            @input="monday = $event.target.value"
+            placeholder="{{monday}}"
+            name="monday"
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label color="warning" style="margin-left: 100px;"
+            >Tuesday</ion-label
+          >
+          <ion-input
+            :value="tuesday"
+            @input="tuesday = $event.target.value"
+            placeholder="{{tuesday}}"
+            name="tuesday"
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label color="warning" style="margin-left: 100px;"
+            >Wednesday</ion-label
+          >
+          <ion-input
+            :value="wednesday"
+            @input="wednesday = $event.target.value"
+            placeholder="{{wednesday}}"
+            name="wednesday"
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label color="warning" style="margin-left: 100px;"
+            >Thursday</ion-label
+          >
+          <ion-input
+            :value="thursday"
+            @input="thursday = $event.target.value"
+            placeholder="{{thursday}}"
+            name="thursday"
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label color="warning" style="margin-left: 100px;"
+            >Friday</ion-label
+          >
+          <ion-input
+            :value="friday"
+            @input="friday = $event.target.value"
+            placeholder="{{friday}}"
+            name="friday"
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label color="warning" style="margin-left: 100px;"
+            >Saturday</ion-label
+          >
+          <ion-input
+            :value="saturday"
+            @input="saturday = $event.target.value"
+            placeholder="{{saturday}}"
+            name="saturday"
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label color="warning" style="margin-left: 100px;"
+            >Sunday</ion-label
+          >
+          <ion-input
+            :value="sunday"
+            @input="sunday = $event.target.value"
+            placeholder="{{sunday}}"
+            name="sunday"
+          ></ion-input>
+        </ion-item>
         <ion-item lines="none">
           <ion-label color="warning">PowerOutlets</ion-label>
           <ion-input
             :value="powerOut"
             @input="powerOut = $event.target.value"
-            placeholder={{poweroutlet}}
+            placeholder="{{poweroutlet}}"
             name="powerOut"
           ></ion-input>
         </ion-item>
@@ -188,7 +211,7 @@
           <ion-input
             :value="wifi"
             @input="wifi = $event.target.value"
-            placeholder={{wifi}}
+            placeholder="{{wifi}}"
             name="wifi"
           ></ion-input>
         </ion-item>
@@ -197,7 +220,7 @@
           <ion-input
             :value="lat"
             @input="lat = $event.target.value"
-            placeholder={{lat}}
+            placeholder="{{lat}}"
             name="latitude"
           ></ion-input>
         </ion-item>
@@ -206,7 +229,7 @@
           <ion-input
             :value="long"
             @input="long = $event.target.value"
-            placeholder={{long}}
+            placeholder="{{long}}"
             name="longitude"
           ></ion-input>
         </ion-item>
@@ -216,7 +239,7 @@
             <ion-input
               :value="locationLink"
               @input="locationLink = $event.target.value"
-              placeholder={{locationlink}}
+              placeholder="{{locationlink}}"
               name="locationLink"
             ></ion-input>
           </div>
@@ -269,45 +292,39 @@ export default defineComponent({
     axios
       .get("http://localhost:5678/admin/workspace")
       .then((res: any) => {
-          console.log(res.data);
-          this.wsname = res.data.rows[this.workspaceID].wsname;
-          this.description = res.data.rows[this.workspaceID].wsname;
-          this.totalseat = res.data.rows[this.workspaceID].totalseat;
-          this.poweroutlet = res.data.rows[this.workspaceID].poweroutlet;
-          this.wifi = res.data.rows[this.workspaceID].wifi;
-          this.lat = res.data.rows[this.workspaceID].ws_lat;
-          this.long = res.data.rows[this.workspaceID].ws_long;
-          this.locationLink = res.data.rows[this.workspaceID].ws_link;
+        console.log(res.data);
+        this.wsname = res.data.rows[this.workspaceID].wsname;
+        this.description = res.data.rows[this.workspaceID].wsname;
+        this.totalseat = res.data.rows[this.workspaceID].totalseat;
+        this.poweroutlet = res.data.rows[this.workspaceID].poweroutlet;
+        this.wifi = res.data.rows[this.workspaceID].wifi;
+        this.lat = res.data.rows[this.workspaceID].ws_lat;
+        this.long = res.data.rows[this.workspaceID].ws_long;
+        this.locationLink = res.data.rows[this.workspaceID].ws_link;
       })
       .catch((err: any) => {
         console.log(err);
       });
-      axios
-          .get("http://localhost:5678/admin/ws_menu")
-          .then((res: any) => {
-              this.menu1 = res.data.rows[this.workspaceID].menu1;
-              this.menu2 = res.data.rows[this.workspaceID].menu2;
-              this.menu3 = res.data.rows[this.workspaceID].menu3;
-          })
-      axios
-          .get("http://localhost:5678/admin/ws_photo")
-          .then((res: any) => {
-              console.log("success pic");
-              this.pic1 = res.data.rows[this.workspaceID].pic1;
-              this.pic2 = res.data.rows[this.workspaceID].pic2;
-              this.pic3 = res.data.rows[this.workspaceID].pic3;
-          })
-      axios
-          .get("http://localhost:5678/admin/ws_oh")
-          .then((res: any) => {
-              this.monday = res.data.rows[this.workspaceID].mon;
-              this.tuesday = res.data.rows[this.workspaceID].tue;
-              this.wednesday = res.data.rows[this.workspaceID].wed;
-              this.thursday = res.data.rows[this.workspaceID].thu;
-              this.friday = res.data.rows[this.workspaceID].fri;
-              this.saturday = res.data.rows[this.workspaceID].sat;
-              this.sunday = res.data.rows[this.workspaceID].sun;
-          })
+    axios.get("http://localhost:5678/admin/ws_menu").then((res: any) => {
+      this.menu1 = res.data.rows[this.workspaceID].menu1;
+      this.menu2 = res.data.rows[this.workspaceID].menu2;
+      this.menu3 = res.data.rows[this.workspaceID].menu3;
+    });
+    axios.get("http://localhost:5678/admin/ws_photo").then((res: any) => {
+      console.log("success pic");
+      this.pic1 = res.data.rows[this.workspaceID].pic1;
+      this.pic2 = res.data.rows[this.workspaceID].pic2;
+      this.pic3 = res.data.rows[this.workspaceID].pic3;
+    });
+    axios.get("http://localhost:5678/admin/ws_oh").then((res: any) => {
+      this.monday = res.data.rows[this.workspaceID].mon;
+      this.tuesday = res.data.rows[this.workspaceID].tue;
+      this.wednesday = res.data.rows[this.workspaceID].wed;
+      this.thursday = res.data.rows[this.workspaceID].thu;
+      this.friday = res.data.rows[this.workspaceID].fri;
+      this.saturday = res.data.rows[this.workspaceID].sat;
+      this.sunday = res.data.rows[this.workspaceID].sun;
+    });
   },
 
   data() {

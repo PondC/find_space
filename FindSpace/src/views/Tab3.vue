@@ -30,9 +30,13 @@
             Status
           </div>
           <div>
-            <ion-button @click="gotosubscribe()" href="/ggPay">
+            <ion-chip
+              class="changeChip2"
+              @click="gotosubscribe()"
+              href="/ggPay"
+            >
               <ion-label> {{ subscribebutton }} </ion-label>
-            </ion-button>
+            </ion-chip>
           </div>
         </div>
         <div>
@@ -430,6 +434,7 @@ export default defineComponent({
 }
 .changeChip2 {
   background-color: #969e78;
+
   border-color: #4a4d3e;
   border-style: solid;
   border-width: 1px;

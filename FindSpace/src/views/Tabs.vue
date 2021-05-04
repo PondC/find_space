@@ -4,7 +4,7 @@
       <!-- <ion-tab-bar class="mainBar" slot="bottom" > -->
       <ion-tab-bar class="mainBar">
         <ion-tab-button tab="tab1" href="/tabs/tab1" @click="reload()">
-          <ion-icon :icon="triangle" />
+          <ion-icon :src="require('@/assets/icon/whiteheart.svg')" />
         </ion-tab-button>
 
         <ion-tab-button tab="tab2" href="/tabs/tab2" @click="reload()">
@@ -15,7 +15,7 @@
         </ion-tab-button>
 
         <ion-tab-button tab="tab3" href="/tabs/tab3" @click="reload()">
-          <ion-icon :icon="square" />
+          <ion-icon :src="require('@/assets/icon/whiteuser.svg')" />
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
