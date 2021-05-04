@@ -7,8 +7,7 @@ import Create from "../views/Admin/create.vue";
 import Modify from "../views/Admin/modify.vue";
 import Modify1 from "../views/Admin/modify1.vue";
 import SpaceInfo from "../views/SpaceInfo.vue";
-
-
+import ggPay from "../views/ggPay.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -61,8 +60,11 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/SpaceInfo/:spaceID",
     component: SpaceInfo,
-    },
-    
+  },
+  {
+    path: "/ggPay",
+    component: ggPay,
+  },
 ];
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

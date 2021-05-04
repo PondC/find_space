@@ -30,10 +30,9 @@
             Status
           </div>
           <div>
-            <ion-chip class="changeChip2" href="/googlepay">
-              <ion-label> Subscribe </ion-label>
-            </ion-chip>
-            <!-- <ion-button @click="gotosubscribe">SUBSCRIBE</ion-button> -->
+            <ion-button @click="gotosubscribe()" href="/ggPay">
+              <ion-label> {{ subscribebutton }} </ion-label>
+            </ion-button>
           </div>
         </div>
         <div>
@@ -146,33 +145,54 @@ export default defineComponent({
     console.log("hello before mount page 3!");
     const tempUserName = window.localStorage.getItem("username");
     const tempPassWord = window.localStorage.getItem("password");
+    //get email from login page
+    const tempEmail = window.localStorage.getItem("useremail");
+    console.log(tempEmail);
+    //set subscribe button to subscribe as default
+
     if (tempUserName) {
       console.log("have information");
       this.userName = tempUserName;
       this.passWord = tempPassWord + "";
+      this.email = tempEmail + "";
       if (window.localStorage.getItem("UserPageReloaded") === "no") {
         window.localStorage.setItem("UserPageReloaded", "yes");
         window.location.reload();
       }
     } else {
       console.log("no data!");
-      this.$router.push("/");
     }
-
-    // axios
-    //   .get(this.backendURL + "/admin/workspace")
-    //   .then((res: any) => {
-    //     console.log(res.data);
-    //     console.log(res.data.rows[1].wsname);
-    //     this.subscribe = res.data.rows[1].wsname;
-    //   })
-    //   .catch((err: any) => {
-    //     console.log(err);
-    //   });
+    //use email to get status from premium table then set usertype to "premium" or "subscribe"
+    axios.get(this.backendURL + "/premium/" + this.email).then((res: any) => {
+      console.log(res);
+      console.log("1" + JSON.stringify(res.data[0].premiumstatus));
+      console.log("res 1:" + JSON.stringify(res.data[0].premiumstatus));
+      this.premiumstatus = JSON.stringify(res.data[0].premiumstatus);
+      console.log("premiumstatuse=" + this.premiumstatus);
+      window.localStorage.setItem(
+        "premiumstatus",
+        JSON.stringify(res.data[0].premiumstatus)
+      );
+      //set subscribe button to premium
+      console.log(res.data[0].premiumstatus == "premium");
+      if (res.data[0].premiumstatus == "premium") {
+        console.log("kuy");
+        this.subscribebutton = "premium";
+        console.log("subscribebutton=" + this.subscribebutton);
+        console.log(JSON.stringify(res.data[0].utype));
+        window.localStorage.setItem("subscribebutton", "premium");
+      } else {
+        console.log("subscribe");
+        window.localStorage.setItem("subscribebutton", "subscribe");
+      }
+    });
+    this.subscribebutton = "" + window.localStorage.getItem("subscribebutton");
   },
   data() {
     return {
-      subscribe: "",
+      premiumstatus: "",
+      email: "",
+      subscribebutton: "",
       userName: "",
       newUsername: "",
       passWord: "",
@@ -230,22 +250,16 @@ export default defineComponent({
       }
     },
     gotosubscribe() {
-      fetch(this.backendURL + "/subscription")
-        .then((response) => {
-          return response.text();
-        })
-        .then((data) => {
-          console.log("error");
-          console.log(data);
-        });
-      /*axios.get("http://localhost:5678/subscription")
-                    .then((res: any) => {
-                        console.log(res.data);
-                        console.log(res.data.rows[1]);
-                    })
-                    .catch((err: any) => {
-                        console.log(err);
-                    });*/
+      console.log("go to subscribe");
+      console.log(this.email);
+      console.log(
+        this.backendURL + "/premium/" + this.email + "?premiumstatus=premium"
+      );
+      //update usertype to premium when pressed
+      axios.put(
+        this.backendURL + "/premium/" + this.email + "?premiumstatus=premium"
+      );
+      //this.$router.push("/ggPay");
     },
     logOut() {
       console.log("logout complete");

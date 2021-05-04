@@ -388,7 +388,7 @@ export default defineComponent({
   border-style: solid;
   border-radius: 3px;
   margin-top: 10%;
-  margin-bottom :10%;
+  margin-bottom: 10%;
 }
 .textFieldBorder2 {
   border-bottom: #4a4d3e;
