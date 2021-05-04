@@ -37,7 +37,7 @@ export default defineComponent({
     return {
       searchWord: "",
       backendURL: "http://localhost:5678",
-      // backendURL: "http://192.168.1.118:5678",
+      //backendURL: "http://192.168.1.118:5678",
       spaces: [],
       location: {
         lat: 0,

@@ -145,8 +145,8 @@ export default defineComponent({
       personIcon4: "cPersonRed.svg",
       heartIcon: "hollowHeart.svg",
       favorite: false,
-      // backendURL: "http://localhost:5678",
-      backendURL: "http://192.168.1.118:5678",
+      backendURL: "http://localhost:5678",
+      //backendURL: "http://192.168.1.118:5678",
     };
   },
   methods: {
