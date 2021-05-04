@@ -41,31 +41,29 @@
         <div class="subSection">
           <div class="onelineSection">
             <div>Available seats</div>
-            <div style="color: red;">
+            <div style="color: grey; margin-left:55%;">
               {{ availableSeat }}
             </div>
           </div>
           <div class="onelineSection">
             <div>Description</div>
-            <div style="color: red;">
-              {{ space.ws_des + " some dummy text" }}
+            <div style="color: grey;">
+              {{ space.ws_des + "Seattle-based coffee house chain known for its signature roasts, light bites and WiFi availability." }}
             </div>
           </div>
           <div class="onelineSection">
             <div>Menu</div>
-            <div>info</div>
           </div>
           <div class="onelineSection">
             <div>Operating Hours</div>
-            <div>info</div>
           </div>
           <div class="onelineSection">
             <div>Power Outlet</div>
-            <div style="color: red;">{{ space.poweroutlet }}</div>
+            <div style="color: grey; margin-left: 61%">{{ space.poweroutlet }}</div>
           </div>
           <div class="onelineSection">
             <div>Wifi</div>
-            <div style="color: red;">
+            <div style="color: grey; margin-left:62%">
               {{ space.wifi ? "Available" : "Unavailable " }}
             </div>
           </div>
@@ -333,7 +331,9 @@ export default defineComponent({
   height: 48px;
 }
 .workspaceName {
-  color: #4a4d3e;
+  color: #949F74;
+  margin-top: 12px;
+  font-size: 120%;
 }
 .icon {
   width: 48px;
@@ -375,9 +375,12 @@ export default defineComponent({
 }
 .onelineSection {
   display: flex;
-  margin-bottom: 4px;
-  font-size: 22px;
-  border-bottom-color: #4a4d3e;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 15px;
+  color: #949F74;
+  border-bottom-color: #d2d3d0;
   border-bottom-style: solid;
   border-bottom-width: 1px;
 }
@@ -385,6 +388,7 @@ export default defineComponent({
   --background: #da8a55;
   --border-radius: 100px;
   position: absolute;
+  margin-left: 35%;
   bottom: 16px;
 }
 </style>

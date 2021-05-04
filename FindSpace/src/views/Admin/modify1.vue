@@ -3,12 +3,14 @@
     <ion-content :fullscreen="true">
       <ion-header>
         <ion-list lines="full" class="ion-no-margin">
-          <ion-list-header lines="full">
+          <ion-list-header lines="full" class="orangeHeader">
             <ion-label>
               <ion-item>
                 <!-- can't use icon instead of texts    -->
                 <ion-button href="/modify">
-                  BACK
+                  mee white arrow<ion-icon class="personIcon"
+                    :src="require('@/assets/icon/back.svg')">
+          </ion-icon>
                 </ion-button>
 
                 <div class="mainIcon">
@@ -18,8 +20,8 @@
             </ion-label>
           </ion-list-header>
 
-          <ion-item lines="none">
-            <ion-label>Picture 1 link</ion-label>
+          <ion-item  lines="none">
+            <ion-label color="warning">Picture 1 link</ion-label>
             <ion-input
               :value="pic1"
               @input="pic1 = $event.target.value"
@@ -29,7 +31,7 @@
           </ion-item>
 
           <ion-item lines="none">
-            <ion-label>Picture 2 link</ion-label>
+            <ion-label color="warning">Picture 2 link</ion-label>
             <ion-input
               :value="pic2"
               @input="pic2 = $event.target.value"
@@ -38,7 +40,7 @@
             ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>Picture 3 link</ion-label>
+            <ion-label color="warning">Picture 3 link</ion-label>
             <ion-input
               :value="pic3"
               @input="pic3 = $event.target.value"
@@ -47,9 +49,19 @@
             ></ion-input>
           </ion-item>
         </ion-list>
-        <!-- wait for crowdedness icons    -->
         <ion-item lines="none">
-          <ion-label>Total Seats</ion-label>
+                    <ion-icon style="margin-left: 150px;"
+                              class="personIcon"
+                              :src="require('@/assets/icon/cPersonGreen.svg')"></ion-icon>
+                    <ion-icon class="personIcon"
+                              :src="require('@/assets/icon/cPersonLight.svg')"></ion-icon>
+                    <ion-icon class="personIcon"
+                              :src="require('@/assets/icon/cPersonOrange.svg')"></ion-icon>
+                    <ion-icon class="personIcon"
+                              :src="require('@/assets/icon/cPersonRed.svg')"></ion-icon>
+                </ion-item>
+        <ion-item lines="none">
+          <ion-label color="warning">Total Seats</ion-label>
           <ion-input
             :value="totalseat"
             @input="totalseat = $event.target.value"
@@ -58,7 +70,7 @@
           ></ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-label>Description</ion-label>
+          <ion-label color="warning">Description</ion-label>
           <ion-input
             :value="description"
             @input="description = $event.target.value"
@@ -66,10 +78,10 @@
             name="description"
           ></ion-input>
         </ion-item>
-        <ion-label>
+        <ion-label color="warning" style="margin-left: 15px;">
           Menu
           <ion-item lines="none">
-            <ion-label>Menu 1 link</ion-label>
+            <ion-label color="warning">Menu 1</ion-label>
             <ion-input
               :value="menu1"
               @input="menu1 = $event.target.value"
@@ -79,7 +91,7 @@
           </ion-item>
 
           <ion-item lines="none">
-            <ion-label>Menu 2 link</ion-label>
+            <ion-label color="warning">Menu 2</ion-label>
             <ion-input
               :value="menu2"
               @input="menu2 = $event.target.value"
@@ -87,8 +99,8 @@
               name="menu2"
             ></ion-input>
           </ion-item>
-          <ion-item>
-            <ion-label>Menu 3 link</ion-label>
+          <ion-item lines="none">
+            <ion-label color="warning">Menu 3</ion-label>
             <ion-input
               :value="menu3"
               @input="menu3 = $event.target.value"
@@ -97,10 +109,10 @@
             ></ion-input>
           </ion-item>
         </ion-label>
-        <ion-label>
-          Operating Hours
+        <ion-label color="warning" style="margin-left: 15px;">
+          Operating Hours </ion-label>
           <ion-item lines="none">
-            <ion-label>Monday</ion-label>
+            <ion-label color="warning" style="margin-left: 100px;">Monday</ion-label>
             <ion-input
               :value="monday"
               @input="monday = $event.target.value"
@@ -109,7 +121,7 @@
             ></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-label>Tuesday</ion-label>
+            <ion-label color="warning" style="margin-left: 100px;">Tuesday</ion-label>
             <ion-input
               :value="tuesday"
               @input="tuesday = $event.target.value"
@@ -118,7 +130,7 @@
             ></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-label>Wednesday</ion-label>
+            <ion-label color="warning" style="margin-left: 100px;">Wednesday</ion-label>
             <ion-input
               :value="wednesday"
               @input="wednesday = $event.target.value"
@@ -127,7 +139,7 @@
             ></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-label>Thursday</ion-label>
+            <ion-label color="warning" style="margin-left: 100px;">Thursday</ion-label>
             <ion-input
               :value="thursday"
               @input="thursday = $event.target.value"
@@ -136,7 +148,7 @@
             ></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-label>Friday</ion-label>
+            <ion-label color="warning" style="margin-left: 100px;">Friday</ion-label>
             <ion-input
               :value="friday"
               @input="friday = $event.target.value"
@@ -145,7 +157,7 @@
             ></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-label>Saturday</ion-label>
+            <ion-label color="warning" style="margin-left: 100px;">Saturday</ion-label>
             <ion-input
               :value="saturday"
               @input="saturday = $event.target.value"
@@ -154,7 +166,7 @@
             ></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-label>Sunday</ion-label>
+            <ion-label color="warning" style="margin-left: 100px;">Sunday</ion-label>
             <ion-input
               :value="sunday"
               @input="sunday = $event.target.value"
@@ -162,9 +174,8 @@
               name="sunday"
             ></ion-input>
           </ion-item>
-        </ion-label>
         <ion-item lines="none">
-          <ion-label>PowerOutlets</ion-label>
+          <ion-label color="warning">PowerOutlets</ion-label>
           <ion-input
             :value="powerOut"
             @input="powerOut = $event.target.value"
@@ -173,7 +184,7 @@
           ></ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-label>Wifi</ion-label>
+          <ion-label color="warning">Wifi</ion-label>
           <ion-input
             :value="wifi"
             @input="wifi = $event.target.value"
@@ -182,7 +193,7 @@
           ></ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-label>Latitude</ion-label>
+          <ion-label color="warning">Latitude</ion-label>
           <ion-input
             :value="lat"
             @input="lat = $event.target.value"
@@ -191,7 +202,7 @@
           ></ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-label>Longitude</ion-label>
+          <ion-label color="warning">Longitude</ion-label>
           <ion-input
             :value="long"
             @input="long = $event.target.value"
@@ -200,7 +211,7 @@
           ></ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-label>Location Link</ion-label>
+          <ion-label color="warning">Location Link</ion-label>
           <div name="textfieldBorder">
             <ion-input
               :value="locationLink"
@@ -495,5 +506,8 @@ export default defineComponent({
   border-style: solid;
   border-radius: 3px;
   margin-top: 10%;
+}
+.orangeHeader {
+  background-color: #e05900;
 }
 </style>

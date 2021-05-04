@@ -19,7 +19,7 @@
                 name="email"
               ></ion-input>
             </div>
-            <div class="textFieldBorder">
+            <div class="textFieldBorder1">
               <ion-input
                 :value="password"
                 @input="password = $event.target.value"
@@ -67,7 +67,7 @@
             </div>
           </div>
           <form @submit.prevent="onSubmit">
-            <div class="textFieldBorder">
+            <div class="textFieldBorder3">
               <ion-input
                 :value="newEmail"
                 @input="newEmail = $event.target.value"
@@ -75,7 +75,7 @@
                 name="newEmail"
               ></ion-input>
             </div>
-            <div class="textFieldBorder">
+            <div class="textFieldBorder2">
               <ion-input
                 :value="newUsername"
                 @input="newUsername = $event.target.value"
@@ -83,7 +83,7 @@
                 name="newUsername"
               ></ion-input>
             </div>
-            <div class="textFieldBorder">
+            <div class="textFieldBorder2">
               <ion-input
                 :value="newPassword"
                 @input="newPassword = $event.target.value"
@@ -91,7 +91,7 @@
                 name="newPassword"
               ></ion-input>
             </div>
-            <div class="textFieldBorder">
+            <div class="textFieldBorder2">
               <ion-input
                 :value="confirmNewPassword"
                 @input="confirmNewPassword = $event.target.value"
@@ -367,6 +367,32 @@ export default defineComponent({
   border-radius: 3px;
   margin-top: 10%;
 }
+.textFieldBorder1 {
+  border-bottom: #4a4d3e;
+  color: #4a4d3e;
+  border-width: thin;
+  border-style: solid;
+  border-radius: 3px;
+  margin-top: 10%;
+  margin-bottom :10%;
+}
+.textFieldBorder2 {
+  border-bottom: #4a4d3e;
+  color: #4a4d3e;
+  border-width: thin;
+  border-style: solid;
+  border-radius: 3px;
+  margin-top: 3%;
+}
+.textFieldBorder3 {
+  border-bottom: #4a4d3e;
+  color: #4a4d3e;
+  border-width: thin;
+  border-style: solid;
+  border-radius: 3px;
+  margin-top: 5%;
+}
+
 .container {
   width: 100%;
   text-align: center;
@@ -375,7 +401,7 @@ export default defineComponent({
 .continueButton {
   --background: #da8a55;
   --border-radius: 100px;
-  margin-top: 12px;
+  margin-top: 5%;
   margin-bottom: 4px;
   margin-left: 24%;
 }

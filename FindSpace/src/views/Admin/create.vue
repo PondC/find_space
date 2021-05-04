@@ -4,9 +4,13 @@
             <ion-header>
                 <ion-list lines="full" class="ion-no-margin">
                     <ion-list-header lines="full" class="orangeHeader">
-                        <ion-button href="/admin" color="danger">❮</ion-button>
+                        <ion-button href="/admin">
+                        <ion-icon class="personIcon"
+                    :src="require('@/assets/icon/back.svg')">
+          </ion-icon>
+                        </ion-button>
                         <div class="spaceName">
-                            <ion-input style="margin-left: 110px; font-weight: bold; font-size:25px;"
+                            <ion-input style=" font-weight: bold; font-size:25px;"
                                        :value="wsname"
                                        @input="wsname = $event.target.value"
                                        placeholder="NAME"
@@ -554,7 +558,7 @@ import { defineComponent } from "vue";
 </script>
 <style lang="css" scoped>
 .spaceName {
-  align-items: center;
+  align-items: end;
   color: #ffffff;
 }
 .textFieldBorder {

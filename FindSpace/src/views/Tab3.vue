@@ -2,7 +2,7 @@
   <ion-page>
     <div class="mainDiv">
       <img class="greenDeskPic" :src="require('@/assets/img/greenDesk.png')" />
-      <img class="profilePic" :src="require('@/assets/img/profileDummy.png')" />
+      <img class="profilePic" :src="require('@/assets/img/realProfile.png')" />
       <div class="subDiv" v-if="panelMode === 'view'">
         <div style="font-weight: bold;">
         {{ userName }}</div>
@@ -24,7 +24,7 @@
             </ion-chip>
           </div>
         </div>
-        <div class="changeInfoDiv2">
+        <div class="changeInfoDiv3">
           <div>
             Status
           </div>
@@ -45,7 +45,7 @@
       </div>
       <div class="subDiv" v-if="panelMode === 'password'">
         <form @submit.prevent="onSubmit">
-          <div class="textFieldBorder">
+          <div class="textFieldBorder1">
             <ion-input
               :value="oldPass"
               @input="oldPass = $event.target.value"
@@ -73,13 +73,13 @@
             ></ion-input>
           </div>
           <div>
-          <ion-button class="backButton" @click="panelMode = 'view'">
-            Back
-          </ion-button></div>
-          <div>
           <ion-button class="continueButton" type="submit">
             Continue
           </ion-button></div>
+            <div>
+            <a @click="panelMode = 'view'" style="text-decoration: underline; color: grey;">
+                  Back </a>
+         </div>
         </form>
       </div>
       <div class="subDiv" v-if="panelMode === 'username'">
@@ -341,7 +341,7 @@ export default defineComponent({
 .changeInfoDiv {
   margin-top: 15%;
   color: #4a4d3e;
-  border-bottom-color: #4a4d3e;
+  border-bottom-color:rgb(146, 145, 145);
   border-width: 1px;
   border-bottom-style: solid;
   min-height: 40px;
@@ -352,8 +352,23 @@ export default defineComponent({
   /* vertical-align: middle; */
 }
 .changeInfoDiv2 {
+   margin-top: 3%;
   color: #4a4d3e;
-  border-bottom-color: #4a4d3e;
+  border-bottom-color: rgb(146, 145, 145);
+  border-width: 1px;
+  border-bottom-style: solid;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  /* vertical-align: middle; */
+}
+.changeInfoDiv3 {
+   margin-top: 3%;
+   margin-bottom: 10%;
+  color: #4a4d3e;
+  border-bottom-color: rgb(146, 145, 145);
   border-width: 1px;
   border-bottom-style: solid;
   min-height: 40px;
@@ -402,6 +417,14 @@ export default defineComponent({
   margin-left: -40px;
   border-radius: 999px;
 }
+.textFieldBorder1 {
+  border-bottom: #4a4d3e;
+  color: #4a4d3e;
+  border-width: thin;
+  border-style: solid;
+  border-radius: 3px;
+  margin-top: 20%;
+}
 .textFieldBorder {
   border-bottom: #4a4d3e;
   color: #4a4d3e;
@@ -413,8 +436,7 @@ export default defineComponent({
 .continueButton {
   --background: #da8a55;
   --border-radius: 100px;
-  margin-top: 12px;
-  margin-bottom: 4px;
+  margin-top: 10%;
   margin-left: 35%; 
   -ms-transform: translate(-50%);
   transform: translate(-50%);
