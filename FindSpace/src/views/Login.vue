@@ -89,6 +89,7 @@
                 @input="newPassword = $event.target.value"
                 placeholder="Password"
                 name="newPassword"
+                type="password"
               ></ion-input>
             </div>
             <div class="textFieldBorder2">
@@ -97,6 +98,7 @@
                 @input="confirmNewPassword = $event.target.value"
                 placeholder="Confirm password"
                 name="confirmNewPassword"
+                type="password"
               ></ion-input>
             </div>
             <ion-button class="continueButton" type="submit">

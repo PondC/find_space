@@ -67,8 +67,8 @@ export default defineComponent({
   data() {
     return {
       searchWord: "",
-      backendURL: "http://localhost:5678",
-      // backendURL: "https://testcu-app.herokuapp.com",
+      // backendURL: "http://localhost:5678",
+      backendURL: "https://testcu-app.herokuapp.com",
       // backendURL: "http://192.168.1.118:5678",
       favSpaces: [],
       showAds: false,
@@ -120,7 +120,7 @@ export default defineComponent({
       // }
       if (event.keyCode === 13) {
         // this.showSearch = true;
-        this.makeAdsAppear(1000);
+        this.makeAdsAppear(8000);
         // if (this.searchSpace.length === 0) {
         //   this.searchSpace = this.allSpaces;
         // }

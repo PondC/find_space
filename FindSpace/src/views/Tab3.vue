@@ -196,7 +196,7 @@ export default defineComponent({
     return {
       premiumstatus: "",
       email: "",
-      subscribebutton: "",
+      subscribebutton: "subscribe",
       userName: "",
       newUsername: "",
       passWord: "",

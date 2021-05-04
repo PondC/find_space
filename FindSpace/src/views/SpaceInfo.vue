@@ -114,10 +114,7 @@
         </div>
       </div>
       <ion-button class="navigateButton" @click="goGoogleMap()">
-        <a
-          href="https://www.w3schools.com"
-          style="text-decoration:none; color: #4a4d3e"
-        >
+        <a :href="googleMapLink" style="text-decoration:none; color: #4a4d3e">
           Navigate
         </a>
       </ion-button>
@@ -163,6 +160,7 @@ export default defineComponent({
   },
   data() {
     return {
+      googleMapLink: "",
       spaceName: "",
       spaceID: 0,
       space: [],
@@ -213,6 +211,7 @@ export default defineComponent({
         .get(url)
         .then((res) => {
           console.log(res.data);
+          this.googleMapLink = res.data.ws_link;
           this.spaceName = res.data.wsname;
           this.space = res.data;
           this.totalSeat = res.data.totalseat;
