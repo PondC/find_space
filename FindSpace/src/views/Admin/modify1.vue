@@ -15,7 +15,7 @@
               </ion-button>
 
               <div class="mainIcon">
-                {{ wsname }}
+
               </div>
             </ion-label>
           </ion-list-header>
@@ -25,7 +25,7 @@
             <ion-input
               :value="pic1"
               @input="pic1 = $event.target.value"
-              placeholder="{{pic1}}"
+              placeholder="insert new information here"
               name="pic1"
             ></ion-input>
           </ion-item>
@@ -35,7 +35,7 @@
             <ion-input
               :value="pic2"
               @input="pic2 = $event.target.value"
-              placeholder="{{pic2}}"
+              placeholder="insert new information here"
               name="pic2"
             ></ion-input>
           </ion-item>
@@ -44,7 +44,7 @@
             <ion-input
               :value="pic3"
               @input="pic3 = $event.target.value"
-              placeholder="{{pic3}}"
+              placeholder="insert new information here"
               name="pic3"
             ></ion-input>
           </ion-item>
@@ -73,7 +73,7 @@
           <ion-input
             :value="totalseat"
             @input="totalseat = $event.target.value"
-            placeholder="{{totalseat}}"
+            placeholder="insert new information here"
             name="totalseat"
           ></ion-input>
         </ion-item>
@@ -82,7 +82,7 @@
           <ion-input
             :value="description"
             @input="description = $event.target.value"
-            placeholder="{{description}}"
+            placeholder="insert new information here"
             name="description"
           ></ion-input>
         </ion-item>
@@ -93,7 +93,7 @@
             <ion-input
               :value="menu1"
               @input="menu1 = $event.target.value"
-              placeholder="{{menu1}}"
+              placeholder="insert new information here"
               name="menu1"
             ></ion-input>
           </ion-item>
@@ -103,7 +103,7 @@
             <ion-input
               :value="menu2"
               @input="menu2 = $event.target.value"
-              placeholder="{{menu2}}"
+              placeholder="insert new information here"
               name="menu2"
             ></ion-input>
           </ion-item>
@@ -112,7 +112,7 @@
             <ion-input
               :value="menu3"
               @input="menu3 = $event.target.value"
-              placeholder="{{menu3}}"
+              placeholder="insert new information here"
               name="menu3"
             ></ion-input>
           </ion-item>
@@ -127,7 +127,7 @@
           <ion-input
             :value="monday"
             @input="monday = $event.target.value"
-            placeholder="{{monday}}"
+            placeholder="insert new information here"
             name="monday"
           ></ion-input>
         </ion-item>
@@ -138,7 +138,7 @@
           <ion-input
             :value="tuesday"
             @input="tuesday = $event.target.value"
-            placeholder="{{tuesday}}"
+            placeholder="insert new information here"
             name="tuesday"
           ></ion-input>
         </ion-item>
@@ -149,7 +149,7 @@
           <ion-input
             :value="wednesday"
             @input="wednesday = $event.target.value"
-            placeholder="{{wednesday}}"
+            placeholder="insert new information here"
             name="wednesday"
           ></ion-input>
         </ion-item>
@@ -160,7 +160,7 @@
           <ion-input
             :value="thursday"
             @input="thursday = $event.target.value"
-            placeholder="{{thursday}}"
+            placeholder="insert new information here"
             name="thursday"
           ></ion-input>
         </ion-item>
@@ -171,7 +171,7 @@
           <ion-input
             :value="friday"
             @input="friday = $event.target.value"
-            placeholder="{{friday}}"
+            placeholder="insert new information here"
             name="friday"
           ></ion-input>
         </ion-item>
@@ -182,7 +182,7 @@
           <ion-input
             :value="saturday"
             @input="saturday = $event.target.value"
-            placeholder="{{saturday}}"
+            placeholder="insert new information here"
             name="saturday"
           ></ion-input>
         </ion-item>
@@ -193,7 +193,7 @@
           <ion-input
             :value="sunday"
             @input="sunday = $event.target.value"
-            placeholder="{{sunday}}"
+            placeholder="insert new information here"
             name="sunday"
           ></ion-input>
         </ion-item>
@@ -202,25 +202,24 @@
           <ion-input
             :value="powerOut"
             @input="powerOut = $event.target.value"
-            placeholder="{{poweroutlet}}"
+            placeholder="insert new information here"
             name="powerOut"
           ></ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-label color="warning">Wifi</ion-label>
-          <ion-input
-            :value="wifi"
-            @input="wifi = $event.target.value"
-            placeholder="{{wifi}}"
-            name="wifi"
-          ></ion-input>
+            <ion-toolbar>
+                <ion-segment value="all">
+                    <ion-segment-button class="btn" value="all" @click="wifiTrue()">Available</ion-segment-button>
+                    <ion-segment-button class="btn" value="favorites" @click="wifiFalse()">Not Available</ion-segment-button>
+                </ion-segment>
+            </ion-toolbar>
         </ion-item>
         <ion-item lines="none">
           <ion-label color="warning">Latitude</ion-label>
           <ion-input
             :value="lat"
             @input="lat = $event.target.value"
-            placeholder="{{lat}}"
+            placeholder="insert new information here"
             name="latitude"
           ></ion-input>
         </ion-item>
@@ -229,7 +228,7 @@
           <ion-input
             :value="long"
             @input="long = $event.target.value"
-            placeholder="{{long}}"
+            placeholder="insert new information here"
             name="longitude"
           ></ion-input>
         </ion-item>
@@ -239,7 +238,7 @@
             <ion-input
               :value="locationLink"
               @input="locationLink = $event.target.value"
-              placeholder="{{locationlink}}"
+              placeholder="insert new information here"
               name="locationLink"
             ></ion-input>
           </div>
@@ -287,44 +286,9 @@ export default defineComponent({
   },
   beforeMount() {
     console.log(this.$route.params.spaceID);
-    this.workspaceID = this.$route.params.spaceID + "";
+      this.workspaceID = "" + this.$route.params.spaceID;
+      window.localStorage.setItem("workspaceID", "" + this.workspaceID);
     console.log("hello before mount!");
-    axios
-      .get(this.backendURL + "/admin/workspace")
-      .then((res: any) => {
-        console.log(res.data);
-        this.wsname = res.data.rows[this.workspaceID].wsname;
-        this.description = res.data.rows[this.workspaceID].wsname;
-        this.totalseat = res.data.rows[this.workspaceID].totalseat;
-        this.poweroutlet = res.data.rows[this.workspaceID].poweroutlet;
-        this.wifi = res.data.rows[this.workspaceID].wifi;
-        this.lat = res.data.rows[this.workspaceID].ws_lat;
-        this.long = res.data.rows[this.workspaceID].ws_long;
-        this.locationLink = res.data.rows[this.workspaceID].ws_link;
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
-    axios.get(this.backendURL + "/admin/ws_menu").then((res: any) => {
-      this.menu1 = res.data.rows[this.workspaceID].menu1;
-      this.menu2 = res.data.rows[this.workspaceID].menu2;
-      this.menu3 = res.data.rows[this.workspaceID].menu3;
-    });
-    axios.get(this.backendURL + "/admin/ws_photo").then((res: any) => {
-      console.log("success pic");
-      this.pic1 = res.data.rows[this.workspaceID].pic1;
-      this.pic2 = res.data.rows[this.workspaceID].pic2;
-      this.pic3 = res.data.rows[this.workspaceID].pic3;
-    });
-    axios.get(this.backendURL + "/admin/ws_oh").then((res: any) => {
-      this.monday = res.data.rows[this.workspaceID].mon;
-      this.tuesday = res.data.rows[this.workspaceID].tue;
-      this.wednesday = res.data.rows[this.workspaceID].wed;
-      this.thursday = res.data.rows[this.workspaceID].thu;
-      this.friday = res.data.rows[this.workspaceID].fri;
-      this.saturday = res.data.rows[this.workspaceID].sat;
-      this.sunday = res.data.rows[this.workspaceID].sun;
-    });
   },
 
   data() {
@@ -357,7 +321,19 @@ export default defineComponent({
       workspacename: "",
     };
   },
-  methods: {
+    methods: {
+      wifiTrue() {
+          this.wifi = "true";
+          console.log(this.wifi);
+          window.localStorage.setItem('wifi', this.wifi);
+          console.log("" + window.localStorage.getItem("wifi"));
+      },
+      wifiFalse() {
+          this.wifi = "false";
+          console.log(this.wifi);
+          window.localStorage.setItem('wifi', this.wifi);
+          console.log("" + window.localStorage.getItem("wifi"));
+      },
     reload() {
       window.location.reload();
     },
@@ -421,137 +397,173 @@ export default defineComponent({
                 this.ophours.map((ophour) => {
                     console.log("ophours=" + ophour);
                 });*/
-      axios.put(
-        this.backendURL +
-          "/admin/workspace/WS_Des/" +
-          this.workspaceID +
-          "?ws_des=" +
-          this.description
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/workspace/coordinate/" +
-          this.workspaceID +
-          " ? " +
-          "ws_lat=" +
-          this.lat +
-          "&ws_long=" +
-          this.long
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/workspace/totalseats/" +
-          this.workspaceID +
-          "?" +
-          "&totalseat=" +
-          this.totalseat
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/workspace/wifi/" +
-          this.workspaceID +
-          "?wifi=" +
-          "&ws_des=" +
-          this.wifi
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/workspace/poweroutlets/" +
-          this.workspaceID +
-          "?poweroutlet=" +
-          this.poweroutlet
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/pic/photo1/" +
-          this.workspaceID +
-          "?photo1=" +
-          this.pic1
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/pic/photo2/" +
-          this.workspaceID +
-          "?photo2=" +
-          this.pic2
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/pic/photo3/" +
-          this.workspaceID +
-          "?photo3=" +
-          this.pic3
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/pic/menu1/" +
-          this.workspaceID +
-          "?menu1=" +
-          this.menu1
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/pic/menu2/" +
-          this.workspaceID +
-          "?menu2=" +
-          this.menu2
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/pic/menu3/" +
-          this.workspaceID +
-          "?menu3=" +
-          this.menu3
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/ophour/mon/" +
-          this.workspaceID +
-          "?mon=" +
-          this.monday
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/ophour/tue/" +
-          this.workspaceID +
-          "?tue=" +
-          this.tuesday
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/ophour/wed/" +
-          this.workspaceID +
-          "?wed=" +
-          this.wednesday
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/ophour/thu/" +
-          this.workspaceID +
-          "?thu=" +
-          this.thursday
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/ophour/fri/" +
-          this.workspaceID +
-          "?fri=" +
-          this.friday
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/ophour/sat/" +
-          this.workspaceID +
-          "?sat=" +
-          this.saturday
-      );
-      axios.put(
-        this.backendURL +
-          "/admin/ophour/sun/" +
-          this.workspaceID +
-          "?sun=" +
-          this.sunday
-      );
+        if (this.description != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/workspace/WS_Des/" +
+                this.workspaceID +
+                "?ws_des=" +
+                this.description
+            );
+        }
+        if (this.lat != "" || this.long != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/workspace/coordinate/" +
+                this.workspaceID +
+                " ? " +
+                "ws_lat=" +
+                this.lat +
+                "&ws_long=" +
+                this.long
+            );
+        }
+        if (this.totalseat != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/workspace/totalseats/" +
+                this.workspaceID +
+                "?" +
+                "&totalseat=" +
+                this.totalseat
+            );
+        }
+        if (this.wifi != "null") {
+            axios.put(
+                this.backendURL +
+                "/admin/workspace/wifi/" +
+                this.workspaceID +
+                "?wifi=" +
+                "&ws_des=" +
+                this.wifi
+            );
+        }
+        if (this.poweroutlet != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/workspace/poweroutlets/" +
+                this.workspaceID +
+                "?poweroutlet=" +
+                this.poweroutlet
+            );
+        }
+        if (this.pic1 != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/pic/photo1/" +
+                this.workspaceID +
+                "?photo1=" +
+                this.pic1
+            );
+        }
+        if (this.pic2 != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/pic/photo2/" +
+                this.workspaceID +
+                "?photo2=" +
+                this.pic2
+            );
+        }
+        if (this.pic3 != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/pic/photo3/" +
+                this.workspaceID +
+                "?photo3=" +
+                this.pic3
+            );
+        }
+        if (this.menu1 != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/pic/menu1/" +
+                this.workspaceID +
+                "?menu1=" +
+                this.menu1
+            );
+        }
+        if (this.menu2 != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/pic/menu2/" +
+                this.workspaceID +
+                "?menu2=" +
+                this.menu2
+            );
+        }
+        if (this.menu3 != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/pic/menu3/" +
+                this.workspaceID +
+                "?menu3=" +
+                this.menu3
+            );
+        }
+        if (this.monday != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/ophour/mon/" +
+                this.workspaceID +
+                "?mon=" +
+                this.monday
+            );
+        }
+        if (this.tuesday != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/ophour/tue/" +
+                this.workspaceID +
+                "?tue=" +
+                this.tuesday
+            );
+        }
+        if (this.wednesday != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/ophour/wed/" +
+                this.workspaceID +
+                "?wed=" +
+                this.wednesday
+            );
+        }
+        if (this.thursday != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/ophour/thu/" +
+                this.workspaceID +
+                "?thu=" +
+                this.thursday
+            );
+        }
+        if (this.friday != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/ophour/fri/" +
+                this.workspaceID +
+                "?fri=" +
+                this.friday
+            );
+        }
+        if (this.saturday != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/ophour/sat/" +
+                this.workspaceID +
+                "?sat=" +
+                this.saturday
+            );
+        }
+        if (this.sunday != "") {
+            axios.put(
+                this.backendURL +
+                "/admin/ophour/sun/" +
+                this.workspaceID +
+                "?sun=" +
+                this.sunday
+            );
+        }
     },
     /*
             deleteSpace() {

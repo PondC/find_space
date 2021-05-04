@@ -246,7 +246,7 @@ import { defineComponent } from "vue";
                 saturday: "",
                 sunday: "",
                 poweroutlet: "",
-                wifi: "true",
+                wifi: "",
                 lat: "",
                 long: "",
                 location: "",
@@ -260,11 +260,17 @@ import { defineComponent } from "vue";
     reload() {
       window.location.reload();
       },
-     wifiTrue() {
-         window.localStorage.setItem('wifi', "true");
+      wifiTrue() {
+          this.wifi = "true";
+          console.log(this.wifi);
+          window.localStorage.setItem('wifi', this.wifi);
+          console.log("" + window.localStorage.getItem("wifi"));
       },
-     wifiFalse() {
-         window.localStorage.setItem('wifi', "false");
+      wifiFalse() {
+          this.wifi = "false";
+          console.log(this.wifi);
+          window.localStorage.setItem('wifi', this.wifi);
+          console.log("" + window.localStorage.getItem("wifi"));
       },
       cancelcreateWorkspace() {
           console.log("cancel create workspace");
@@ -576,5 +582,8 @@ import { defineComponent } from "vue";
 }
 .btn:active {
   background: #949f74;
+}
+.orangeHeader {
+  background-color: #e05900;
 }
 </style>
