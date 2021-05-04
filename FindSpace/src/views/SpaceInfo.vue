@@ -57,11 +57,46 @@
           </div>
           <div class="multiLineSection">
             <div class="multiLineTopicText">Menu</div>
-            <div class="multiLineInfo">info</div>
+            <div class="multiLineInfo">
+              <!-- <div v-for="menu in menus" :key="menu" class="menuList">
+                <img :src="menu" />
+              </div> -->
+              <div v-if="menuJson.menu1">
+                <img :src="menuJson.menu1" />
+              </div>
+              <div v-if="menuJson.menu2">
+                <img :src="menuJson.menu2" />
+              </div>
+              <div v-if="menuJson.menu3">
+                <img :src="menuJson.menu3" />
+              </div>
+            </div>
           </div>
           <div class="multiLineSection">
             <div class="multiLineTopicText">Operating Hours</div>
-            <div class="multiLineInfo">info</div>
+            <div class="multiLineInfo">
+              <div>
+                Monday : {{ operatingHR.mon ? operatingHR.mon : "Closed" }}
+              </div>
+              <div>
+                Tuesday : {{ operatingHR.tue ? operatingHR.tue : "Closed" }}
+              </div>
+              <div>
+                Wednesday : {{ operatingHR.wed ? operatingHR.wed : "Closed" }}
+              </div>
+              <div>
+                Thursday : {{ operatingHR.thu ? operatingHR.thu : "Closed" }}
+              </div>
+              <div>
+                Friday : {{ operatingHR.fri ? operatingHR.fri : "Closed" }}
+              </div>
+              <div>
+                Saturday : {{ operatingHR.sat ? operatingHR.sat : "Closed" }}
+              </div>
+              <div>
+                Sunday : {{ operatingHR.sun ? operatingHR.sun : "Closed" }}
+              </div>
+            </div>
           </div>
           <div class="onelineSection">
             <div class="onelineTopicText">Power Outlet</div>
@@ -73,9 +108,9 @@
               {{ space.wifi ? "Available" : "Unavailable " }}
             </div>
           </div>
-          <div class="onelineSection">
+          <!-- <div class="onelineSection">
             <div class="onelineTopicText">info</div>
-          </div>
+          </div> -->
         </div>
       </div>
       <ion-button class="navigateButton" @click="goGoogleMap()">
@@ -86,13 +121,6 @@
           Navigate
         </a>
       </ion-button>
-      <!-- <video width="400" controls>
-        <source :src="require('@/assets/video/sample.mp4')" type="video/mp4" />
-        <source
-          src="https://uploads.overwolf.com/owclient/discord/2020/07/23/f61f495a-8c69-4dde-ae32-2aff2d708fa9.mp4"
-          type="video/mp4"
-        />
-      </video> -->
     </div>
   </ion-page>
 </template>
@@ -139,7 +167,9 @@ export default defineComponent({
       spaceID: 0,
       space: [],
       pic: [],
-      menu: [],
+      menuJson: {},
+      menus: [""],
+      operatingHR: {},
       ophr: [],
       availableSeat: 0,
       totalSeat: 0,
@@ -208,7 +238,12 @@ export default defineComponent({
         .get(url)
         .then((res) => {
           console.log("getMenu");
-          this.menu = res.data;
+          this.menuJson = res.data;
+          this.menus = [""];
+          this.menus.pop();
+          this.menus.push(res.data.menu1);
+          this.menus.push(res.data.menu2);
+          this.menus.push(res.data.menu3);
         })
         .catch((err) => {
           console.log(err);
@@ -221,6 +256,7 @@ export default defineComponent({
         .then((res) => {
           console.log("getOPHR");
           this.ophr = res.data;
+          this.operatingHR = res.data;
           console.log(this.ophr);
         })
         .catch((err) => {
@@ -413,6 +449,7 @@ export default defineComponent({
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   height: 160px;
+  width: 100%;
 }
 .crowBar {
   display: flex;
@@ -476,6 +513,7 @@ export default defineComponent({
   min-width: 76%;
   max-width: 76%;
   margin-left: 24%;
+  overflow: scroll;
   /* padding-left: 4px;
   padding-right: 4px; */
 }
@@ -485,5 +523,8 @@ export default defineComponent({
   position: absolute;
   bottom: 4px;
   left: 32%;
+}
+.menuList {
+  flex-direction: row;
 }
 </style>

@@ -46,7 +46,7 @@
       autoplay
     >
       <source
-        src="https://uploads.overwolf.com/owclient/discord/2020/07/23/f61f495a-8c69-4dde-ae32-2aff2d708fa9.mp4"
+        src="https://cdn.kapwing.com/findspace_ads-y3C1I4uWnK.mp4"
         type="video/mp4"
       />
       <source src="mov_bbb.ogg" type="video/ogg" />
