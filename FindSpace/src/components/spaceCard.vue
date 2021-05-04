@@ -7,12 +7,13 @@
     style="max-width:96%;margin-left:2%;background-color:white;border-radius:8px"
   >
     <div class="spacePic">
-      <!-- <img :src="require('@/assets/img/LoginImg.jpg')" /> -->
-      <img src="https://picsum.photos/700/300" />
+      <!-- <img src="https://picsum.photos/700/300" /> -->
+      <img :src="bannerPicture ? bannerPicture : loremPicsum" />
     </div>
     <div class="spaceInfo">
       <div class="spaceIcon">
-        <img src="https://picsum.photos/100" />
+        <!-- <img src="https://picsum.photos/100" /> -->
+        <img :src="iconPicture ? iconPicture : loremPicsum" />
       </div>
       <div class="nameAndDistance">
         <div class="spaceName">
@@ -65,6 +66,8 @@ export default defineComponent({
   props: ["space"],
   beforeMount() {
     const spaceInfo = this.$props.space;
+    this.bannerPicture = spaceInfo.photo1;
+    this.iconPicture = spaceInfo.photo2;
     this.createFeedBackMSG(spaceInfo);
     this.createDistanceMSG(spaceInfo);
     this.displayCrowdedNess(spaceInfo);
@@ -77,6 +80,9 @@ export default defineComponent({
       personIcon4: "cPersonRed.svg",
       feedbackText: "",
       kmFromSpace: "",
+      bannerPicture: "",
+      iconPicture: "",
+      loremPicsum: "https://picsum.photos/700/300",
     };
   },
   methods: {
@@ -157,6 +163,7 @@ export default defineComponent({
 }
 .spaceIcon {
   max-width: 48px;
+  border-radius: 99px;
 }
 .nameAndDistance {
   padding-left: 4px;

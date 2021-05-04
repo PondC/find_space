@@ -9,7 +9,11 @@
       </div>
       <div class="mainCard">
         <div class="spacePic">
-          <img class="spacePic" src="https://picsum.photos/700/300" />
+          <!-- <img class="spacePic" src="https://picsum.photos/700/300" /> -->
+          <img
+            class="spacePic"
+            :src="bannerPicture ? bannerPicture : loremPicsum"
+          />
         </div>
         <div class="crowBar">
           <div class="spaceCrowd">
@@ -40,37 +44,40 @@
         </div>
         <div class="subSection">
           <div class="onelineSection">
-            <div>Available seats</div>
-            <div style="color: red;">
+            <div class="onelineTopicText">Available seats</div>
+            <div class="onelineInfo">
               {{ availableSeat }}
             </div>
           </div>
-          <div class="onelineSection">
-            <div>Description</div>
-            <div style="color: red;">
-              {{ space.ws_des + " some dummy text" }}
+          <div class="multiLineSection">
+            <div class="multiLineTopicText">Description</div>
+            <div class="multiLineInfo">
+              {{
+                space.ws_des +
+                  " some dummy text some dummy text some dummy text some dummy text some dummy text some dummy text some dummy text"
+              }}
             </div>
           </div>
-          <div class="onelineSection">
-            <div>Menu</div>
+          <div class="multiLineSection">
+            <div class="multiLineTopicText">Menu</div>
+            <div>info</div>
+          </div>
+          <div class="multiLineSection">
+            <div class="multiLineTopicText">Operating Hours</div>
             <div>info</div>
           </div>
           <div class="onelineSection">
-            <div>Operating Hours</div>
-            <div>info</div>
+            <div class="onelineTopicText">Power Outlet</div>
+            <div class="onelineInfo">{{ space.poweroutlet }}</div>
           </div>
           <div class="onelineSection">
-            <div>Power Outlet</div>
-            <div style="color: red;">{{ space.poweroutlet }}</div>
-          </div>
-          <div class="onelineSection">
-            <div>Wifi</div>
-            <div style="color: red;">
+            <div class="onelineTopicText">Wifi</div>
+            <div class="onelineInfo">
               {{ space.wifi ? "Available" : "Unavailable " }}
             </div>
           </div>
           <div class="onelineSection">
-            <div>info</div>
+            <div class="onelineTopicText">info</div>
           </div>
         </div>
       </div>
@@ -147,6 +154,8 @@ export default defineComponent({
       personIcon4: "cPersonRed.svg",
       heartIcon: "hollowHeart.svg",
       favorite: false,
+      bannerPicture: "",
+      loremPicsum: "https://picsum.photos/700/300",
       backendURL: "http://localhost:5678",
       // backendURL: "http://192.168.1.118:5678",
     };
@@ -190,8 +199,7 @@ export default defineComponent({
       return axios
         .get(url)
         .then((res) => {
-          console.log("getPic");
-          this.pic = res.data;
+          this.bannerPicture = res.data.photo1;
         })
         .catch((err) => {
           console.log(err);
@@ -376,7 +384,7 @@ export default defineComponent({
 <style lang="css" scoped>
 .background {
   background-color: #faf6f0;
-  color: #4a4d3e;
+  color: #969e78;
   height: 100%;
 }
 .header {
@@ -388,8 +396,8 @@ export default defineComponent({
   min-width: 72%;
   max-block-size: 72%;
   overflow: hidden;
-  color: #4a4d3e;
-  font-size: 20px;
+  color: #969e78;
+  font-size: 18px;
 }
 .icon {
   width: 48px;
@@ -427,15 +435,50 @@ export default defineComponent({
 }
 .subSection {
   /* background-color: rgb(91, 160, 137); */
-  /* overflow: scroll; */
+  overflow: scroll;
 }
 .onelineSection {
   display: flex;
-  margin-bottom: 4px;
-  font-size: 22px;
-  border-bottom-color: #4a4d3e;
+  margin-bottom: 16px;
+  font-size: 18px;
+  /* border-bottom-color: #4a4d3e;
   border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-bottom-width: 1px; */
+}
+.onelineTopicText {
+  margin-left: 16px;
+  /* background-color: aquamarine; */
+  min-width: 63%;
+  max-width: 63%;
+}
+.onelineInfo {
+  /* background-color: #c1ffff; */
+  min-width: 32%;
+  max-width: 32%;
+}
+.multiLineSection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  font-size: 18px;
+  /* border-bottom-color: #4a4d3e;
+  border-bottom-style: solid;
+  border-bottom-width: 1px; */
+}
+.multiLineTopicText {
+  margin-left: 16px;
+  margin-bottom: 8px;
+  /* background-color: aquamarine; */
+  min-width: 96%;
+  max-width: 96%;
+}
+.multiLineInfo {
+  /* background-color: #c1ffff; */
+  min-width: 76%;
+  max-width: 76%;
+  margin-left: 24%;
+  /* padding-left: 4px;
+  padding-right: 4px; */
 }
 .navigateButton {
   --background: #da8a55;
