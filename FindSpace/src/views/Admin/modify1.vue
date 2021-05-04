@@ -588,8 +588,8 @@ export default defineComponent({
             cssClass: "secondary",
             handler: () => {
               console.log("Confirm Okay:");
-              axios
-                .delete(this.backendURL + "/admin/workspace/137")
+                axios
+                    .delete(this.backendURL + "/admin/workspace/" + this.workspaceID)
                 .then((res) => {
                   console.log(res);
                 })
