@@ -1,20 +1,50 @@
 <template>
   <ion-page>
-    <div class="mainDiv">
+    <div class="mainDiv" v-if="!showAds">
       <img class="nearbyBanner" :src="require('@/assets/img/FavSpace.png')" />
-      <div class="searchBox">search box</div>
+      <div class="searchBox">
+        <div class="textFieldBorder">
+          <ion-input
+            :value="searchWord"
+            @input="searchWord = $event.target.value"
+            @keyup="searching($event)"
+            placeholder="Search"
+            name="searchWord"
+          ></ion-input>
+        </div>
+      </div>
       <div class="spaceList">
-        <div v-for="space in spaces" :key="space.workspaceid">
-          <spaceList :space="space"></spaceList>
+        <div v-for="space in favSpaces" :key="space.workspaceid">
+          <spaceList
+            :space="space"
+            :userLat="location.lat"
+            :userLong="location.long"
+          ></spaceList>
         </div>
       </div>
     </div>
+    <video
+      id="myVideo"
+      width="320"
+      height="176"
+      v-if="showAds"
+      class="ads"
+      autoplay
+    >
+      <source
+        src="https://uploads.overwolf.com/owclient/discord/2020/07/23/f61f495a-8c69-4dde-ae32-2aff2d708fa9.mp4"
+        type="video/mp4"
+      />
+      <source src="mov_bbb.ogg" type="video/ogg" />
+      Your browser does not support HTML5 video.
+    </video>
   </ion-page>
 </template>
 
 <script lang="ts">
 import {
   IonPage,
+  IonInput,
   // IonIcon,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
@@ -25,6 +55,7 @@ export default defineComponent({
   name: "Tab1",
   components: {
     IonPage,
+    IonInput,
     spaceList,
     // IonIcon,
   },
@@ -38,7 +69,8 @@ export default defineComponent({
       searchWord: "",
       backendURL: "http://localhost:5678",
       // backendURL: "http://192.168.1.118:5678",
-      spaces: [],
+      favSpaces: [],
+      showAds: false,
       location: {
         lat: 0,
         long: 0,
@@ -58,8 +90,10 @@ export default defineComponent({
       });
     },
     updateLocation(data: any) {
-      this.location.lat = data.coords.latitude;
-      this.location.long = data.coords.longitude;
+      // this.location.lat = data.coords.latitude;
+      // this.location.long = data.coords.longitude;
+      this.location.lat = 13.736281;
+      this.location.long = 100.53221;
       this.getFavoriteSpace();
     },
     getFavoriteSpace() {
@@ -70,14 +104,40 @@ export default defineComponent({
       return axios
         .get(endPointURL)
         .then((res) => {
-          console.log("res");
-          console.log(res);
-          console.log(res.data);
-          // this.spaces = res.data.rows;
+          this.favSpaces = res.data;
         })
         .catch((err) => {
           console.log(err);
         });
+    },
+    searching(event: any) {
+      console.log(event.keyCode);
+      // if (this.searchWord.length === 0) {
+      //   this.showSearch = false;
+      // }
+      if (event.keyCode === 13) {
+        // this.showSearch = true;
+        this.makeAdsAppear(1000);
+        // if (this.searchSpace.length === 0) {
+        //   this.searchSpace = this.allSpaces;
+        // }
+        // this.searchSpace = [];
+        // this.allSpaces.map((e: any) => {
+        //   if (
+        //     e.wsname.substring(0, this.searchWord.length) === this.searchWord
+        //   ) {
+        //     this.searchSpace.push(e);
+        //   }
+        // });
+        // console.log("this.searchSpace");
+        // console.log(this.searchSpace);
+      }
+    },
+    makeAdsAppear(time: number) {
+      this.showAds = true;
+      setTimeout(() => {
+        this.showAds = false;
+      }, time);
     },
   },
 });
@@ -93,11 +153,23 @@ export default defineComponent({
 }
 .searchBox {
   height: 10%;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 .spaceList {
   height: 80%;
   padding-top: 8px;
   overflow: scroll;
+}
+.textFieldBorder {
+  border-bottom: #4a4d3e;
+  color: #4a4d3e;
+  border-width: thin;
+  border-style: solid;
+  border-radius: 24px;
+}
+.ads {
+  position: absolute;
+  height: auto;
+  width: 100%;
 }
 </style>

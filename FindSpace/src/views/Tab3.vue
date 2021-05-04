@@ -5,11 +5,12 @@
       <img class="profilePic" :src="require('@/assets/img/profileDummy.png')" />
       <div class="subDiv" v-if="panelMode === 'view'">
         <div style="font-weight: bold;">
-        {{ userName }}</div>
+          {{ userName }}
+        </div>
         <div class="changeInfoDiv">
           <div>Username</div>
           <div>
-            <ion-chip class="changeChip">
+            <ion-chip class="changeChip" @click="changeUserName()">
               <ion-label> Change Username </ion-label>
             </ion-chip>
           </div>
@@ -36,9 +37,13 @@
           </div>
         </div>
         <div>
-        <a @click="askToDelete()" style="text-decoration: underline; color: grey;">
-          Delete Account
-        </a></div>
+          <a
+            @click="askToDelete()"
+            style="text-decoration: underline; color: grey;"
+          >
+            Delete Account
+          </a>
+        </div>
         <ion-chip class="logOutChip" @click="logOut()">
           <ion-label> Log Out </ion-label>
         </ion-chip>
@@ -73,51 +78,34 @@
             ></ion-input>
           </div>
           <div>
-          <ion-button class="backButton" @click="panelMode = 'view'">
-            Back
-          </ion-button></div>
+            <ion-button class="backButton" @click="panelMode = 'view'">
+              Back
+            </ion-button>
+          </div>
           <div>
-          <ion-button class="continueButton" type="submit">
-            Continue
-          </ion-button></div>
+            <ion-button class="continueButton" type="submit">
+              Continue
+            </ion-button>
+          </div>
         </form>
       </div>
       <div class="subDiv" v-if="panelMode === 'username'">
-        <!-- <form @submit.prevent="onSubmit">
+        <form @submit.prevent="onSubmit">
           <div class="textFieldBorder">
             <ion-input
-              :value="oldPass"
-              @input="oldPass = $event.target.value"
-              placeholder="Old password"
-              name="oldPass"
-              type="password"
+              :value="newUsername"
+              @input="newUsername = $event.target.value"
+              placeholder="New username"
+              name="newUsername"
             ></ion-input>
           </div>
-          <div class="textFieldBorder">
-            <ion-input
-              :value="newPass"
-              @input="newPass = $event.target.value"
-              placeholder="New password"
-              name="newPass"
-              type="password"
-            ></ion-input>
-          </div>
-          <div class="textFieldBorder">
-            <ion-input
-              :value="newPass2"
-              @input="newPass2 = $event.target.value"
-              placeholder="Confirm password"
-              name="newPass2"
-              type="password"
-            ></ion-input>
-          </div>
-          <ion-button class="continueButton" @click="panelMode = 'view'">
+          <ion-button class="usernameBack" @click="panelMode = 'view'">
             Back
           </ion-button>
-          <ion-button class="continueButton" type="submit">
+          <ion-button class="usernameContinue" type="submit">
             Continue
           </ion-button>
-        </form> -->
+        </form>
       </div>
     </div>
   </ion-page>
@@ -183,6 +171,7 @@ export default defineComponent({
     return {
       subscribe: "",
       userName: "",
+      newUsername: "",
       passWord: "",
       oldPass: "",
       newPass: "",
@@ -196,8 +185,8 @@ export default defineComponent({
         lat: 0,
         long: 0,
       },
-      // backendURL: "http://localhost:5678",
-      backendURL: "http://192.168.1.118:5678",
+      backendURL: "http://localhost:5678",
+      // backendURL: "http://192.168.1.118:5678",
     };
   },
   setup() {
@@ -225,6 +214,16 @@ export default defineComponent({
         }
       } else if (this.panelMode === "username") {
         console.log("go change some username");
+        console.log(this.newUsername);
+        console.log("!window.localStorage.getItem(username)");
+        console.log(window.localStorage.getItem("username"));
+        console.log(!window.localStorage.getItem("username"));
+        if (!window.localStorage.getItem("username")) {
+          this.changeErrMsg = "No permission!";
+          console.log(this.changeErrMsg);
+        } else {
+          this.confirmChangeUsername();
+        }
       }
     },
     gotosubscribe() {
@@ -291,6 +290,9 @@ export default defineComponent({
     changePassword() {
       this.panelMode = "password";
     },
+    changeUserName() {
+      this.panelMode = "username";
+    },
     confirmChangePassword() {
       // "http://localhost:5678/users/profileManage/changePassword?password=Ultimate8&password2=Ultimate8&email=helppls2@gmail.com"
       // console.log(window.localStorage.getItem("useremail"));
@@ -307,6 +309,28 @@ export default defineComponent({
         .then((res) => {
           console.log(res);
           window.localStorage.setItem("password", this.newPass);
+          this.panelMode = "view";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    confirmChangeUsername() {
+      // "http://localhost:5678/users/profileManage/changePassword?password=Ultimate8&password2=Ultimate8&email=helppls2@gmail.com"
+      // console.log(window.localStorage.getItem("useremail"));
+      // "/users/profileManage/changeUsername"
+      const endpointURL =
+        this.backendURL +
+        "/users/profileManage/changeUsername?name=" +
+        this.newUsername +
+        "&email=" +
+        window.localStorage.getItem("useremail");
+      axios
+        .post(endpointURL)
+        .then((res) => {
+          console.log(res);
+          window.localStorage.setItem("username", this.newUsername);
+          this.userName = this.newUsername;
           this.panelMode = "view";
         })
         .catch((err) => {
@@ -333,7 +357,7 @@ export default defineComponent({
   margin-top: 10%;
   background-color: #faf6f0;
   text-align: center;
-  color:#949F74;
+  color: #949f74;
   height: 100%;
   width: 92%;
   margin-left: 4%;
@@ -415,7 +439,7 @@ export default defineComponent({
   --border-radius: 100px;
   margin-top: 12px;
   margin-bottom: 4px;
-  margin-left: 35%; 
+  margin-left: 35%;
   -ms-transform: translate(-50%);
   transform: translate(-50%);
 }
@@ -424,7 +448,25 @@ export default defineComponent({
   --border-radius: 100px;
   margin-top: 12px;
   margin-bottom: 4px;
-  margin-left: 25%; 
+  margin-left: 25%;
+  -ms-transform: translate(-50%);
+  transform: translate(-50%);
+}
+.usernameContinue {
+  --background: #da8a55;
+  --border-radius: 100px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  margin-left: 35%;
+  -ms-transform: translate(-50%);
+  transform: translate(-50%);
+}
+.usernameBack {
+  --background: #da8a55;
+  --border-radius: 100px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  margin-left: 25%;
   -ms-transform: translate(-50%);
   transform: translate(-50%);
 }

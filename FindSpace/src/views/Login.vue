@@ -25,6 +25,7 @@
                 @input="password = $event.target.value"
                 placeholder="Password"
                 name="password"
+                type="password"
               ></ion-input>
             </div>
             <!-- </ion-item> -->
@@ -55,7 +56,6 @@
               </div>
             </ion-row>
           </form>
-          
         </div>
       </div>
       <!-- I'm too lazy to create new page -->
@@ -103,7 +103,10 @@
               Continue
             </ion-button>
           </form>
-          <a style="margin-left: 40%;text-decoration:underline; color:grey;" @click="registerMode()">
+          <a
+            style="margin-left: 40%;text-decoration:underline; color:grey;"
+            @click="registerMode()"
+          >
             back
           </a>
         </div>
@@ -162,8 +165,8 @@ export default defineComponent({
       newUsername: "",
       newPassword: "",
       confirmNewPassword: "",
-      // backendURL: "http://localhost:5678",
-      backendURL: "http://192.168.1.118:5678",
+      backendURL: "http://localhost:5678",
+      // backendURL: "http://192.168.1.118:5678",
     };
   },
   setup() {
@@ -189,13 +192,24 @@ export default defineComponent({
             console.log(res);
             console.log(res.data);
             console.log(res.data[0]);
-            if (res.data == "password incorrect") {
+            if (res.data == "Password incorrect") {
+              this.loginError(res.data);
+            } else if (res.data == "Try again later") {
+              this.loginError(res.data);
+            } else if (res.data == "No user found") {
               this.loginError(res.data);
             } else {
               window.localStorage.setItem("useremail", this.email);
               window.localStorage.setItem("username", res.data[0].uname);
               window.localStorage.setItem("password", this.password);
-              this.$router.push("/tabs");
+              if (
+                this.email === "jommy346@gmail.com" ||
+                this.email === "Jommy346@gmail.com"
+              ) {
+                this.$router.push("/admin");
+              } else {
+                this.$router.push("/tabs");
+              }
             }
           })
           .catch((err) => {

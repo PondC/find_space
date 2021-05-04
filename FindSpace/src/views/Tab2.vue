@@ -3,12 +3,6 @@
     <div class="mainDiv" v-if="!showAds">
       <img class="nearbyBanner" :src="require('@/assets/img/NearBy.png')" />
       <div class="searchBox">
-        <!-- <ion-searchbar
-          show-cancel-button="never"
-          @keypress="searching()"
-          :value="searchWord"
-          @input="email = $event.target.value"
-        ></ion-searchbar> -->
         <div class="textFieldBorder">
           <ion-input
             :value="searchWord"

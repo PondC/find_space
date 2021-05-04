@@ -125,6 +125,7 @@ export default defineComponent({
     this.getMenu(this.spaceID);
     this.getOPHR(this.spaceID);
     this.getCRWDNESS(this.spaceID);
+    this.checkFavorite();
     this.fetchEvery();
     // this.checkReload();
   },
@@ -139,6 +140,7 @@ export default defineComponent({
       availableSeat: 0,
       totalSeat: 0,
       crwdness: 0,
+      favoriteList: [],
       personIcon1: "cPersonGreen.svg",
       personIcon2: "cPersonLight.svg",
       personIcon3: "cPersonOrange.svg",
@@ -220,18 +222,19 @@ export default defineComponent({
         });
     },
     getCRWDNESS(spaceID: any) {
-      console.log("getCRWDNESS");
-      console.log("getCRWDNESS");
       const url = this.backendURL + "/wsdetail/crowdedness/" + spaceID;
       return axios
         .get(url)
         .then((res) => {
-          console.log("getCRWDNESS");
-          console.log(res);
-          console.log(res.data);
-          console.log("getCRWDNESS");
+          // console.log("getCRWDNESS");
+          // console.log(res);
+          // console.log(res.data);
+          // console.log("getCRWDNESS");
           this.crwdness = res.data.crowdednessstatus;
           this.availableSeat = res.data.totalseat - Number(res.data.ppl_in_ws);
+          if (this.availableSeat < 0) {
+            this.availableSeat = 0;
+          }
           this.displayCrowdedNess(this.crwdness);
         })
         .catch((err) => {
@@ -261,13 +264,42 @@ export default defineComponent({
         this.personIcon4 = "cPersonRed.svg";
       }
     },
+    checkFavorite() {
+      // const endPointURL = this.backendURL + "/admin/workspace";
+      const endPointURL =
+        "http://localhost:5678/users/favorite?email=" +
+        window.localStorage.getItem("useremail");
+      return axios
+        .get(endPointURL)
+        .then((res) => {
+          console.log("favorite checking");
+          // console.log(res);
+          // console.log(res.data);
+          this.favoriteList = res.data;
+          this.favoriteList.map((e: any) => {
+            console.log(e.workspaceid);
+            if (this.spaceID === e.workspaceid) {
+              this.favorite = true;
+              this.heartIcon = "blackHeart.svg";
+            }
+          });
+          if (!this.favorite) {
+            this.heartIcon = "hollowHeart.svg";
+          }
+          console.log("favorite checking");
+          // this.favSpaces = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     editFavorite() {
       this.favorite = !this.favorite;
       if (this.favorite) {
         this.heartIcon = "blackHeart.svg";
         const url =
           this.backendURL +
-          "/users/home?email=" +
+          "/users/favorite?email=" +
           window.localStorage.getItem("useremail") +
           "&heart=" +
           this.spaceID;
@@ -285,8 +317,26 @@ export default defineComponent({
           .catch((err) => {
             console.log(err);
           });
+        console.log("will add favorite");
       } else {
         this.heartIcon = "hollowHeart.svg";
+        const url =
+          this.backendURL +
+          "/user/favorite?email=" +
+          window.localStorage.getItem("useremail") +
+          "&WorkspaceID=" +
+          this.spaceID;
+        console.log("url");
+        console.log(url);
+        axios
+          .delete(url)
+          .then((res) => {
+            console.log("res");
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
       console.log("new fav");
       console.log(this.favorite);
@@ -305,6 +355,7 @@ export default defineComponent({
         this.getMenu(this.spaceID);
         this.getOPHR(this.spaceID);
         this.getCRWDNESS(this.spaceID);
+        this.checkFavorite();
         this.fetchEvery();
       }, 5000);
     },
@@ -331,15 +382,20 @@ export default defineComponent({
 .header {
   display: flex;
   height: 48px;
+  align-items: center;
 }
 .workspaceName {
+  min-width: 72%;
+  max-block-size: 72%;
+  overflow: hidden;
   color: #4a4d3e;
+  font-size: 20px;
 }
 .icon {
   width: 48px;
   font-size: 24px;
   margin-left: 12px;
-  margin-top: 12px;
+  margin-top: 8px;
 }
 .mainCard {
   background-color: white;

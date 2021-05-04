@@ -41,6 +41,7 @@ import {
   //   IonCard,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
+import axios from "axios";
 
 export default defineComponent({
   name: "spaceCard",
@@ -49,12 +50,15 @@ export default defineComponent({
     IonIcon,
     // IonCard,
   },
-  props: ["space"],
+  props: ["space", "userLat", "userLong"],
   beforeMount() {
     const spaceInfo = this.$props.space;
+    console.log("spaceInfo");
+    console.log(spaceInfo);
     this.createFeedBackMSG(spaceInfo);
-    this.createDistanceMSG(spaceInfo);
-    this.displayCrowdedNess(spaceInfo);
+    this.createDistanceMSG();
+    this.getCRWDNESS(spaceInfo.workspaceid);
+    // this.displayCrowdedNess();
   },
   data() {
     return {
@@ -64,15 +68,16 @@ export default defineComponent({
       personIcon4: "cPersonRed.svg",
       feedbackText: "",
       kmFromSpace: "",
+      backendURL: "http://localhost:5678",
     };
   },
   methods: {
     showSpaceInfo(id: number) {
       // This one is for admin page
-      this.$router.push("/modify/" + id);
+      // this.$router.push("/modify/" + id);
 
       // This one is for user page
-      // this.$router.push("/SpaceInfo/" + id);
+      this.$router.push("/SpaceInfo/" + id);
     },
     createFeedBackMSG(spaceInfo: any) {
       if (spaceInfo.feedbackstatus) {
@@ -84,39 +89,75 @@ export default defineComponent({
           " Seat(s) available";
       }
     },
-    createDistanceMSG(spaceInfo: any) {
-      this.kmFromSpace =
-        Number((spaceInfo.distance + "").split(".")[0]) / 1000 + " Km";
+    getCRWDNESS(spaceID: any) {
+      const url = this.backendURL + "/wsdetail/crowdedness/" + spaceID;
+      axios
+        .get(url)
+        .then((res) => {
+          console.log("getCRWDNESS");
+          console.log(res);
+          console.log(res.data);
+          console.log("getCRWDNESS");
+          const crwdedness = res.data;
+          // this.availableSeat = res.data.totalseat - Number(res.data.ppl_in_ws);
+          this.displayCrowdedNess(crwdedness);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    displayCrowdedNess(spaceInfo: any) {
-      console.log("hphphphphph");
-      console.log(spaceInfo);
-
-      if (spaceInfo.crowdednessstatus == 1) {
+    displayCrowdedNess(crwdedness: any) {
+      if (crwdedness.crowdednessstatus == 1) {
         console.log("green");
         this.personIcon1 = "cPersonGreen.svg";
         this.personIcon2 = "cPerson.svg";
         this.personIcon3 = "cPerson.svg";
         this.personIcon4 = "cPerson.svg";
-      } else if (spaceInfo.crowdednessstatus == 2.4) {
+      } else if (crwdedness.crowdednessstatus == 2.4) {
         this.personIcon1 = "cPersonGreen.svg";
         this.personIcon2 = "cPersonLight.svg";
         this.personIcon3 = "cPerson.svg";
         this.personIcon4 = "cPerson.svg";
         console.log("light");
-      } else if (spaceInfo.crowdednessstatus == 3.6) {
+      } else if (crwdedness.crowdednessstatus == 3.6) {
         this.personIcon1 = "cPersonGreen.svg";
         this.personIcon2 = "cPersonLight.svg";
         this.personIcon3 = "cPersonOrange.svg";
         this.personIcon4 = "cPerson.svg";
         console.log("orange");
-      } else if (spaceInfo.crowdednessstatus == 5) {
+      } else if (crwdedness.crowdednessstatus == 5) {
         this.personIcon1 = "cPersonGreen.svg";
         this.personIcon2 = "cPersonLight.svg";
         this.personIcon3 = "cPersonOrange.svg";
         this.personIcon4 = "cPersonRed.svg";
         console.log("red");
       }
+    },
+    createDistanceMSG() {
+      const wsLat = this.$props.space.ws_lat;
+      console.log("wsLat");
+      console.log(wsLat);
+      const wsLong = this.$props.space.ws_long;
+      console.log("wsLong");
+      console.log(wsLong);
+      console.log(this.$props.userLat);
+      console.log(this.$props.userLong);
+      const R = 6378.137;
+      const dLat =
+        (this.$props.userLat * Math.PI) / 180 - (wsLat * Math.PI) / 180;
+      const dLon =
+        (this.$props.userLong * Math.PI) / 180 - (wsLong * Math.PI) / 180;
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos((wsLat * Math.PI) / 180) *
+          Math.cos((this.$props.userLat * Math.PI) / 180) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const d = R * c;
+      const distanceInM = d * 1000;
+      this.kmFromSpace =
+        Number((distanceInM + "").split(".")[0]) / 1000 + " Km";
     },
   },
 });
@@ -151,6 +192,7 @@ export default defineComponent({
 .nameAndDistance {
   padding-left: 4px;
   max-width: 144px;
+  min-width: 144px;
   display: flex;
   flex-direction: column;
 }
