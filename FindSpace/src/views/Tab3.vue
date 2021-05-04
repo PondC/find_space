@@ -30,13 +30,13 @@
             Status
           </div>
           <div>
-            <ion-chip
+            <ion-button
               class="changeChip2"
               @click="gotosubscribe()"
               href="/ggPay"
             >
               <ion-label> {{ subscribebutton }} </ion-label>
-            </ion-chip>
+            </ion-button>
           </div>
         </div>
         <div>
@@ -263,7 +263,7 @@ export default defineComponent({
       axios.put(
         this.backendURL + "/premium/" + this.email + "?premiumstatus=premium"
       );
-      //this.$router.push("/ggPay");
+      this.$router.push("/ggPay");
     },
     logOut() {
       console.log("logout complete");

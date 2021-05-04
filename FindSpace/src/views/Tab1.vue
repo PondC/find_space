@@ -72,8 +72,8 @@ export default defineComponent({
       favSpaces: [],
       showAds: false,
       location: {
-        lat: 0,
-        long: 0,
+        lat: 13.736281,
+        long: 100.53221,
       },
     };
   },
@@ -99,7 +99,8 @@ export default defineComponent({
     getFavoriteSpace() {
       // const endPointURL = this.backendURL + "/admin/workspace";
       const endPointURL =
-        "http://localhost:5678/users/favorite?email=" +
+        this.backendURL +
+        "/users/favorite?email=" +
         window.localStorage.getItem("useremail");
       return axios
         .get(endPointURL)

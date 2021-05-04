@@ -308,7 +308,8 @@ export default defineComponent({
     checkFavorite() {
       // const endPointURL = this.backendURL + "/admin/workspace";
       const endPointURL =
-        "http://localhost:5678/users/favorite?email=" +
+        this.backendURL +
+        "/users/favorite?email=" +
         window.localStorage.getItem("useremail");
       return axios
         .get(endPointURL)
