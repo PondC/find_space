@@ -181,8 +181,8 @@ export default defineComponent({
       favorite: false,
       bannerPicture: "",
       loremPicsum: "https://picsum.photos/700/300",
-      backendURL: "http://localhost:5678",
-      // backendURL: "http://192.168.1.118:5678",
+      // backendURL: "http://localhost:5678",
+      backendURL: "https://find-space-app.herokuapp.com",
     };
   },
   methods: {

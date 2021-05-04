@@ -328,9 +328,9 @@ export default defineComponent({
   },
 
   data() {
-      return {
-        backendURL: "http://localhost:5678",
-      //backendURL: "http://192.168.1.118:5678",
+    return {
+      // backendURL: "http://localhost:5678",
+      backendURL: "https://find-space-app.herokuapp.com",
       wsname: "",
       workspaceID: "",
       pic1: "",
@@ -421,50 +421,137 @@ export default defineComponent({
                 this.ophours.map((ophour) => {
                     console.log("ophours=" + ophour);
                 });*/
-        axios.put(
-            this.backendURL + "/admin/workspace/WS_Des/" + this.workspaceID + "?ws_des=" +
+      axios.put(
+        this.backendURL +
+          "/admin/workspace/WS_Des/" +
+          this.workspaceID +
+          "?ws_des=" +
           this.description
       );
-        axios.put(
-            this.backendURL + "/admin/workspace/coordinate/" + this.workspaceID+" ? " +
+      axios.put(
+        this.backendURL +
+          "/admin/workspace/coordinate/" +
+          this.workspaceID +
+          " ? " +
           "ws_lat=" +
           this.lat +
           "&ws_long=" +
           this.long
       );
       axios.put(
-        this.backendURL + "/admin/workspace/totalseats/" + this.workspaceID + "?" +
+        this.backendURL +
+          "/admin/workspace/totalseats/" +
+          this.workspaceID +
+          "?" +
           "&totalseat=" +
           this.totalseat
       );
       axios.put(
-        this.backendURL + "/admin/workspace/wifi/" + this.workspaceID + "?wifi=" +
+        this.backendURL +
+          "/admin/workspace/wifi/" +
+          this.workspaceID +
+          "?wifi=" +
           "&ws_des=" +
           this.wifi
       );
       axios.put(
-        this.backendURL + "/admin/workspace/poweroutlets/" + this.workspaceID + "?poweroutlet=" +
+        this.backendURL +
+          "/admin/workspace/poweroutlets/" +
+          this.workspaceID +
+          "?poweroutlet=" +
           this.poweroutlet
       );
-      axios.put(this.backendURL + "/admin/pic/photo1/" + this.workspaceID + "?photo1=" + this.pic1);
-      axios.put(this.backendURL + "/admin/pic/photo2/" + this.workspaceID + "?photo2=" + this.pic2);
-      axios.put(this.backendURL + "/admin/pic/photo3/" + this.workspaceID + "?photo3=" + this.pic3);
-      axios.put(this.backendURL + "/admin/pic/menu1/" + this.workspaceID + "?menu1=" + this.menu1);
-      axios.put(this.backendURL + "/admin/pic/menu2/" + this.workspaceID + "?menu2=" + this.menu2);
-      axios.put(this.backendURL + "/admin/pic/menu3/" + this.workspaceID + "?menu3=" + this.menu3);
-      axios.put(this.backendURL + "/admin/ophour/mon/" + this.workspaceID + "?mon=" + this.monday);
-      axios.put(this.backendURL + "/admin/ophour/tue/" + this.workspaceID + "?tue=" + this.tuesday);
       axios.put(
-        this.backendURL + "/admin/ophour/wed/" + this.workspaceID + "?wed=" + this.wednesday
+        this.backendURL +
+          "/admin/pic/photo1/" +
+          this.workspaceID +
+          "?photo1=" +
+          this.pic1
       );
       axios.put(
-        this.backendURL + "/admin/ophour/thu/" + this.workspaceID + "?thu=" + this.thursday
+        this.backendURL +
+          "/admin/pic/photo2/" +
+          this.workspaceID +
+          "?photo2=" +
+          this.pic2
       );
-      axios.put(this.backendURL + "/admin/ophour/fri/" + this.workspaceID + "?fri=" + this.friday);
       axios.put(
-        this.backendURL + "/admin/ophour/sat/" + this.workspaceID + "?sat=" + this.saturday
+        this.backendURL +
+          "/admin/pic/photo3/" +
+          this.workspaceID +
+          "?photo3=" +
+          this.pic3
       );
-      axios.put(this.backendURL + "/admin/ophour/sun/" + this.workspaceID + "?sun=" + this.sunday);
+      axios.put(
+        this.backendURL +
+          "/admin/pic/menu1/" +
+          this.workspaceID +
+          "?menu1=" +
+          this.menu1
+      );
+      axios.put(
+        this.backendURL +
+          "/admin/pic/menu2/" +
+          this.workspaceID +
+          "?menu2=" +
+          this.menu2
+      );
+      axios.put(
+        this.backendURL +
+          "/admin/pic/menu3/" +
+          this.workspaceID +
+          "?menu3=" +
+          this.menu3
+      );
+      axios.put(
+        this.backendURL +
+          "/admin/ophour/mon/" +
+          this.workspaceID +
+          "?mon=" +
+          this.monday
+      );
+      axios.put(
+        this.backendURL +
+          "/admin/ophour/tue/" +
+          this.workspaceID +
+          "?tue=" +
+          this.tuesday
+      );
+      axios.put(
+        this.backendURL +
+          "/admin/ophour/wed/" +
+          this.workspaceID +
+          "?wed=" +
+          this.wednesday
+      );
+      axios.put(
+        this.backendURL +
+          "/admin/ophour/thu/" +
+          this.workspaceID +
+          "?thu=" +
+          this.thursday
+      );
+      axios.put(
+        this.backendURL +
+          "/admin/ophour/fri/" +
+          this.workspaceID +
+          "?fri=" +
+          this.friday
+      );
+      axios.put(
+        this.backendURL +
+          "/admin/ophour/sat/" +
+          this.workspaceID +
+          "?sat=" +
+          this.saturday
+      );
+      axios.put(
+        this.backendURL +
+          "/admin/ophour/sun/" +
+          this.workspaceID +
+          "?sun=" +
+          this.sunday
+      );
     },
     /*
             deleteSpace() {

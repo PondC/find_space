@@ -68,8 +68,7 @@ export default defineComponent({
     return {
       searchWord: "",
       // backendURL: "http://localhost:5678",
-      backendURL: "https://testcu-app.herokuapp.com",
-      // backendURL: "http://192.168.1.118:5678",
+      backendURL: "https://find-space-app.herokuapp.com",
       favSpaces: [],
       showAds: false,
       location: {

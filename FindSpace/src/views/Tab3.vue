@@ -212,8 +212,8 @@ export default defineComponent({
         lat: 0,
         long: 0,
       },
-      backendURL: "http://localhost:5678",
-      // backendURL: "http://192.168.1.118:5678",
+      // backendURL: "http://localhost:5678",
+      backendURL: "https://find-space-app.herokuapp.com",
     };
   },
   setup() {

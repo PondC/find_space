@@ -68,7 +68,8 @@ export default defineComponent({
       personIcon4: "cPersonRed.svg",
       feedbackText: "",
       kmFromSpace: "",
-      backendURL: "http://localhost:5678",
+      // backendURL: "http://localhost:5678",
+      backendURL: "https://find-space-app.herokuapp.com",
     };
   },
   methods: {
