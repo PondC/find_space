@@ -166,31 +166,39 @@ export default defineComponent({
     } else {
       console.log("no data!");
     }
+    if (window.localStorage.getItem("subscribebutton") === "premium") {
+      this.subscribebutton =
+        window.localStorage.getItem("subscribebutton") + "";
+    } else {
+      window.localStorage.setItem("subscribebutton", "subscribe");
+      this.subscribebutton =
+        window.localStorage.getItem("subscribebutton") + "";
+    }
     //use email to get status from premium table then set usertype to "premium" or "subscribe"
-    axios.get(this.backendURL + "/premium/" + this.email).then((res: any) => {
-      console.log(res);
-      console.log("1" + JSON.stringify(res.data[0].premiumstatus));
-      console.log("res 1:" + JSON.stringify(res.data[0].premiumstatus));
-      this.premiumstatus = JSON.stringify(res.data[0].premiumstatus);
-      console.log("premiumstatuse=" + this.premiumstatus);
-      window.localStorage.setItem(
-        "premiumstatus",
-        JSON.stringify(res.data[0].premiumstatus)
-      );
-      //set subscribe button to premium
-      console.log(res.data[0].premiumstatus == "premium");
-      if (res.data[0].premiumstatus == "premium") {
-        console.log("kuy");
-        this.subscribebutton = "premium";
-        console.log("subscribebutton=" + this.subscribebutton);
-        console.log(JSON.stringify(res.data[0].utype));
-        window.localStorage.setItem("subscribebutton", "premium");
-      } else {
-        console.log("subscribe");
-        window.localStorage.setItem("subscribebutton", "subscribe");
-      }
-    });
-    this.subscribebutton = "" + window.localStorage.getItem("subscribebutton");
+    // axios.get(this.backendURL + "/premium/" + this.email).then((res: any) => {
+    //   console.log(res);
+    //   console.log("1" + JSON.stringify(res.data[0].premiumstatus));
+    //   console.log("res 1:" + JSON.stringify(res.data[0].premiumstatus));
+    //   this.premiumstatus = JSON.stringify(res.data[0].premiumstatus);
+    //   console.log("premiumstatuse=" + this.premiumstatus);
+    //   window.localStorage.setItem(
+    //     "premiumstatus",
+    //     JSON.stringify(res.data[0].premiumstatus)
+    //   );
+    //   //set subscribe button to premium
+    //   console.log(res.data[0].premiumstatus == "premium");
+    //   if (res.data[0].premiumstatus == "premium") {
+    //     console.log("kuy");
+    //     this.subscribebutton = "premium";
+    //     console.log("subscribebutton=" + this.subscribebutton);
+    //     console.log(JSON.stringify(res.data[0].utype));
+    //     window.localStorage.setItem("subscribebutton", "premium");
+    //   } else {
+    //     console.log("subscribe");
+    //     window.localStorage.setItem("subscribebutton", "subscribe");
+    //   }
+    // });
+    // this.subscribebutton = "" + window.localStorage.getItem("subscribebutton");
   },
   data() {
     return {
@@ -259,11 +267,16 @@ export default defineComponent({
       console.log(
         this.backendURL + "/premium/" + this.email + "?premiumstatus=premium"
       );
+      window.localStorage.setItem("subscribebutton", "premium");
+      this.subscribebutton = "premium";
       //update usertype to premium when pressed
-      axios.put(
-        this.backendURL + "/premium/" + this.email + "?premiumstatus=premium"
-      );
-      this.$router.push("/ggPay");
+      axios
+        .put(
+          this.backendURL + "/premium/" + this.email + "?premiumstatus=premium"
+        )
+        .then(() => {
+          this.$router.push("/ggPay");
+        });
     },
     logOut() {
       console.log("logout complete");

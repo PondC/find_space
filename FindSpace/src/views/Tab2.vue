@@ -84,6 +84,13 @@ export default defineComponent({
     this.getNearbySpaceList();
     this.updateList();
     this.getAllSpace();
+    console.log("hello from tab 2");
+    console.log(window.localStorage.getItem("subscribebutton"));
+    if (window.localStorage.getItem("subscribebutton") === "premium") {
+      this.isPremium = true;
+    } else {
+      this.isPremium = false;
+    }
   },
   data() {
     return {
@@ -95,6 +102,7 @@ export default defineComponent({
       spaces: [],
       allSpaces: [],
       searchSpace: [""],
+      isPremium: false,
       location: {
         lat: 0,
         long: 0,
@@ -262,7 +270,9 @@ export default defineComponent({
       }
       if (event.keyCode === 13) {
         this.showSearch = true;
-        this.makeAdsAppear(8000);
+        if (!this.isPremium) {
+          this.makeAdsAppear(8000);
+        }
         if (this.searchSpace.length === 0) {
           this.searchSpace = this.allSpaces;
         }

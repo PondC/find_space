@@ -118,6 +118,9 @@
           Navigate
         </a>
       </ion-button>
+      <ion-fab-button class="refresh" @click="reload()" size="small">
+        R
+      </ion-fab-button>
     </div>
   </ion-page>
 </template>
@@ -126,6 +129,7 @@
 import {
   IonPage,
   IonIcon,
+  IonFabButton,
   // IonHeader,
   // IonToolbar,
   // IonTitle,Î
@@ -145,6 +149,7 @@ export default defineComponent({
     IonPage,
     IonButton,
     IonIcon,
+    IonFabButton,
   },
   beforeMount() {
     console.log("THIS IS SPACE INFOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
@@ -186,9 +191,9 @@ export default defineComponent({
     };
   },
   methods: {
-    // reload() {
-    //   window.location.reload();
-    // },
+    reload() {
+      window.location.reload();
+    },
     checkReload() {
       console.log("checking reload");
       console.log("checking reload");
@@ -523,6 +528,13 @@ export default defineComponent({
   position: absolute;
   bottom: 4px;
   left: 32%;
+}
+.refresh {
+  --background: #faf6f0;
+  --border-radius: 100px;
+  position: absolute;
+  bottom: 1px;
+  right: 8px;
 }
 .menuList {
   flex-direction: row;

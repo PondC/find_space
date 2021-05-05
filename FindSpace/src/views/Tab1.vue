@@ -63,6 +63,11 @@ export default defineComponent({
     console.log("hello from tab 2");
     this.watchLocation();
     this.getFavoriteSpace();
+    if (window.localStorage.getItem("subscribebutton") === "premium") {
+      this.isPremium = true;
+    } else {
+      this.isPremium = false;
+    }
   },
   data() {
     return {
@@ -70,6 +75,7 @@ export default defineComponent({
       // backendURL: "http://localhost:5678",
       backendURL: "https://find-space-app.herokuapp.com",
       favSpaces: [],
+      isPremium: false,
       showAds: false,
       location: {
         lat: 13.736281,
@@ -120,7 +126,9 @@ export default defineComponent({
       // }
       if (event.keyCode === 13) {
         // this.showSearch = true;
-        this.makeAdsAppear(8000);
+        if (!this.isPremium) {
+          this.makeAdsAppear(8000);
+        }
         // if (this.searchSpace.length === 0) {
         //   this.searchSpace = this.allSpaces;
         // }
